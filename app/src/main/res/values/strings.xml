@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Load</string>
+    <string name="new_game">New Game</string>
+    <string name="load_game">Load</string>
+    <string name="load_screen">Load Game</string>
+    <string name="load_1">Load 1</string>
+    <string name="load_2">Load 2</string>
+    <string name="load_3">Load 3</string>
+</resources>

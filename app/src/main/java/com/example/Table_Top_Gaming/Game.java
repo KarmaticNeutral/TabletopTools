@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class Game extends AppCompatActivity {
 
-    // This might make a merge conflict! Uh oh!
+    //Blah
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

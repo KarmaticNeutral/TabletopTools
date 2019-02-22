@@ -1,28 +1,28 @@
 package com.example.Table_Top_Gaming;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
+import java.util.List;
 
-public class Game extends AppCompatActivity {
+public class Game {
+    private List<Player> players;
+    private Deck deck;
 
-    //Blah
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+    public Game(List<Player> players) {
+        this.players = players;
+    }
 
+    public Deck getDeck() {
+        return deck;
+    }
 
-        // Get the intent for this Activity
-        Intent intent = getIntent();
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
 
-        // Grab the information passed to this Activity and place it in the string "message"
-        String message = intent.getStringExtra(LoadGameActivity.EXTRA_MESSAGE);
+    public List<Player> getPlayers() {
+        return players;
+    }
 
-        // Replace the Text on this Activity with the information of "message" and display it to the
-        // screen
-        TextView textView = findViewById(R.id.textView2);
-        textView.setText(message);
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

@@ -52,13 +52,13 @@ public class LoadGameActivity extends AppCompatActivity {
 
 
     /*
-        This function loads the desired Game File and reads in the information and then passes that
+        This function loads the desired GameActivity File and reads in the information and then passes that
         information to the next Activity or window
     */
     public void loadGameFile(View view) {
 
         // Create a new intent for the next Activity and a string to store the data from the file
-        Intent intent = new Intent(this, Game.class);
+        Intent intent = new Intent(this, GameActivity.class);
         String message = null;
 
         // Open the file and read in the information

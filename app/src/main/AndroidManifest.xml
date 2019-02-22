@@ -9,20 +9,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name="com.example.Table_Top_Gaming.Game"
-            android:parentActivityName="com.example.Table_Top_Gaming.LoadGameActivity">
+            android:name=".SaveGameActivity"
+            android:parentActivityName=".GameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.Table_Top_Gaming.LoadGameActivity" /></activity>
+                android:value="com.example.Table_Top_Gaming.GameActivity"/>
+        </activity>
+
         <activity
-            android:name="com.example.Table_Top_Gaming.LoadGameActivity"
-            android:parentActivityName="com.example.Table_Top_Gaming.MainActivity">
+            android:name=".NewGameActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.Table_Top_Gaming.MainActivity"/>
+        </activity>
+
+        <activity
+            android:name=".GameActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.Table_Top_Gaming.MainActivity" />
         </activity>
-        <activity android:name="com.example.Table_Top_Gaming.MainActivity">
+
+        <activity
+            android:name=".LoadGameActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.Table_Top_Gaming.MainActivity" />
+        </activity>
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,4 +6,15 @@
     <string name="load_1">Load 1</string>
     <string name="load_2">Load 2</string>
     <string name="load_3">Load 3</string>
+    <string name="number_of_players">Number of Players</string>
+    <string name="player_number">Player 1</string>
+    <string name="player_name">Enter Name</string>
+    <string name="ok">OK</string>
+    <string name="start">Start New Game</string>
+    <string name="second_ok">OK</string>
+    <string name="save_game">Save</string>
+    <string name="save_screen">Save Game</string>
+    <string name="save_1">Save 1</string>
+    <string name="save_2">Save 2</string>
+    <string name="save_3">Save 3</string>
 </resources>

@@ -12,6 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".CameraActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.Table_Top_Gaming.GameActivity"/>
+        </activity>
+
         <activity
             android:name=".SaveGameActivity"
             android:parentActivityName=".GameActivity">

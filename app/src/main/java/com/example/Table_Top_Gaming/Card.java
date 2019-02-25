@@ -1,5 +1,4 @@
 package com.example.Table_Top_Gaming;
 
-public class Card {
-
+public interface Card {
 }

@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class GameActivity extends AppCompatActivity {
+    private Game game;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,29 +18,46 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
+        // Create a text view object to display the received information
+        TextView textView = findViewById(R.id.textView2);
+
         // Get the intent for this Activity
         Intent intent = getIntent();
 
-        // Grab the information passed to this Activity and place it in the string "message"
+        // Grab the information from LoadGameActivity passed to this Activity and place it in the
+        // string message
         String message = intent.getStringExtra(LoadGameActivity.EXTRA_MESSAGE);
 
-        // Replace the Text on this Activity with the information of "message" and display it to the
-        // screen
-        TextView textView = findViewById(R.id.textView2);
-
+        // If the GameActivity was reached by way of SaveGameActivity or NewGameActivity message
+        // will be null
         if (message == null) {
+
+            // Check to see if there is information to grab from the SaveGameActivity
             message = intent.getStringExtra(SaveGameActivity.EXTRA_MESSAGE_SAVE);
 
+            // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
-                message = "New Game";
+                message = intent.getExtras().getString("Game");
+
             }
         }
+        // Set the text view to the recovered information to see if the desired information was
+        // acquired
         textView.setText(message);
+
+        // Parse the information saved in the String "message" and place it in the Game object
+        game = gson.fromJson(message, Game.class);
 
     }
 
+    /*
+    This function converts the information saved in the game object to a string and passes that to
+    the SaveGameActivity
+     */
     public void saveGame(View view) {
+        String gameInformation = gson.toJson(game);
         Intent intent = new Intent(this, SaveGameActivity.class);
+        intent.putExtra("Game", gameInformation);
         startActivity(intent);
     }
 }

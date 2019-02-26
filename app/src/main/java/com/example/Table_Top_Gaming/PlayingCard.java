@@ -1,6 +1,6 @@
 package com.example.Table_Top_Gaming;
 
-public class PlayingCard implements Card{
+public class PlayingCard implements Card {
     private Suit suit;
     private int number;
 

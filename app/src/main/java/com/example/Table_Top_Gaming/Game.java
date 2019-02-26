@@ -1,10 +1,15 @@
 package com.example.Table_Top_Gaming;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
     private List<Player> players;
     private Deck deck;
+
+    public Game() {
+        players = new ArrayList<>();
+    }
 
     public Game(List<Player> players) {
         this.players = players;

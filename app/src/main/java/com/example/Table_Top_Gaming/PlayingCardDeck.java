@@ -48,6 +48,7 @@ public class PlayingCardDeck implements Deck{
             deck.add(card);
         }
 
+        // All the PlayingCards are in the deck so it's time to shuffle it
         shuffle();
     }
 

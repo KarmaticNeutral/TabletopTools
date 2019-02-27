@@ -64,7 +64,11 @@ public class PlayingCardDeck implements Deck{
     }
 
     @Override
-    public List<Card> drawHand(int numCards) {
+    public List<PlayingCard> drawHand(int numCards) {
         return null;
+    }
+
+    public List<PlayingCard> getDeck() {
+        return this.deck;
     }
 }

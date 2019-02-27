@@ -5,5 +5,5 @@ import java.util.List;
 public interface Deck {
     public void shuffle();
     public Card drawCard();
-    public List<Card> drawHand(int numCards);
+    public List<PlayingCard> drawHand(int numCards);
 }

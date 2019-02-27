@@ -31,7 +31,7 @@ public class LoadGameActivity extends AppCompatActivity {
     */
     public void loadSaveOne(View view) {
         fileName = "save.txt";
-        loadGameFile(view);
+        loadGameFile();
     }
 
     /*
@@ -39,7 +39,7 @@ public class LoadGameActivity extends AppCompatActivity {
     */
     public void loadSaveTwo(View view) {
         fileName = "save2.txt";
-        loadGameFile(view);
+        loadGameFile();
     }
 
     /*
@@ -47,7 +47,7 @@ public class LoadGameActivity extends AppCompatActivity {
     */
     public void loadSaveThree(View view) {
         fileName = "save3.txt";
-        loadGameFile(view);
+        loadGameFile();
     }
 
 
@@ -55,7 +55,7 @@ public class LoadGameActivity extends AppCompatActivity {
         This function loads the desired GameActivity File and reads in the information and then passes that
         information to the next Activity or window
     */
-    public void loadGameFile(View view) {
+    public void loadGameFile() {
 
         // Create a new intent for the next Activity and a string to store the data from the file
         Intent intent = new Intent(this, GameActivity.class);

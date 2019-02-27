@@ -1,5 +1,6 @@
 package com.example.Table_Top_Gaming;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -9,7 +10,10 @@ public class Player {
     private List<Card> hand;
 
     public Player(String name) {
+
         this.name = name;
+        pathToImage = null;
+        hand = new ArrayList<>();
     }
 
     public String getName() {

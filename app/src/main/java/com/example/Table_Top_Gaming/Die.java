@@ -21,6 +21,7 @@ public class Die {
     //returns a random number simulating a die roll
     int roll() {
         int num = rand.nextInt();
+        num = (num % numSides) + 1;
         return num;
     }
 }

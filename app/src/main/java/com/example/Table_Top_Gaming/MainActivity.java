@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void onTakePhoto(View view) {
-        Intent intent = new Intent (this, CameraActivity.class);
+        Intent intent = new Intent (MainActivity.this, CameraActivity.class);
         startActivity(intent);
     }
 }

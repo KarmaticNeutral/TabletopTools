@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:913521701985:android:39edc59b7833da50",
         "android_client_info": {
-          "package_name": "com.example.test"
+          "package_name": "com.example.Table_Top_Gaming"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "913521701985-k0out0tk41n0f4alu839g76ctsmsc6v5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.test",
+            "package_name": "com.example.Table_Top_Gaming",
             "certificate_hash": "3af13dbf12b529ac3c6cf421685d9300d697fb94"
           }
         },

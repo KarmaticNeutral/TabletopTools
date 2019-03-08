@@ -7,42 +7,14 @@
     tools:context=".LoadGameActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="294dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="loadSaveOne"
-        android:text="@string/load_1"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="294dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="loadSaveTwo"
-        android:text="@string/load_2"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button3"
+        android:id="@+id/loadGame"
         android:layout_width="294dp"
         android:layout_height="88dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="150dp"
-        android:onClick="loadSaveThree"
+        android:onClick="loadGameFile"
         android:text="@string/load_3"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +25,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loadGameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

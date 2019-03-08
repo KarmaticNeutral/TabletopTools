@@ -59,13 +59,31 @@ public class PlayingCardDeck implements Deck{
     }
 
     @Override
-    public Card drawCard() {
-        return null;
+    public PlayingCard drawCard() {
+        if (!deck.isEmpty()) {
+            PlayingCard card = deck.get(0);
+            deck.remove(0);
+            return card;
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public List<PlayingCard> drawHand(int numCards) {
-        return null;
+        List<PlayingCard> hand = new ArrayList<>();
+        if (!deck.isEmpty()) {
+            while (!deck.isEmpty() && numCards > 0) {
+                hand.add(deck.get(0));
+                deck.remove(0);
+                numCards--;
+            }
+        }
+        if (deck.isEmpty()) {
+            return null;
+        }
+        return hand;
     }
 
     public List<PlayingCard> getDeck() {

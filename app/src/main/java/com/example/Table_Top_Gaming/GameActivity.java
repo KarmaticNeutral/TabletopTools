@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -16,10 +17,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-
-        // Create a text view object to display the received information
-        TextView textView = findViewById(R.id.textView2);
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -41,9 +38,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }
-        // Set the text view to the recovered information to see if the desired information was
-        // acquired
-        textView.setText(message);
 
         // Parse the information saved in the String "message" and place it in the Game object
         game = gson.fromJson(message, Game.class);
@@ -59,5 +53,35 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SaveGameActivity.class);
         intent.putExtra("Game", gameInformation);
         startActivity(intent);
+    }
+
+    public void drawCard(View view) {
+        int player = 1 - 1;
+
+        if (!game.getDeck().getDeck().isEmpty()) {
+            game.getPlayers().get(player).addCardToHand(game.getDeck().drawCard());
+        }
+
+        else {
+            Toast.makeText(this, "Cannot draw a card. There are no more cards in the deck",
+                    Toast.LENGTH_LONG).show();
+        }
+        String message = gson.toJson(game);
+        System.out.println(message);
+    }
+
+    public void drawHand(View view) {
+        int numCards = 5;
+        int player = 1 - 1;
+
+        if (!game.getPlayers().get(player).canDraw()) {
+            Toast.makeText(this, game.getPlayers().get(player).getName() +
+                            " has already drawn a hand", Toast.LENGTH_LONG).show();
+            return;
+        }
+        game.getPlayers().get(player).setHand(game.getDeck().drawHand(numCards));
+
+        String message = gson.toJson(game);
+        System.out.println(message);
     }
 }

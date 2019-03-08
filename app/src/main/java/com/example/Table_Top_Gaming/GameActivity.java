@@ -18,10 +18,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-
-        // Create a text view object to display the received information
-        TextView textView = findViewById(R.id.textView2);
-
         // Get the intent for this Activity
         Intent intent = getIntent();
 
@@ -42,9 +38,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }
-        // Set the text view to the recovered information to see if the desired information was
-        // acquired
-        //textView.setText(message);
 
         // Parse the information saved in the String "message" and place it in the Game object
         game = gson.fromJson(message, Game.class);
@@ -64,8 +57,16 @@ public class GameActivity extends AppCompatActivity {
 
     public void drawCard(View view) {
         int player = 1 - 1;
-        game.getPlayers().get(player).addCardToHand(game.getDeck().drawCard());
+        PlayingCard card = game.getDeck().drawCard();
 
+        if (card != null) {
+            game.getPlayers().get(player).addCardToHand(card);
+        }
+
+        else {
+            Toast.makeText(this, "Cannot draw a card. There are no more cards in the deck",
+                    Toast.LENGTH_LONG).show();
+        }
         String message = gson.toJson(game);
         System.out.println(message);
     }

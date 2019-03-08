@@ -29,10 +29,6 @@ public class SaveGameActivity extends AppCompatActivity {
         // Store the game information in message
         message = intent.getExtras().getString("Game");
 
-        // Create a TextView object and set the text field to the information stored in message
-        TextView textView = findViewById(R.id.textView7);
-        textView.setText(message);
-
     }
 
     public void saveOne(View view) {

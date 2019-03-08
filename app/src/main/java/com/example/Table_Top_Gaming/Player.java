@@ -7,17 +7,23 @@ public class Player {
 
     private String name;
     private String pathToImage;
-    private List<Card> hand;
+    private List<PlayingCard> hand;
+    private boolean canDrawHand;
 
     public Player(String name) {
 
         this.name = name;
         pathToImage = null;
         hand = new ArrayList<>();
+        canDrawHand = true;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean canDraw() {
+        return canDrawHand;
     }
 
     public void setName(String name) {
@@ -32,12 +38,20 @@ public class Player {
         this.pathToImage = pathToImage;
     }
 
-    public void setHand(List<Card> hand) {
+    public void setHand(List<PlayingCard> hand) {
+        if (!canDrawHand) {
+            return;
+        }
         this.hand = hand;
+        canDrawHand = false;
     }
 
-    public List<Card> getHand() {
+    public List<PlayingCard> getHand() {
         return hand;
+    }
+
+    public void addCardToHand(PlayingCard card) {
+        hand.add(card);
     }
 
 

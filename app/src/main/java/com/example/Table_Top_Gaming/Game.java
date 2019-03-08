@@ -17,7 +17,7 @@ public class Game {
         deck = new PlayingCardDeck();
     }
 
-    public Deck getDeck() {
+    public PlayingCardDeck getDeck() {
         return deck;
     }
 

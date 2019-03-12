@@ -7,44 +7,15 @@
     tools:context=".SaveGameActivity">
 
     <Button
-        android:id="@+id/button18"
-        android:layout_width="294dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="saveOne"
-        android:text="@string/save_1"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button17"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="294dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="saveTwo"
-        android:text="@string/save_2"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button16"
+        android:id="@+id/saveGameButton"
         android:layout_width="294dp"
         android:layout_height="88dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="150dp"
-        android:onClick="saveThree"
-        android:text="@string/save_3"
+        android:onClick="createSave"
+        android:text="@string/save_your_game"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +25,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/saveGameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -62,6 +33,22 @@
         android:layout_marginEnd="16dp"
         android:text="@string/save_screen"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/saveNameTextBox"
+        android:layout_width="305dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/enter_the_name_for_your_save"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

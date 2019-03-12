@@ -57,10 +57,9 @@ public class GameActivity extends AppCompatActivity {
 
     public void drawCard(View view) {
         int player = 1 - 1;
-        PlayingCard card = game.getDeck().drawCard();
 
-        if (card != null) {
-            game.getPlayers().get(player).addCardToHand(card);
+        if (!game.getDeck().getDeck().isEmpty()) {
+            game.getPlayers().get(player).addCardToHand(game.getDeck().drawCard());
         }
 
         else {
@@ -76,8 +75,8 @@ public class GameActivity extends AppCompatActivity {
         int player = 1 - 1;
 
         if (!game.getPlayers().get(player).canDraw()) {
-            Toast.makeText(this, "This player " + player + " has already drawn a hand",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, game.getPlayers().get(player).getName() +
+                            " has already drawn a hand", Toast.LENGTH_LONG).show();
             return;
         }
         game.getPlayers().get(player).setHand(game.getDeck().drawHand(numCards));

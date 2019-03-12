@@ -17,5 +17,7 @@
     <string name="save_1">Save 1</string>
     <string name="save_2">Save 2</string>
     <string name="save_3">Save 3</string>
-    <string name="takePhoto">Select Profile Picture</string>
+    <string name="takePhoto">Take Photo</string>
+    <string name="save_your_game">Save Your Game</string>
+    <string name="enter_the_name_for_your_save">Enter The Name For Your Save</string>
 </resources>

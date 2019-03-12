@@ -57,25 +57,6 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-//    String currentPhotoPath;
-//
-//    @RequiresApi(api = Build.VERSION_CODES.N)
-//    private File createImageFile() throws IOException {
-//        // Create an image file name
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = File.createTempFile(
-//                imageFileName,   //prefix
-//                ".jpg",          //suffix
-//                storageDir       //directory
-//        );
-//
-//        // Save a file: path for use with ACTION_VIEW intents
-//        currentPhotoPath = image.getAbsolutePath();
-//        return image;
-//    }
-
     public void pickFromGallery(View view) {
         //Create an Intent with action as ACTION_PICK
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -106,17 +87,6 @@ public class CameraActivity extends AppCompatActivity {
         cameraFilePath = "file://" + image.getAbsolutePath();
         return image;
     }
-
-//    @RequiresApi(api = Build.VERSION_CODES.N)
-//    public void captureFromCamera(View view) {
-//        try {
-//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", createImageFile()));
-//            startActivityForResult(intent, CAMERA_REQUEST_CODE);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
 
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         // Result code is RESULT_OK only if the user selects an Image

@@ -1,6 +1,7 @@
 package com.example.Table_Top_Gaming;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,8 @@ import java.util.Date;
 
 public class CameraActivity extends AppCompatActivity {
     ImageView imageView;
+    private final int GALLERY_REQUEST_CODE = 1;
+    private final int CAMERA_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +33,8 @@ public class CameraActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
     }
 
-    // SAVES IMAGE AS SMALL THUMBNAIL
-//    static final int REQUEST_IMAGE_CAPTURE = 1;
-//
-//    public void dispatchTakePictureIntent(View view) {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
-
-    static final int REQUEST_TAKE_PHOTO = 1;
-
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void dispatchTakePictureIntent(View view) {
+    public void captureFromCamera(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -61,41 +52,84 @@ public class CameraActivity extends AppCompatActivity {
                         "com.example.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
     }
 
-    String currentPhotoPath;
+//    String currentPhotoPath;
+//
+//    @RequiresApi(api = Build.VERSION_CODES.N)
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,   //prefix
+//                ".jpg",          //suffix
+//                storageDir       //directory
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        currentPhotoPath = image.getAbsolutePath();
+//        return image;
+//    }
 
+    public void pickFromGallery(View view) {
+        //Create an Intent with action as ACTION_PICK
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        // Sets the type as image/*. This ensures only components of type image are selected
+        intent.setType("image/*");
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        // Launching the Intent
+        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+    }
+
+    private String cameraFilePath;
     @RequiresApi(api = Build.VERSION_CODES.N)
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //This is the directory in which the file will be created. This is the default location of Camera photos
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM), "Camera");
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
+        // Save a file: path for using again
+        cameraFilePath = "file://" + image.getAbsolutePath();
         return image;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            imageView.setImageBitmap(imageBitmap);
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath,bmOptions);
-            imageView.setImageBitmap(bitmap);
-        }
+//    @RequiresApi(api = Build.VERSION_CODES.N)
+//    public void captureFromCamera(View view) {
+//        try {
+//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", createImageFile()));
+//            startActivityForResult(intent, CAMERA_REQUEST_CODE);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
-
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode){
+                case GALLERY_REQUEST_CODE:
+                    data.getData(); //returns the content URI for the selected Image
+                    Uri selectedImage = data.getData();
+                    imageView.setImageURI(selectedImage);
+                    break;
+                case CAMERA_REQUEST_CODE:
+                    imageView.setImageURI(Uri.parse(cameraFilePath));
+                    break;
+            }
     }
 }

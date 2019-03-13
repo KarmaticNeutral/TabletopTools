@@ -14,15 +14,16 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
 public class CameraActivity extends AppCompatActivity {
     ImageView imageView;
+    public static final String TAG = "CameraActivity";
     private final int GALLERY_REQUEST_CODE = 1;
     private final int CAMERA_REQUEST_CODE = 2;
 
@@ -44,7 +45,7 @@ public class CameraActivity extends AppCompatActivity {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
-                System.out.println("Eror creating file.");
+                Log.e(TAG, "Eror creating file.");
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -57,6 +58,7 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
+    // Opens default photo gallery app, and allows user to choose image.
     public void pickFromGallery(View view) {
         //Create an Intent with action as ACTION_PICK
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -85,6 +87,7 @@ public class CameraActivity extends AppCompatActivity {
         );
         // Save a file: path for using again
         cameraFilePath = "file://" + image.getAbsolutePath();
+        Log.i(TAG, "Photo file path: " + cameraFilePath);
         return image;
     }
 

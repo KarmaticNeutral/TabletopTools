@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AuthenticationActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -22,32 +23,30 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".CameraActivity"
+        <activity
+            android:name=".CameraActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.Table_Top_Gaming.MainActivity"/>
+                android:value="com.example.Table_Top_Gaming.MainActivity" />
         </activity>
-
         <activity
             android:name=".SaveGameActivity"
             android:parentActivityName=".GameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.Table_Top_Gaming.GameActivity"/>
+                android:value="com.example.Table_Top_Gaming.GameActivity" />
         </activity>
-
         <activity
             android:name=".NewGameActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.Table_Top_Gaming.MainActivity"/>
+                android:value="com.example.Table_Top_Gaming.MainActivity" />
         </activity>
-
         <activity
             android:name=".GameActivity"
             android:parentActivityName=".MainActivity">
@@ -55,7 +54,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.Table_Top_Gaming.MainActivity" />
         </activity>
-
         <activity
             android:name=".LoadGameActivity"
             android:parentActivityName=".MainActivity">
@@ -63,7 +61,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.Table_Top_Gaming.MainActivity" />
         </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,4 +69,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

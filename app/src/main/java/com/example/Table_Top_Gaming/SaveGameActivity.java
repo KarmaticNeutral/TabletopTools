@@ -63,6 +63,7 @@ public class SaveGameActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.i(TAG, "Document Saved Successfully");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

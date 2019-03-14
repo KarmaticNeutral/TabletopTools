@@ -150,7 +150,9 @@ public class GameActivity extends AppCompatActivity {
                 game.getPlayers().get(0).getResources().get(0).setAmount(game.getPlayers().get(0).getResources().get(0).getAmount() - diff);
 
                 // Change the display on the new window to the new amount
-                difference.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));
+                String resourceInfo = game.getPlayers().get(0).getResources().get(0).getName();
+                resourceInfo += ": " + Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount());
+                difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
                 scoreButton.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));

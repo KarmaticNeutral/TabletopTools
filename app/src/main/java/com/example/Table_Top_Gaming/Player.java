@@ -9,7 +9,7 @@ public class Player {
     private String pathToImage;
     private List<PlayingCard> hand;
     private boolean canDrawHand;
-    private int score;
+    private List<Resource> resources;
 
     public Player(String name) {
 
@@ -17,7 +17,8 @@ public class Player {
         pathToImage = null;
         hand = new ArrayList<>();
         canDrawHand = true;
-        score = 0;
+        resources = new ArrayList<>();
+        resources.add(new Resource("Score", 0));
     }
 
     public String getName() {
@@ -56,13 +57,12 @@ public class Player {
         hand.add(card);
     }
 
-
-    public int getScore() {
-        return score;
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public List<Resource> getResources(){
+        return resources;
     }
 }
 

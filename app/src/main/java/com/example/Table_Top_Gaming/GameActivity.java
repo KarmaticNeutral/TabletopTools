@@ -48,10 +48,9 @@ public class GameActivity extends AppCompatActivity {
         game = gson.fromJson(message, Game.class);
 
         // Testing Player Score button
-        game.getPlayers().get(0).setScore(10);
         scoreButton = findViewById(R.id.player_score_button);
         // Set the Text on the button equal to the first players score
-        scoreButton.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+        scoreButton.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));
 
     }
 
@@ -111,7 +110,9 @@ public class GameActivity extends AppCompatActivity {
         final TextView difference = (TextView) view.findViewById(R.id.player_score);
 
         // Set the score display on the new window equal to Player 1's score
-        difference.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+        String resourceInfo = game.getPlayers().get(0).getResources().get(0).getName();
+        resourceInfo += ": " + Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount());
+        difference.setText(resourceInfo);
 
         // There is a plus and a minus button on this custom layout so we have to grab them
         // and define them in this activity
@@ -126,13 +127,15 @@ public class GameActivity extends AppCompatActivity {
                 int diff = Integer.parseInt(input.getText().toString());
 
                 // Add this amount to the current player score
-                game.getPlayers().get(0).setScore(game.getPlayers().get(0).getScore() + diff);
+                game.getPlayers().get(0).getResources().get(0).setAmount(game.getPlayers().get(0).getResources().get(0).getAmount() + diff);
 
                 // Change the display on the new window to the new amount
-                difference.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+                String resourceInfo = game.getPlayers().get(0).getResources().get(0).getName();
+                resourceInfo += ": " + Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount());
+                difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                scoreButton.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+                scoreButton.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));
             }
         });
 
@@ -144,13 +147,13 @@ public class GameActivity extends AppCompatActivity {
                 int diff = Integer.parseInt(input.getText().toString());
 
                 // Subtract this amount from the current player score
-                game.getPlayers().get(0).setScore(game.getPlayers().get(0).getScore() - diff);
+                game.getPlayers().get(0).getResources().get(0).setAmount(game.getPlayers().get(0).getResources().get(0).getAmount() - diff);
 
                 // Change the display on the new window to the new amount
-                difference.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+                difference.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));
 
                 // Change the display on the GameActivity window score button to the new amount
-                scoreButton.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+                scoreButton.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));
             }
         });
 
@@ -165,8 +168,8 @@ public class GameActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         // Change the score to the number the user input instead of adding or subtracting it
-                        game.getPlayers().get(0).setScore(Integer.parseInt(input.getText().toString()));
-                        scoreButton.setText(Integer.toString(game.getPlayers().get(0).getScore()));
+                        game.getPlayers().get(0).getResources().get(0).setAmount(Integer.parseInt(input.getText().toString()));
+                        scoreButton.setText(Integer.toString(game.getPlayers().get(0).getResources().get(0).getAmount()));
                     }
                 })
                 .setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {

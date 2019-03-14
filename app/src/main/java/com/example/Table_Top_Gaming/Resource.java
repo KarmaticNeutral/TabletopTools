@@ -3,8 +3,13 @@ package com.example.Table_Top_Gaming;
 public class Resource {
     private String name;
     private int amount;
-    private String imagePath;
     private double weight;
+
+    public Resource(String name, int amount) {
+        this.name = name;
+        this.amount = amount;
+        weight = 0;
+    }
 
     public String getName() {
         return name;
@@ -20,14 +25,6 @@ public class Resource {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public double getWeight() {

@@ -20,4 +20,8 @@
     <string name="takePhoto">Take Photo</string>
     <string name="save_your_game">Save Your Game</string>
     <string name="enter_the_name_for_your_save">Enter The Name For Your Save</string>
+    <string name="score">0</string>
+    <string name="player_score_ok">Ok</string>
+    <string name="player_score_cancel">Cancel</string>
+    <string name="change_score_to">Change To</string>
 </resources>

@@ -71,6 +71,7 @@ public class NewGameActivity extends AppCompatActivity {
         if (numPlayers == index) {
             Toast.makeText(this, "All player names have been entered. To change the " +
                     "player names renter the number of players", Toast.LENGTH_LONG).show();
+            return;
         }
 
         // Display this toast if the user tries to enter a blank player name

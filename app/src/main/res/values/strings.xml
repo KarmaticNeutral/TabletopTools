@@ -26,4 +26,6 @@
     <string name="change_score_to">Change To</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="next_player">&gt;</string>
+    <string name="previous_player">&lt;</string>
 </resources>

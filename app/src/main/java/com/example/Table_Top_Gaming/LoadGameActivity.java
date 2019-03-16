@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -25,83 +30,110 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LoadGameActivity extends AppCompatActivity {
 
     // Create a KEY for passing information to the next activity
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
 
-    //Create a String with the file name
-    private String fileName = "save.txt";
+    private ArrayList <String> GAME_NAMES;
+    private String ganeToLoad;
+
+    public LoadGameActivity() {
+        GAME_NAMES = new ArrayList<>();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_game);
-    }
-
-    /*
-        This function loads the desired GameActivity File and reads in the information and then passes that
-        information to the next Activity or window
-    */
-    public void loadGameFile(View view) {
-
-        // Create a new intent for the next Activity and a string to store the data from the file
-        Intent intent = new Intent(this, GameActivity.class);
-        String message = null;
 
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-        ArrayList<HashMap<String, Object>> savedGamesList;
         Task<QuerySnapshot> snapshotTask = firebase.collection("savedGames").get();
+        Log.d("PIE", "Before onSuccess in the code");
         snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                Log.d("PIE", "Inside Onsucess Outside List");
                 for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
                     String filePath = currentDocumentSnapshot.getReference().getPath();
-                    Log.d("TAG", "onSuccess: Filepath of a Saved Game:" + filePath);
+                    Log.d("PIE", "onSuccess: Filepath of a Saved Game:" + filePath);
+
+                    if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
+                        Log.d("PIE", "Inside IF Name&Save; List Length: " + GAME_NAMES.size());
+                        GAME_NAMES.add(currentDocumentSnapshot.get("Name").toString());
+                    }
                 }
+                CustomAdapter customAdapter = new CustomAdapter();
+                ListView savedGamesListView = (ListView) findViewById(R.id.savedGamesListView);
+                savedGamesListView.setAdapter(customAdapter);
             }
         });
+        Log.d("PIE", "After onSuccess in the code");
+    }
 
-        // Display a toast to the screen showing the file path of the file being opened
-        Toast.makeText(this, "Loading " + getFilesDir() + "/" + fileName,
-                Toast.LENGTH_LONG).show();
+    public void onSelectedSave(View view){
+        Button bt=(Button)view;
+        Toast.makeText(this, "Button "+bt.getText().toString() + bt.getId(),Toast.LENGTH_LONG).show();
+    }
 
-        // Pass the gathered information to the next Activity or window and then open that Activity
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+    class CustomAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return GAME_NAMES.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);
+
+            TextView textView = (TextView) convertView.findViewById(R.id.textViewName);
+            Button button = (Button) convertView.findViewById(R.id.selectionButton);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+                    Task<QuerySnapshot> snapshotTask = firebase.collection("savedGames").get();
+                    Log.d("PIE", "Before onSuccess in the code");
+                    snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
+                                if(currentDocumentSnapshot.contains("Name")) {
+                                    if (currentDocumentSnapshot.get("Name").toString().equals(LoadGameActivity.this.GAME_NAMES.get(position))) {
+                                        Intent intent = new Intent(LoadGameActivity.this, GameActivity.class);
+                                        intent.putExtra("Game", currentDocumentSnapshot.get("savedGame").toString());
+                                        startActivity(intent);
+                                    }
+                                }
+                            }
+                        }
+                    });
 
 
+                }
+            });
 
-        // Open the file and read in the information
-//        FileInputStream fis = null;
-//        try {
-//            fis = openFileInput(fileName);
-//            InputStreamReader isr = new InputStreamReader(fis);
-//            BufferedReader br = new BufferedReader(isr);
-//            StringBuilder sb = new StringBuilder();
-//
-//            // While there is still information in the file add it onto the string "message"
-//            while((message = br.readLine()) != null) {
-//                sb.append(message).append("\n");
-//            }
-//
-//            message = sb.toString();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//
-//        // Close the file
-//        } finally {
-//            if (fis != null) {
-//                try {
-//                    fis.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
+            if (GAME_NAMES.size() > 0) {
+                textView.setText(GAME_NAMES.get(position));
+                return convertView;
+            }
+            return null;
+        }
     }
 }

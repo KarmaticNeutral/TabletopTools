@@ -41,11 +41,11 @@ public class Player {
         this.pathToImage = pathToImage;
     }
 
-    public void setHand(List<PlayingCard> hand) {
-        if (!canDrawHand) {
+    public void setHand(List<PlayingCard> hand2) {
+        if (!canDrawHand || hand2 == null) {
             return;
         }
-        this.hand = hand;
+        this.hand = hand2;
         canDrawHand = false;
     }
 

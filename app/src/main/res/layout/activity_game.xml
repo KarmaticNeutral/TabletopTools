@@ -7,20 +7,20 @@
     tools:context=".GameActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/saveGameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/saveGameButton"
         android:layout_width="326dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/player_score_button"
+        android:id="@+id/playerScoreButton"
         android:layout_width="326dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
@@ -42,39 +42,39 @@
         android:onClick="editPlayerScore"
         android:text="@string/score"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
+        app:layout_constraintBottom_toTopOf="@+id/saveGameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/drawCardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:onClick="drawCard"
-        android:text="Draw Card"
+        android:text="@string/draw_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/saveGameHeader" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/drawHandButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:onClick="drawHand"
-        android:text="Draw Hand"
+        android:text="@string/draw_hand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button10" />
+        app:layout_constraintTop_toBottomOf="@+id/drawCardButton" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/leftPlayerSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -82,11 +82,11 @@
         android:onClick="previousPlayerView"
         android:text="@string/previous_player"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/player_score_button"
+        app:layout_constraintBottom_toTopOf="@+id/playerScoreButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/rightPlayerSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -94,7 +94,7 @@
         android:onClick="nextPlayerView"
         android:text="@string/next_player"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/player_score_button"
+        app:layout_constraintBottom_toTopOf="@+id/playerScoreButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

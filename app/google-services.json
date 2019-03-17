@@ -8,9 +8,53 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:913521701985:android:39edc59b7833da50",
+        "mobilesdk_app_id": "1:913521701985:android:5bfeda2cf535ce24",
         "android_client_info": {
           "package_name": "com.example.Table_Top_Gaming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913521701985-il0i9sd92ft1nf8ugkoo35qci3cbuf94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Table_Top_Gaming",
+            "certificate_hash": "3af13dbf12b529ac3c6cf421685d9300d697fb94"
+          }
+        },
+        {
+          "client_id": "913521701985-pbq688egbsmo4fba4qa3l4crdaanvs1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOKxzaPyZlVD4FtwWR6xXvpLFZw-zlGL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913521701985-pbq688egbsmo4fba4qa3l4crdaanvs1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913521701985:android:39edc59b7833da50",
+        "android_client_info": {
+          "package_name": "com.example.test"
         }
       },
       "oauth_client": [
@@ -18,7 +62,7 @@
           "client_id": "913521701985-k0out0tk41n0f4alu839g76ctsmsc6v5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.Table_Top_Gaming",
+            "package_name": "com.example.test",
             "certificate_hash": "3af13dbf12b529ac3c6cf421685d9300d697fb94"
           }
         },

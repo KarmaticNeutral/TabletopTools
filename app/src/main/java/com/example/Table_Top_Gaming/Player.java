@@ -7,6 +7,7 @@ public class Player {
 
     private String name;
     private String pathToImage;
+    // private URI image;
     private List<PlayingCard> hand;
     private boolean canDrawHand;
     private List<Resource> resources;

@@ -86,7 +86,6 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "Cannot draw a card. There are no more cards in the deck",
                     Toast.LENGTH_LONG).show();
         }
-        String message = gson.toJson(game);
 
         Log.i("GameActivity", game.getPlayers().get(player).getName() + " has drawn a card");
     }
@@ -94,14 +93,18 @@ public class GameActivity extends AppCompatActivity {
     public void drawHand(View view) {
         int numCards = 5;
 
+        if (game.getDeck().getDeck().isEmpty()) {
+            Toast.makeText(this, "Cannot draw a hand. There are no more cards in the deck",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if (!game.getPlayers().get(player).canDraw()) {
             Toast.makeText(this, game.getPlayers().get(player).getName() +
                             " has already drawn a hand", Toast.LENGTH_LONG).show();
             return;
         }
         game.getPlayers().get(player).setHand(game.getDeck().drawHand(numCards));
-
-        String message = gson.toJson(game);
 
         Log.i("GameActivity", game.getPlayers().get(player).getName() + " has drawn a hand");
     }

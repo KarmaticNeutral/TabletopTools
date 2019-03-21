@@ -56,10 +56,10 @@ public class GameActivity extends AppCompatActivity {
 
         size = game.getPlayers().size();
 
-        textView = (TextView) findViewById(R.id.textView2);
+        textView = (TextView) findViewById(R.id.saveGameHeader);
 
         // Testing Player Score button
-        scoreButton = findViewById(R.id.player_score_button);
+        scoreButton = findViewById(R.id.playerScoreButton);
         // Set the Text on the button equal to the first players score
         setPlayerView();
 

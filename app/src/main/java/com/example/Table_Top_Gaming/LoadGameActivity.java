@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class LoadGameActivity extends AppCompatActivity {
 
@@ -38,7 +39,6 @@ public class LoadGameActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
 
     private ArrayList <String> GAME_NAMES;
-    private String ganeToLoad;
 
     public LoadGameActivity() {
         GAME_NAMES = new ArrayList<>();
@@ -72,11 +72,6 @@ public class LoadGameActivity extends AppCompatActivity {
             }
         });
         Log.d("PIE", "After onSuccess in the code");
-    }
-
-    public void onSelectedSave(View view){
-        Button bt=(Button)view;
-        Toast.makeText(this, "Button "+bt.getText().toString() + bt.getId(),Toast.LENGTH_LONG).show();
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -115,9 +110,9 @@ public class LoadGameActivity extends AppCompatActivity {
                             List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
                                 if(currentDocumentSnapshot.contains("Name")) {
-                                    if (currentDocumentSnapshot.get("Name").toString().equals(LoadGameActivity.this.GAME_NAMES.get(position))) {
+                                    if (Objects.requireNonNull(currentDocumentSnapshot.get("Name")).toString().equals(LoadGameActivity.this.GAME_NAMES.get(position))) {
                                         Intent intent = new Intent(LoadGameActivity.this, GameActivity.class);
-                                        intent.putExtra("Game", currentDocumentSnapshot.get("savedGame").toString());
+                                        intent.putExtra("Game", Objects.requireNonNull(currentDocumentSnapshot.get("savedGame")).toString());
                                         startActivity(intent);
                                     }
                                 }

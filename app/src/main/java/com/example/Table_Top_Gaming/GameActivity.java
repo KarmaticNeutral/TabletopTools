@@ -1,25 +1,34 @@
 package com.example.Table_Top_Gaming;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.List;
+
 public class GameActivity extends AppCompatActivity {
     private Game game;
     private Gson gson = new Gson();
     private Button scoreButton;
-    private int player;
-    private int size;
+    private int currentPlayer;
+    private int numPlayers;
     private TextView textView;
 
     @Override
@@ -43,26 +52,28 @@ public class GameActivity extends AppCompatActivity {
 
             // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
-                message = intent.getExtras().getString("Game");
-
+                if (intent.getExtras() != null) {
+                    message = intent.getExtras().getString("Game");
+                }
             }
         }
 
+
         // Set player to player number 1
-        player = 0;
+        currentPlayer = 0;
 
         // Parse the information saved in the String "message" and place it in the Game object
         game = gson.fromJson(message, Game.class);
 
-        size = game.getPlayers().size();
+        numPlayers = game.getPlayers().size();
 
-        textView = (TextView) findViewById(R.id.textView2);
+        GameActivity.CustomAdapter customAdapter = new CustomAdapter(this);
+        ListView resourceListView = (ListView) findViewById(R.id.resourceListView);
+        resourceListView.setAdapter(customAdapter);
 
-        // Testing Player Score button
-        scoreButton = findViewById(R.id.player_score_button);
-        // Set the Text on the button equal to the first players score
+        textView = (TextView) findViewById(R.id.playerNameHeader);
+
         setPlayerView();
-
     }
 
     /*
@@ -79,7 +90,7 @@ public class GameActivity extends AppCompatActivity {
     public void drawCard(View view) {
 
         if (!game.getDeck().getDeck().isEmpty()) {
-            game.getPlayers().get(player).addCardToHand(game.getDeck().drawCard());
+            game.getPlayers().get(currentPlayer).addCardToHand(game.getDeck().drawCard());
         }
 
         else {
@@ -87,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
 
-        Log.i("GameActivity", game.getPlayers().get(player).getName() + " has drawn a card");
+        Log.i("GameActivity", game.getPlayers().get(currentPlayer).getName() + " has drawn a card");
     }
 
     public void drawHand(View view) {
@@ -99,20 +110,20 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if (!game.getPlayers().get(player).canDraw()) {
-            Toast.makeText(this, game.getPlayers().get(player).getName() +
+        if (!game.getPlayers().get(currentPlayer).canDraw()) {
+            Toast.makeText(this, game.getPlayers().get(currentPlayer).getName() +
                             " has already drawn a hand", Toast.LENGTH_LONG).show();
             return;
         }
-        game.getPlayers().get(player).setHand(game.getDeck().drawHand(numCards));
+        game.getPlayers().get(currentPlayer).setHand(game.getDeck().drawHand(numCards));
 
-        Log.i("GameActivity", game.getPlayers().get(player).getName() + " has drawn a hand");
+        Log.i("GameActivity", game.getPlayers().get(currentPlayer).getName() + " has drawn a hand");
     }
 
     /*
     This function Allows the editing of a players score when the score button is pressed
      */
-    public void editPlayerScore (View view2) {
+    public void editPlayerScore (View view2, int resourceIndex) {
         // Define a new AlertDialog box that will be called from this activity
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
@@ -126,8 +137,8 @@ public class GameActivity extends AppCompatActivity {
         final TextView difference = (TextView) view.findViewById(R.id.player_score);
 
         // Set the score display on the new window equal to Player 1's score
-        String resourceInfo = game.getPlayers().get(player).getResources().get(0).getName();
-        resourceInfo += ": " + Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount());
+        String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getName();
+        resourceInfo += ": " + Integer.toString(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
         difference.setText(resourceInfo);
 
         // There is a plus and a minus button on this custom layout so we have to grab them
@@ -143,15 +154,15 @@ public class GameActivity extends AppCompatActivity {
                 int diff = Integer.parseInt(input.getText().toString());
 
                 // Add this amount to the current player score
-                game.getPlayers().get(player).getResources().get(0).setAmount(game.getPlayers().get(player).getResources().get(0).getAmount() + diff);
+                game.getPlayers().get(currentPlayer).getResources().get(0).setAmount(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount() + diff);
 
                 // Change the display on the new window to the new amount
-                String resourceInfo = game.getPlayers().get(player).getResources().get(0).getName();
-                resourceInfo += ": " + Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount());
+                String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(0).getName();
+                resourceInfo += ": " + Integer.toString(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount());
                 difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                scoreButton.setText(Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount()));
+                scoreButton.setText(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount());
             }
         });
 
@@ -163,15 +174,15 @@ public class GameActivity extends AppCompatActivity {
                 int diff = Integer.parseInt(input.getText().toString());
 
                 // Subtract this amount from the current player score
-                game.getPlayers().get(player).getResources().get(0).setAmount(game.getPlayers().get(player).getResources().get(0).getAmount() - diff);
+                game.getPlayers().get(currentPlayer).getResources().get(0).setAmount(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount() - diff);
 
                 // Change the display on the new window to the new amount
-                String resourceInfo = game.getPlayers().get(player).getResources().get(0).getName();
-                resourceInfo += ": " + Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount());
+                String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(0).getName();
+                resourceInfo += ": " + Integer.toString(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount());
                 difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                scoreButton.setText(Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount()));
+                scoreButton.setText(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount());
             }
         });
 
@@ -186,8 +197,8 @@ public class GameActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         // Change the score to the number the user input instead of adding or subtracting it
-                        game.getPlayers().get(player).getResources().get(0).setAmount(Integer.parseInt(input.getText().toString()));
-                        scoreButton.setText(Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount()));
+                        game.getPlayers().get(currentPlayer).getResources().get(0).setAmount(Integer.parseInt(input.getText().toString()));
+                        scoreButton.setText(game.getPlayers().get(currentPlayer).getResources().get(0).getAmount());
                     }
                 })
                 .setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
@@ -201,31 +212,111 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void setPlayerView() {
-        scoreButton.setText(Integer.toString(game.getPlayers().get(player).getResources().get(0).getAmount()));
-        textView.setText(game.getPlayers().get(player).getName());
+        textView.setText(game.getPlayers().get(currentPlayer).getName());
     }
 
     public void nextPlayerView(View view) {
-        if (player < size) {
-            player++;
+        if (currentPlayer < numPlayers) {
+            currentPlayer++;
         }
-        if (player >= size) {
-            player = 0;
+        if (currentPlayer >= numPlayers) {
+            currentPlayer = 0;
         }
 
         setPlayerView();
     }
 
     public void previousPlayerView(View view) {
-        if (player > 0) {
-            player--;
+        if (currentPlayer > 0) {
+            currentPlayer--;
             setPlayerView();
-            return;
         }
-        if (player <= 0) {
-            player = size - 1;
+        else {
+            currentPlayer = numPlayers - 1;
             setPlayerView();
-            return;
+        }
+    }
+
+    public void onClickAddResource(View view) {
+        List<Player> players = game.getPlayers();
+
+        boolean allPlayers = true;
+        String newResourceName = "newResource";
+        int defaultValue = 0;
+
+        Resource resourceToBeAdded = new Resource(newResourceName, defaultValue);
+
+        if (allPlayers) {
+            for (Player currentPlayerToGetResource : players) {
+                currentPlayerToGetResource.getResources().add(resourceToBeAdded);
+            }
+        } else {
+            game.getPlayers().get(currentPlayer).getResources().add(resourceToBeAdded);
+        }
+
+//        ListView resourceListView = this.findViewById(R.id.resourceListView);
+//        resourceListView.getAdapter().notify();
+    }
+
+    class CustomAdapter extends BaseAdapter {
+        Context context;
+
+        CustomAdapter(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            Log.d("Make Resource List View", "getCount: " + game.getPlayers().get(currentPlayer).getResources().size());
+            return game.getPlayers().get(currentPlayer).getResources().size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Log.d("Make Resource List View", "getView: Position:" + position);
+
+            View newView = getLayoutInflater().inflate(R.layout.custom_resource_layout, null);
+
+            Log.d("Make Resource List View", "getView: Post convert = inflate");
+
+            TextView textView = (TextView) findViewById(R.id.resourceNameTextView);
+            Button button = (Button) findViewById(R.id.resourceButton);
+
+            if (button == null) {
+                Log.wtf("WTF", "getView: the button doesn't exist and should");
+            }
+            if (textView == null) {
+                Log.wtf("WTF", "getView: the textView doesn't exist and should");
+            }
+
+            List <Resource> currentPlayerResources = game.getPlayers().get(currentPlayer).getResources();
+
+//            button.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    editPlayerScore(GameActivity.this.findViewById(R.id.resourceButton));
+//                }
+//            });
+//
+//            Log.d("Make Resource List View", "getView: Post set on click");
+//
+//            textView.setText(/*currentPlayerResources.get(position).getName()*/"Testing");
+//            int amount = currentPlayerResources.get(position).getAmount();
+//            button.setText(amount);
+//
+//            Log.d("Make Resource List View", "getView: Post Set Texts");
+
+            return newView;
         }
     }
 }

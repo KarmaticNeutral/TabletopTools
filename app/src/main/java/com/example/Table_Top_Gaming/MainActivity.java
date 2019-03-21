@@ -63,14 +63,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        String cloudUsername = prefs.getString("cloudUsername", " ");
-        String cloudPassword = prefs.getString("cloudPassword", " ");
-
-        if (cloudUsername.equals(" ")) {
-            //go to get info activity
-        } else {
-            // Connect to FireBase
-        }
+        Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
+        startActivity(intent);
+//        String cloudUsername = prefs.getString("cloudUsername", " ");
+//        String cloudPassword = prefs.getString("cloudPassword", " ");
+//
+//        if (cloudUsername.equals(" ")) {
+//            //go to get info activity
+//        } else {
+//            // Connect to FireBase
+//        }
     }
 
 }

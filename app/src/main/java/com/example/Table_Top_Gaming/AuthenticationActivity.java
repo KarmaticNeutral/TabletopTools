@@ -1,32 +1,43 @@
 package com.example.Table_Top_Gaming;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class AuthenticationActivity extends AppCompatActivity{
+public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "EmailPassword";
     private static final int RC_SIGN_IN = 123;
 
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
-    private EditText mEmailField;
-    private EditText mPasswordField;
+    private Button buttonRegister;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private TextView textViewSignin;
+
+    private ProgressDialog progressDialog;
+
 
     private FirebaseAuth mAuth;
 
@@ -34,51 +45,71 @@ public class AuthenticationActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
+
         mAuth = FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(this);
+
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPass);
+
+        textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
+
+        buttonRegister.setOnClickListener(this);
+        textViewSignin.setOnClickListener(this);
     }
 
-    public void createSignInIntent() {
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build());
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
+    private void registerUser() {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)){
+            //email is empty
+            Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)){
+            //password is empty
+            Toast.makeText(this, "Please Enter a Password", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //Email and password are que bueno
+        //we will show a progress bar
+
+        progressDialog.setMessage("Registering User...");
+        progressDialog.show();
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    //user successfully registers
+                    //we will start the profile activity
+                    Toast.makeText(AuthenticationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(AuthenticationActivity.this, "Failed to Registered", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //dismiss the bar when user is done registering
+        progressDialog.dismiss();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onClick(View v){
+        if(v == buttonRegister) {
+            registerUser();
+        }
 
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
+        if(v == textViewSignin) {
+            //will open login activity
 
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                // ...
-            } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
-            }
         }
     }
-
-    public void signOut() {
-        // [START auth_fui_signout]
-        AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-                    }
-                });
-        // [END auth_fui_signout]
-    }
-
 }

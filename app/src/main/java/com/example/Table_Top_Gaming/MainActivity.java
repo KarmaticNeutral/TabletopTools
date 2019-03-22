@@ -19,8 +19,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -32,8 +37,12 @@ import java.util.Date;
 
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences prefs;
+
+    private FirebaseAuth firebaseAuth;
+    private Button buttonLogOut;
+    private TextView textViewUserEmail;
 
 
     @Override
@@ -42,6 +51,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         prefs = getPreferences(Context.MODE_PRIVATE);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        /*
+        if (firebaseAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        */
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+
+
+
+        textViewUserEmail = (TextView) findViewById(R.id.textView5);
+
+        if (user != null) {
+            textViewUserEmail.setText("Welcome " + user.getEmail());
+        }
+        else {
+            textViewUserEmail.setText("Welcome Guest");
+        }
+
+
+
+
+        buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
+        buttonLogOut.setOnClickListener(this);
     }
 
     /*
@@ -63,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        finish();
         startActivity(intent);
 //        String cloudUsername = prefs.getString("cloudUsername", " ");
 //        String cloudPassword = prefs.getString("cloudPassword", " ");
@@ -75,4 +114,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
+
+    @Override
+    public void onClick(View v) {
+        if (v == buttonLogOut) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
+    }
 }

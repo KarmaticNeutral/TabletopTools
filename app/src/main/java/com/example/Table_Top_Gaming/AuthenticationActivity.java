@@ -48,6 +48,14 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         mAuth = FirebaseAuth.getInstance();
 
+        /*
+        if (mAuth.getCurrentUser() != null){
+            //start profile activity
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+        */
+
         progressDialog = new ProgressDialog(this);
 
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
@@ -90,6 +98,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     //user successfully registers
                     //we will start the profile activity
                     Toast.makeText(AuthenticationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                    //start profile activity
+                    finish();
+                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
                 else {
                     Toast.makeText(AuthenticationActivity.this, "Failed to Registered", Toast.LENGTH_SHORT).show();
@@ -109,7 +120,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         if(v == textViewSignin) {
             //will open login activity
-
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
     }
 }

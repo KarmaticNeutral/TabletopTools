@@ -30,9 +30,13 @@ public class GameActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private int currentPlayer;
     private int numPlayers;
-    private TextView textView;
+    private TextView playerNameHeader;
     private GameActivity.CustomAdapter customAdapter;
 
+    /**
+     * Initialize values that are needed when the game Activity starts.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,20 +73,23 @@ public class GameActivity extends AppCompatActivity {
 
         numPlayers = game.getPlayers().size();
 
-
+        //Create a custom adapter for this activity
         customAdapter = new CustomAdapter(this);
+        // Predefine  the ListView
         ListView resourceListView = (ListView) findViewById(R.id.resourceListView);
+        //Set up the custom adapter for the discovered ListView.
         resourceListView.setAdapter(customAdapter);
 
-        textView = (TextView) findViewById(R.id.playerNameHeader);
+        playerNameHeader = (TextView) findViewById(R.id.playerNameHeader);
 
 
         setPlayerView();
     }
 
-    /*
-    This function converts the information saved in the game object to a string and passes that to
-    the SaveGameActivity
+    /**
+     * This function converts the information saved in the game object to a string and passes that
+     * to the SaveGameActivity.
+     * @param view
      */
     public void saveGame(View view) {
         String gameInformation = gson.toJson(game);
@@ -91,6 +98,10 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * If it is appropriate for currentPlayer to draw a card, they do.
+     * @param view - The View Object that called this function.
+     */
     public void drawCard(View view) {
 
         if (!game.getDeck().getDeck().isEmpty()) {
@@ -105,6 +116,10 @@ public class GameActivity extends AppCompatActivity {
         Log.i("GameActivity", game.getPlayers().get(currentPlayer).getName() + " has drawn a card");
     }
 
+    /**
+     * If it is appropriate for currentPlayer to draw a full hand of cards, they do.
+     * @param view - The View Object that called this function.
+     */
     public void drawHand(View view) {
         int numCards = 5;
 
@@ -124,10 +139,12 @@ public class GameActivity extends AppCompatActivity {
         Log.i("GameActivity", game.getPlayers().get(currentPlayer).getName() + " has drawn a hand");
     }
 
-    /*
-    This function Allows the editing of a players score when the score button is pressed
+    /**
+     * This function Allows the editing of a players score when the score button is pressed.
+     * @param callingButton - The button that called this function.
+     * @param resourceIndex - The index in the resource list of the currentPlayer that is being modified.
      */
-    public void editPlayerScore (final Button buttonThatCalledThisFunction, final int resourceIndex) {
+    public void editPlayerScore (final Button callingButton, final int resourceIndex) {
         // Define a new AlertDialog box that will be called from this activity
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
@@ -166,7 +183,7 @@ public class GameActivity extends AppCompatActivity {
                 difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                buttonThatCalledThisFunction.setText(" " + game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                callingButton.setText(" " + game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
             }
         });
 
@@ -186,7 +203,7 @@ public class GameActivity extends AppCompatActivity {
                 difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                buttonThatCalledThisFunction.setText(" " + game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                callingButton.setText(" " + game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
             }
         });
 
@@ -202,7 +219,7 @@ public class GameActivity extends AppCompatActivity {
 
                         // Change the score to the number the user input instead of adding or subtracting it
                         game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(Integer.parseInt(input.getText().toString()));
-                        buttonThatCalledThisFunction.setText(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                        callingButton.setText(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
                     }
                 })
                 .setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
@@ -215,11 +232,18 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Update the display to show that the currentPlayer has changed.
+     */
     public void setPlayerView() {
-        textView.setText(game.getPlayers().get(currentPlayer).getName());
+        playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
         customAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Shift the currentPlayer to be the next player in the List in the positive direction.
+     * @param view - The button that called the function.
+     */
     public void nextPlayerView(View view) {
         if (currentPlayer < numPlayers) {
             currentPlayer++;
@@ -227,24 +251,30 @@ public class GameActivity extends AppCompatActivity {
         if (currentPlayer >= numPlayers) {
             currentPlayer = 0;
         }
-
+        // Make the display reflect the change in the data structure.
         setPlayerView();
     }
 
+    /**
+     * Shift the currentPlayer to be the next player in the List in the negative direction.
+     * @param view - The button that called the function.
+     */
     public void previousPlayerView(View view) {
         if (currentPlayer > 0) {
             currentPlayer--;
-            setPlayerView();
         }
         else {
             currentPlayer = numPlayers - 1;
-            setPlayerView();
         }
+        // Make the display reflect the change in the data structure.
+        setPlayerView();
     }
 
+    /**
+     * Add a blank resource to the resource List.
+     * @param view - The View that called the function.
+     */
     public void onClickAddResource(View view) {
-        List<Player> players = game.getPlayers();
-
         boolean allPlayers = true;
         String newResourceName = "newResource";
         int defaultValue = 0;
@@ -252,19 +282,22 @@ public class GameActivity extends AppCompatActivity {
         Resource resourceToBeAdded = new Resource(newResourceName, defaultValue);
 
         if (allPlayers) {
-            for (Player currentPlayerToGetResource : players) {
+            for (Player currentPlayerToGetResource : game.getPlayers()) {
                 currentPlayerToGetResource.getResources().add(resourceToBeAdded);
             }
         } else {
             game.getPlayers().get(currentPlayer).getResources().add(resourceToBeAdded);
         }
-
+        // Make sure the Display reflects the change in the data structure.
         customAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Custom Adapter class used to show A player's List of Resources in a ListView.
+     */
     class CustomAdapter extends BaseAdapter {
         Context context;
-
+        private static final String TAG = "CustomAdapter";
         CustomAdapter(Context context) {
             this.context = context;
         }
@@ -285,35 +318,46 @@ public class GameActivity extends AppCompatActivity {
             return 0;
         }
 
+        /**
+         * As the adapter iterates through the List of Resources that belong to Current Player,
+         * Create a display for that item. This ccreates a button that shows the value of that
+         * Resource and a TextView that shows the name of the resource.
+         * @param position - The current location in the Resource List.
+         * @param convertView - The View to be changed before returning.
+         * @param parent - The containing ViewGroup.
+         * @return - The convertView after the appropriate changes have been made.
+         */
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            Log.d("Make Resource List View", "getView: Position:" + position);
+            Log.v(TAG, "getView: Position:" + position);
 
             convertView = getLayoutInflater().inflate(R.layout.custom_resource_layout, null);
 
-            Log.d("Make Resource List View", "getView: Post convert = inflate");
+            Log.v(TAG, "getView: Post convert = inflate");
 
+            //Get references to both of the new Views.
             TextView textView = (TextView) convertView.findViewById(R.id.resourceNameTextView);
             Button button = (Button) convertView.findViewById(R.id.resourceButton);
 
-            if (button == null) {
-                Log.wtf("WTF", "getView: the button doesn't exist and should");
-            }
-            if (textView == null) {
-                Log.wtf("WTF", "getView: the textView doesn't exist and should");
-            }
+            // We want to know if they are somehow null.
+            assert button != null;
+            assert textView != null;
 
             List <Resource> currentPlayerResources = game.getPlayers().get(currentPlayer).getResources();
 
+            //Initialize the Values to be displayed.
             textView.setText(currentPlayerResources.get(position).getName());
             int amount = currentPlayerResources.get(position).getAmount();
             button.setText(" " + amount);
+
+            //Assign each View a new ID so that we don't call the wrong View when all of the custom
+            //Buttons share an ID.
             final int newButtonId = Button.generateViewId();
             final int newTextViewId = Button.generateViewId();
             textView.setId(newTextViewId);
             button.setId(newButtonId);
 
-            Log.d("Make Resource List View", "getView: Post Set Texts");
+            Log.v(TAG ,"getView: Post Set Defaults");
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -322,7 +366,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
 
-            Log.d("Make Resource List View", "getView: Post set on click");
+            Log.v(TAG, "getView: Post set on click");
             return convertView;
         }
     }

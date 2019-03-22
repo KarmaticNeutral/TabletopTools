@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/tabletop_tools_launcher_alpha"
         android:label="Table Top Gaming"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/tabletop_tools_launcher_alpha_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".EditPlayerScoreDialogActivity"></activity>

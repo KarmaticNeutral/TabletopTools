@@ -29,6 +29,7 @@ public class SaveGameActivity extends AppCompatActivity {
     private String fileName;
     private String message;
     private Intent intent;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class SaveGameActivity extends AppCompatActivity {
 
         // Store the game information in message
         message = intent.getExtras().getString("Game");
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
     }

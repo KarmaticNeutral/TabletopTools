@@ -63,9 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
-
-
-
         textViewUserEmail = (TextView) findViewById(R.id.textView5);
 
         if (user != null) {
@@ -74,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else {
             textViewUserEmail.setText("Welcome Guest");
         }
-
-
-
 
         buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(this);
@@ -104,14 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, LoginActivity.class);
         finish();
         startActivity(intent);
-//        String cloudUsername = prefs.getString("cloudUsername", " ");
-//        String cloudPassword = prefs.getString("cloudPassword", " ");
-//
-//        if (cloudUsername.equals(" ")) {
-//            //go to get info activity
-//        } else {
-//            // Connect to FireBase
-//        }
     }
 
 

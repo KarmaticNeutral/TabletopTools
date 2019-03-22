@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/tabletop_tools_launcher_alpha_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditPlayerScoreDialogActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".EditPlayerScoreDialogActivity" />
         <activity android:name=".AuthenticationActivity" />
 
         <provider

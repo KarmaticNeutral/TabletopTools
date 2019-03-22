@@ -28,4 +28,11 @@
     <string name="minus">-</string>
     <string name="next_player">&gt;</string>
     <string name="previous_player">&lt;</string>
+    <string name="add_resource">Add Resource</string>
+    <string name="playername">playerName</string>
+    <string name="draw_card">Draw Card</string>
+    <string name="draw_hand">Draw Hand</string>
+    <string name="player_profile_image">Player Profile Image</string>
+    <string name="load">Load</string>
+    <string name="dice">Dice!</string>
 </resources>

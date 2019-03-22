@@ -6,23 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <Button
-        android:id="@+id/addResourceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="onClickAddResource"
-        android:text="@string/add_resource"
-        app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/drawHandButton"
-        app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
-        app:layout_constraintVertical_bias="0.433" />
-
     <TextView
         android:id="@+id/playerNameHeader"
         android:layout_width="wrap_content"
@@ -30,63 +13,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/textview"
+        android:text="@string/playername"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/saveGameButton"
-        android:layout_width="326dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
-        android:onClick="saveGame"
-        android:text="@string/save_game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/drawCardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="drawCard"
-        android:text="@string/draw_card"
-        app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-        app:layout_constraintEnd_toStartOf="@+id/drawHandButton"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
-        app:layout_constraintVertical_bias="0.425" />
-
-    <Button
-        android:id="@+id/drawHandButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="drawHand"
-        android:text="@string/draw_hand"
-        app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
-        app:layout_constraintVertical_bias="0.49" />
-
-    <Button
         android:id="@+id/leftPlayerSelectButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -94,15 +30,15 @@
         android:onClick="previousPlayerView"
         android:text="@string/previous_player"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/drawCardButton"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContainerLayout"
         app:layout_constraintEnd_toStartOf="@+id/playerProfileImageButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/rightPlayerSelectButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="28dp"
@@ -110,15 +46,15 @@
         android:onClick="nextPlayerView"
         android:text="@string/next_player"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/addResourceButton"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContainerLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playerProfileImageButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/playerProfileImageButton"
-        android:layout_width="100dp"
-        android:layout_height="125dp"
+        android:layout_width="125dp"
+        android:layout_height="165dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/player_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,16 +66,104 @@
     <ListView
         android:id="@+id/resourceListView"
         android:layout_width="match_parent"
-        android:layout_height="333dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/saveGameButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drawHandButton">
-
+        app:layout_constraintTop_toBottomOf="@+id/buttonContainerLayout">
     </ListView>
+
+
+    <Button
+        android:id="@+id/saveGameButton"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="saveGame"
+        android:text="@string/save_game"
+        app:layout_constraintBottom_toTopOf="@id/rightPlayerSelectButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/playerNameHeader"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <LinearLayout
+        android:id="@+id/buttonContainerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/resourceListView"
+        app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Button
+            android:id="@+id/addResourceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="onClickAddResource"
+            android:text="@string/add_resource"
+            app:layout_constraintBottom_toTopOf="@+id/resourceListView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/drawHandButton"
+            app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
+            app:layout_constraintVertical_bias="0.433" />
+
+        <Button
+            android:id="@+id/drawCardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="drawCard"
+            android:text="@string/draw_card"
+            app:layout_constraintBottom_toTopOf="@+id/resourceListView"
+            app:layout_constraintEnd_toStartOf="@+id/drawHandButton"
+            app:layout_constraintHorizontal_bias="0.636"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
+            app:layout_constraintVertical_bias="0.425" />
+
+        <Button
+            android:id="@+id/drawHandButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="drawHand"
+            android:text="@string/draw_hand"
+            app:layout_constraintBottom_toTopOf="@+id/resourceListView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/diceButton"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:onClick="diceClicked"
+        android:text="@string/dice"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="7dp"
+        app:layout_constraintBottom_toTopOf="@id/leftPlayerSelectButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/playerNameHeader"
+        app:layout_constraintTop_toTopOf="parent"/>/>
 
 </android.support.constraint.ConstraintLayout>

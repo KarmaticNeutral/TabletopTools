@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/leftCard"
+        android:layout_width="57dp"
+        android:layout_height="306dp"
+        android:src="@drawable/red_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/rightCard"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/rightCard"
+        android:layout_width="49dp"
+        android:layout_height="313dp"
+        android:src="@drawable/red_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/leftCard"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/playerNameHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Player Name Header"
+        android:textSize="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/leftCard"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/handScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </HorizontalScrollView>
+</android.support.constraint.ConstraintLayout>

@@ -69,11 +69,13 @@ public class GameActivity extends AppCompatActivity {
 
         numPlayers = game.getPlayers().size();
 
+
         customAdapter = new CustomAdapter(this);
         ListView resourceListView = (ListView) findViewById(R.id.resourceListView);
         resourceListView.setAdapter(customAdapter);
 
         textView = (TextView) findViewById(R.id.playerNameHeader);
+
 
         setPlayerView();
     }

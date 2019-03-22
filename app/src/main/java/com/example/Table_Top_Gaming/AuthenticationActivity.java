@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class AuthenticationActivity extends AppCompatActivity {
+public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final String TAG = "EmailPassword";
@@ -29,14 +31,14 @@ public class AuthenticationActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
-    //private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        //mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         /*
         if (mAuth.getCurrentUser() != null){
@@ -48,15 +50,15 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        //buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
-        //editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        //editTextPassword = (EditText) findViewById(R.id.editTextPass);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPass);
 
-        //textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
+        textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
 
-        //buttonRegister.setOnClickListener(this);
-        //textViewSignin.setOnClickListener(this);
+        buttonRegister.setOnClickListener(this);
+        textViewSignin.setOnClickListener(this);
     }
 
     private void registerUser() {
@@ -81,7 +83,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
-        /*
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -114,7 +116,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
-        */
+
     }
 
 

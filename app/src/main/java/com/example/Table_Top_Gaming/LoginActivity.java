@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,14 +24,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextPassword;
     private TextView textViewSignup;
     private ProgressDialog progressDialog;
-    //private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         /*
         if (mAuth.getCurrentUser() != null){
@@ -39,14 +41,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         */
 
-        //buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
+        buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
 
         progressDialog = new ProgressDialog(this);
 
-        //editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        //editTextPassword = (EditText) findViewById(R.id.editTextPass);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPass);
 
-        //textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
+        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
 
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog.setMessage("Logging In User...");
         progressDialog.show();
-/*
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -88,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
-                */
+
     }
 
     @Override

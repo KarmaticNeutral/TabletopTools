@@ -293,6 +293,47 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
+     * Launches a dialog to allow user to select camera or gallery.
+     * @param view The button that called the function.
+     */
+    public void cameraDialog(View view) {
+
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Profile Photo");
+
+        // add the buttons
+        builder.setPositiveButton("Take picture",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /* BUTTON DOES NOTHING! */
+                //onCameraClick();
+            }
+        });
+        builder.setNegativeButton("Select from gallery",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /* BUTTON DOES NOTHING! */
+                //onGalleryClick();
+            }
+        });
+        builder.setNeutralButton("Cancel", null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void diceClicked(View view) {
+        Context context = getApplicationContext();
+        CharSequence text = "Self destruct imminent...";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    /**
      * Custom Adapter class used to show A player's List of Resources in a ListView.
      */
     class CustomAdapter extends BaseAdapter {

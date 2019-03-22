@@ -82,6 +82,7 @@ public class GameActivity extends AppCompatActivity {
 
         playerNameHeader = (TextView) findViewById(R.id.playerNameHeader);
 
+
         setPlayerView();
     }
 

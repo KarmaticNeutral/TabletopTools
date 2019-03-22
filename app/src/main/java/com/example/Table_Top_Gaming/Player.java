@@ -11,7 +11,7 @@ public class Player {
 
     private String name;
     private String pathToImage;
-    private URI image;
+    private URI image; //Will hold the image resource
     private List<PlayingCard> hand;
     private boolean canDrawHand;
     private List<Resource> resources;

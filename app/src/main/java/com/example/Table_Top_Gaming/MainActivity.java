@@ -21,7 +21,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences prefs;
     private Button buttonLogin;
 
+    private FirebaseAuth firebaseAuth;
+    private Button buttonLogOut;
+    private TextView textViewUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         prefs = getPreferences(Context.MODE_PRIVATE);
-        buttonLogin = (Button) findViewById(R.id.signInButton);
+        buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
+        buttonLogOut.setOnClickListener(this);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        textViewUserEmail = (TextView) findViewById(R.id.textView5);
+
+        if (user != null) {
+            textViewUserEmail.setText("Welcome " + user.getEmail());
+        }
+        else {
+            textViewUserEmail.setText("Welcome Guest");
+        }
     }
 
     /*
@@ -65,24 +85,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void signIn() {
-        //finish();
-        //startActivity(new Intent(this, LoginActivity.class));
-//        String cloudUsername = prefs.getString("cloudUsername", " ");
-//        String cloudPassword = prefs.getString("cloudPassword", " ");
-//
-//        if (cloudUsername.equals(" ")) {
-//            //go to get info activity
-//        } else {
-//            // Connect to FireBase
-//        }
+    public void signIn(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        finish();
+        startActivity(intent);
     }
+
 
     @Override
     public void onClick(View v) {
-        if (v == buttonLogin)
-        {
-            signIn();
+        if (v == buttonLogOut) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
+
 }

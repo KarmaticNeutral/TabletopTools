@@ -59,27 +59,34 @@ public class LoadGameActivity extends AppCompatActivity {
         user = firebaseAuth.getCurrentUser();
 
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-        Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
-        Log.d("PIE", "Before onSuccess in the code");
-        snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
-                Log.d("PIE", "Inside Onsucess Outside List");
-                for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
-                    String filePath = currentDocumentSnapshot.getReference().getPath();
-                    Log.d("PIE", "onSuccess: Filepath of a Saved Game:" + filePath);
+        if (user != null) {
+            Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
+            Log.d("PIE", "Before onSuccess in the code");
+            snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                    Log.d("PIE", "Inside Onsucess Outside List");
+                    for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
+                        String filePath = currentDocumentSnapshot.getReference().getPath();
+                        Log.d("PIE", "onSuccess: Filepath of a Saved Game:" + filePath);
 
-                    if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
-                        Log.d("PIE", "Inside IF Name&Save; List Length: " + GAME_NAMES.size());
-                        GAME_NAMES.add(currentDocumentSnapshot.get("Name").toString());
+                        if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
+                            Log.d("PIE", "Inside IF Name&Save; List Length: " + GAME_NAMES.size());
+                            GAME_NAMES.add(currentDocumentSnapshot.get("Name").toString());
+                        }
                     }
+                    CustomAdapter customAdapter = new CustomAdapter();
+                    ListView savedGamesListView = (ListView) findViewById(R.id.savedGamesListView);
+                    savedGamesListView.setAdapter(customAdapter);
                 }
-                CustomAdapter customAdapter = new CustomAdapter();
-                ListView savedGamesListView = (ListView) findViewById(R.id.savedGamesListView);
-                savedGamesListView.setAdapter(customAdapter);
-            }
-        });
+            });
+        }
+        else
+        {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         Log.d("PIE", "After onSuccess in the code");
     }
 

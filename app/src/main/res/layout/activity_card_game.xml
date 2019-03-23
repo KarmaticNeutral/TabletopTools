@@ -20,7 +20,7 @@
 
     <ImageView
         android:id="@+id/rightCard"
-        android:layout_width="49dp"
+        android:layout_width="57dp"
         android:layout_height="313dp"
         android:src="@drawable/red_back"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,9 +41,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
-        android:id="@+id/handScrollView"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </HorizontalScrollView>
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:id="@+id/handRecyclerView"
+        app:layout_constraintTop_toBottomOf="@id/rightCard"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="530dp" />
 </android.support.constraint.ConstraintLayout>

@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 public class CardGameActivity extends AppCompatActivity {
+
+    // Create a KEY for passing information to the next activity
+    public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
     private Game game;
     private Gson gson = new Gson();
     private int currentPlayer;
@@ -30,14 +35,27 @@ public class CardGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_card_game);
 
         // Get the intent for this Activity
         Intent intent = getIntent();
 
-        // Grab the information from LoadGameActivity passed to this Activity and place it in the
+        // Grab the information from GameActivity passed to this Activity and place it in the
         // string message
-        String message = intent.getStringExtra(LoadGameActivity.EXTRA_MESSAGE);
+        String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
+        Game game = gson.fromJson(message, Game.class);
+        currentPlayer = 0;
+        numPlayers = game.getPlayers().size();
+        playerNameHeader = findViewById(R.id.playerNameHeader);
+        playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
         RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand());
+    }
+
+    public void returnToScore(View view) {
+        String gameInformation = gson.toJson(game);
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("Game", gameInformation);
+        startActivity(intent);
     }
 }

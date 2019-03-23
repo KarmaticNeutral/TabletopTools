@@ -9,15 +9,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
-    private ArrayList<Card> currentPlayerHand;
+    private List<Card> currentPlayerHand;
     private Context context;
 
-    public RecyclerViewAdapter(ArrayList <Card> hand, Context context) {
+    public RecyclerViewAdapter(List<Card> hand) {
         currentPlayerHand = hand;
-        this.context = context;
     }
 
 

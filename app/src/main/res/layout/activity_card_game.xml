@@ -9,24 +9,28 @@
 
     <ImageView
         android:id="@+id/leftCard"
-        android:layout_width="57dp"
-        android:layout_height="306dp"
+        android:padding="15dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/red_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/rightCard"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/playerNameHeader" />
 
 
-    <ImageView
+    <ImageButton
         android:id="@+id/rightCard"
-        android:layout_width="57dp"
-        android:layout_height="313dp"
+        android:padding="15dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/red_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/leftCard"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/playerNameHeader" />
 
     <TextView
         android:id="@+id/playerNameHeader"
@@ -34,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Player Name Header"
-        android:textSize="26dp"
+        android:text="@string/player_name_header"
+        android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/leftCard"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -44,7 +48,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
+        android:rotation="90"
         android:id="@+id/handRecyclerView"
         app:layout_constraintTop_toBottomOf="@id/rightCard"
         app:layout_constraintRight_toRightOf="parent"
@@ -52,4 +56,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="530dp" />
+
+    <Button
+        android:id="@+id/returnToScore"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/return_to_score"
+        android:onClick="returnToScore"
+        app:layout_constraintBottom_toTopOf="@+id/playerNameHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>

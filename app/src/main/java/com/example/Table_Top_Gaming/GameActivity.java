@@ -324,13 +324,700 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void diceClicked(View view) {
-        Context context = getApplicationContext();
-        CharSequence text = "Self destruct imminent...";
-        int duration = Toast.LENGTH_SHORT;
+    public void diceClicked(View view2) {
+        final DieRoller dieRoller = new DieRoller();
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
+        final TextView toBeRolled = (TextView) view.findViewById(R.id.diceBeingRolled);
+        final TextView total = (TextView) view.findViewById(R.id.sumOfDice);
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Button zero = (Button) view.findViewById(R.id.zero);
+        Button one = (Button) view.findViewById(R.id.one);
+        Button two = (Button) view.findViewById(R.id.two);
+        Button three = (Button) view.findViewById(R.id.three);
+        Button four = (Button) view.findViewById(R.id.four);
+        Button five = (Button) view.findViewById(R.id.five);
+        Button six = (Button) view.findViewById(R.id.six);
+        Button seven = (Button) view.findViewById(R.id.seven);
+        Button eight = (Button) view.findViewById(R.id.eight);
+        Button nine = (Button) view.findViewById(R.id.nine);
+        Button delete = (Button) view.findViewById(R.id.delete);
+        Button plus = (Button) view.findViewById(R.id.roll_plus);
+        Button roll = (Button) view.findViewById(R.id.roll);
+        Button d4 = (Button) view.findViewById(R.id.d4);
+        Button d6 = (Button) view.findViewById(R.id.d6);
+        Button d8 = (Button) view.findViewById(R.id.d8);
+        Button d10 = (Button) view.findViewById(R.id.d10);
+        Button d20 = (Button) view.findViewById(R.id.d20);
+
+        zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "0");
+            }
+        });
+
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "1");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "1");
+            }
+        });
+
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "2");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "2");
+            }
+        });
+
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "3");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "3");
+            }
+        });
+
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "4");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "4");
+            }
+        });
+
+        five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "5");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "5");
+            }
+        });
+
+        six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "6");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "6");
+            }
+        });
+
+        seven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "7");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "7");
+            }
+        });
+
+        eight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "8");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "8");
+            }
+        });
+
+        nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    toBeRolled.setText(toBeRolled.getText().toString() + "9");
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                toBeRolled.setText(toBeRolled.getText().toString() + "9");
+            }
+        });
+
+        d4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+                else {
+                    int startIndex = 0;
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    int numDice;
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                    }
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    toBeRolled.setText(toBeRolled.getText().toString() + "d4");
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new D4());
+                    }
+                }
+            }
+        });
+
+        d6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+                else {
+                    int startIndex = 0;
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    int numDice;
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                    }
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    toBeRolled.setText(toBeRolled.getText().toString() + "d6");
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new D6());
+                    }
+                }
+            }
+        });
+
+        d8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+                else {
+                    int startIndex = 0;
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    int numDice;
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                    }
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    toBeRolled.setText(toBeRolled.getText().toString() + "d8");
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new D8());
+                    }
+                }
+            }
+        });
+
+        d10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+                else {
+                    int startIndex = 0;
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    int numDice;
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                    }
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    toBeRolled.setText(toBeRolled.getText().toString() + "d10");
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new D10());
+                    }
+                }
+            }
+        });
+
+        d20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            return;
+                        }
+                    }
+                }
+
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+                else {
+                    int startIndex = 0;
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    int numDice;
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                    }
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    toBeRolled.setText(toBeRolled.getText().toString() + "d20");
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new D20());
+                    }
+                }
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4') {
+                        toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
+                        for (int i = 0; i < dieRoller.getDice().size(); i ++) {
+                            if (dieRoller.getDice().get(i) instanceof D4) {
+                                dieRoller.getDice().remove(i);
+                                i = 0;
+                                if (dieRoller.getDice().get(0) instanceof D4 && dieRoller.getDice().size() == 1) {
+                                    dieRoller.getDice().clear();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6') {
+                        toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
+                        for (int i = 0; i < dieRoller.getDice().size(); i ++) {
+                            if (dieRoller.getDice().get(i) instanceof D6) {
+                                dieRoller.getDice().remove(i);
+                                i = 0;
+                                if (dieRoller.getDice().get(0) instanceof D6 && dieRoller.getDice().size() == 1) {
+                                    dieRoller.getDice().clear();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
+                            for (int i = 0; i < dieRoller.getDice().size(); i ++) {
+                                if (dieRoller.getDice().get(i) instanceof D8) {
+                                    dieRoller.getDice().remove(i);
+                                    i = 0;
+                                    if (dieRoller.getDice().get(0) instanceof D8 && dieRoller.getDice().size() == 1) {
+                                        dieRoller.getDice().clear();
+                                    }
+                                }
+                            }
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '1') {
+                                toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
+                                for (int i = 0; i < dieRoller.getDice().size(); i ++) {
+                                    if (dieRoller.getDice().get(i) instanceof D10) {
+                                        dieRoller.getDice().remove(i);
+                                        i = 0;
+                                        if (dieRoller.getDice().get(0) instanceof D10 && dieRoller.getDice().size() == 1) {
+                                            dieRoller.getDice().clear();
+                                        }
+                                    }
+                                }
+                                return;
+                            }
+
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '2') {
+                                toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
+                                for (int i = 0; i < dieRoller.getDice().size(); i ++) {
+                                    if (dieRoller.getDice().get(i) instanceof D20) {
+                                        dieRoller.getDice().remove(i);
+                                        i = 0;
+                                        if (dieRoller.getDice().get(0) instanceof D20 && dieRoller.getDice().size() == 1) {
+                                            dieRoller.getDice().clear();
+                                        }
+                                    }
+                                }
+                                return;
+                            }
+                            toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                        toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
+                        return;
+                    }
+                }
+                if (toBeRolled.getText().toString().length() > 0) {
+                    toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -1));
+                    return;
+                }
+            }
+        });
+
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    return;
+                }
+
+                if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            toBeRolled.setText(toBeRolled.getText().toString() + " + ");
+                            return;
+                        }
+                    }
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            && toBeRolled.getText().toString().length() > 2) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            toBeRolled.setText(toBeRolled.getText().toString() + " + ");
+                            return;
+                        }
+                    }
+                }
+            }
+        });
+
+        roll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
+                if (!dieRoller.getDice().isEmpty() || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) != ' ') {
+
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                                || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                                || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                                dieRoller.rollAllDice();
+                                total.setText(dieRoller.display());
+                                dieRoller.getDice().clear();
+                                toBeRolled.setText("");
+                                return;
+                            }
+                        }
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                                && toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                dieRoller.rollAllDice();
+                                total.setText(dieRoller.display());
+                                dieRoller.getDice().clear();
+                                toBeRolled.setText("");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        builder.setView(view)
+                .setPositiveButton(R.string.player_score_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The user hit "OK" do nothing they are done
+                    }
+                }).setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // The user hit "CANCEL" do nothing they are done
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /**

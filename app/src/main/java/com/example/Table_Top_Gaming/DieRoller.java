@@ -127,6 +127,8 @@ public class DieRoller {
 
         rolls += "\n";
 
+        rolls += Integer.toString(sum) + " = ";
+
         rolls += "(";
         for (int i = 0; i < dice.size(); i ++) {
             if (dice.get(i).getName().equals("d4")) {
@@ -202,7 +204,6 @@ public class DieRoller {
                 }
             }
         }
-        rolls += " = " + Integer.toString(sum);
 
         return rolls;
     }

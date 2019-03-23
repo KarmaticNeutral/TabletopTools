@@ -38,7 +38,7 @@
         android:id="@+id/d4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/d4"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
         android:id="@+id/d10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/d10"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
         android:id="@+id/seven"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/seven"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
         android:id="@+id/four"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/four"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +148,7 @@
         android:id="@+id/one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/one"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +178,7 @@
         android:id="@+id/zero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/zero"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
 
     <Button
         android:id="@+id/roll_plus"
-        android:layout_width="83dp"
+        android:layout_width="60dp"
         android:layout_height="153dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="72dp"
@@ -196,7 +196,7 @@
 
     <Button
         android:id="@+id/roll"
-        android:layout_width="83dp"
+        android:layout_width="60dp"
         android:layout_height="142dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -206,11 +206,12 @@
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/delete"
+        android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/d8"
         app:layout_constraintTop_toBottomOf="@+id/sumOfDice" />
 </android.support.constraint.ConstraintLayout>

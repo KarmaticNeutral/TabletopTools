@@ -661,6 +661,7 @@ public class GameActivity extends AppCompatActivity {
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new D4());
                     }
+                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -707,6 +708,7 @@ public class GameActivity extends AppCompatActivity {
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new D6());
                     }
+                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -753,6 +755,7 @@ public class GameActivity extends AppCompatActivity {
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new D8());
                     }
+                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -799,6 +802,7 @@ public class GameActivity extends AppCompatActivity {
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new D10());
                     }
+                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -847,6 +851,7 @@ public class GameActivity extends AppCompatActivity {
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new D20());
                     }
+                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -855,46 +860,55 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4') {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                             if (dieRoller.getDice().get(i) instanceof D4) {
                                 dieRoller.getDice().remove(i);
                                 i = 0;
-                                if (dieRoller.getDice().get(0) instanceof D4 && dieRoller.getDice().size() == 1) {
-                                    dieRoller.getDice().clear();
+                                if (dieRoller.getDice().size() > 0) {
+                                    if (dieRoller.getDice().get(0) instanceof D4 && dieRoller.getDice().size() == 1) {
+                                        dieRoller.getDice().clear();
+                                    }
                                 }
                             }
                         }
                         return;
                     }
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6') {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                             if (dieRoller.getDice().get(i) instanceof D6) {
                                 dieRoller.getDice().remove(i);
                                 i = 0;
-                                if (dieRoller.getDice().get(0) instanceof D6 && dieRoller.getDice().size() == 1) {
-                                    dieRoller.getDice().clear();
+                                if (dieRoller.getDice().size() > 0) {
+                                    if (dieRoller.getDice().get(0) instanceof D6 && dieRoller.getDice().size() == 1) {
+                                        dieRoller.getDice().clear();
+                                    }
                                 }
                             }
                         }
                         return;
                     }
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8'
+                            && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
                             toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                             for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                                 if (dieRoller.getDice().get(i) instanceof D8) {
                                     dieRoller.getDice().remove(i);
                                     i = 0;
-                                    if (dieRoller.getDice().get(0) instanceof D8 && dieRoller.getDice().size() == 1) {
-                                        dieRoller.getDice().clear();
+                                    if (dieRoller.getDice().size() > 0) {
+                                        if (dieRoller.getDice().get(0) instanceof D8 && dieRoller.getDice().size() == 1) {
+                                            dieRoller.getDice().clear();
+                                        }
                                     }
                                 }
                             }
                             return;
-                        }
                     }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
@@ -905,8 +919,10 @@ public class GameActivity extends AppCompatActivity {
                                     if (dieRoller.getDice().get(i) instanceof D10) {
                                         dieRoller.getDice().remove(i);
                                         i = 0;
-                                        if (dieRoller.getDice().get(0) instanceof D10 && dieRoller.getDice().size() == 1) {
-                                            dieRoller.getDice().clear();
+                                        if (dieRoller.getDice().size() > 0) {
+                                            if (dieRoller.getDice().get(0) instanceof D10 && dieRoller.getDice().size() == 1) {
+                                                dieRoller.getDice().clear();
+                                            }
                                         }
                                     }
                                 }
@@ -919,8 +935,10 @@ public class GameActivity extends AppCompatActivity {
                                     if (dieRoller.getDice().get(i) instanceof D20) {
                                         dieRoller.getDice().remove(i);
                                         i = 0;
-                                        if (dieRoller.getDice().get(0) instanceof D20 && dieRoller.getDice().size() == 1) {
-                                            dieRoller.getDice().clear();
+                                        if (dieRoller.getDice().size() > 0) {
+                                            if (dieRoller.getDice().get(0) instanceof D20 && dieRoller.getDice().size() == 1) {
+                                                dieRoller.getDice().clear();
+                                            }
                                         }
                                     }
                                 }

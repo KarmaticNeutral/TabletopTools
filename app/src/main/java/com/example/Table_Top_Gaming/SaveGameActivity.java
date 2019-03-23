@@ -35,7 +35,6 @@ public class SaveGameActivity extends AppCompatActivity {
     private Intent intent;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
-    private DatabaseReference databaseReference;
 
 
     @Override
@@ -52,9 +51,6 @@ public class SaveGameActivity extends AppCompatActivity {
         //used to get the user
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
 

@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +42,9 @@ public class LoadGameActivity extends AppCompatActivity {
 
     private ArrayList <String> GAME_NAMES;
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+
     public LoadGameActivity() {
         GAME_NAMES = new ArrayList<>();
     }
@@ -49,8 +54,12 @@ public class LoadGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_game);
 
+        //used to get the user
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-        Task<QuerySnapshot> snapshotTask = firebase.collection("savedGames").get();
+        Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
         Log.d("PIE", "Before onSuccess in the code");
         snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -102,7 +111,7 @@ public class LoadGameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-                    Task<QuerySnapshot> snapshotTask = firebase.collection("savedGames").get();
+                    Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
                     Log.d("PIE", "Before onSuccess in the code");
                     snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override

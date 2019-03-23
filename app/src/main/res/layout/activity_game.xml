@@ -20,38 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/leftPlayerSelectButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="previousPlayerView"
-        android:text="@string/previous_player"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonContainerLayout"
-        app:layout_constraintEnd_toStartOf="@+id/playerProfileImageButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/rightPlayerSelectButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="nextPlayerView"
-        android:text="@string/next_player"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonContainerLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/playerProfileImageButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/playerProfileImageButton"
         android:layout_width="125dp"
@@ -84,15 +52,13 @@
         android:id="@+id/saveGameButton"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
         android:onClick="saveGame"
         android:text="@string/save_game"
-        app:layout_constraintBottom_toTopOf="@id/rightPlayerSelectButton"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/playerNameHeader"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
@@ -159,13 +125,12 @@
         android:id="@+id/diceButton"
         android:layout_width="100dp"
         android:layout_height="45dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:onClick="diceClicked"
         android:text="@string/dice"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="7dp"
-        app:layout_constraintBottom_toTopOf="@id/leftPlayerSelectButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/playerNameHeader"
-        app:layout_constraintTop_toTopOf="parent"/>/>
+        app:layout_constraintTop_toTopOf="parent" />/>
 
 </android.support.constraint.ConstraintLayout>

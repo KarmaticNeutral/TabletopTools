@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,13 +28,14 @@ import java.util.List;
 
 import static android.view.View.generateViewId;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private Game game;
     private Gson gson = new Gson();
     private int currentPlayer;
     private int numPlayers;
     private TextView playerNameHeader;
     private GameActivity.CustomAdapter customAdapter;
+    private GestureDetectorCompat detector;
 
     /**
      * Initialize values that are needed when the game Activity starts.
@@ -64,6 +68,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+        detector = new GestureDetectorCompat(this,this);
 
         // Set player to player number 1
         currentPlayer = 0;
@@ -242,9 +247,8 @@ public class GameActivity extends AppCompatActivity {
 
     /**
      * Shift the currentPlayer to be the next player in the List in the positive direction.
-     * @param view - The button that called the function.
      */
-    public void nextPlayerView(View view) {
+    public void nextPlayerView() {
         if (currentPlayer < numPlayers) {
             currentPlayer++;
         }
@@ -257,9 +261,8 @@ public class GameActivity extends AppCompatActivity {
 
     /**
      * Shift the currentPlayer to be the next player in the List in the negative direction.
-     * @param view - The button that called the function.
      */
-    public void previousPlayerView(View view) {
+    public void previousPlayerView() {
         if (currentPlayer > 0) {
             currentPlayer--;
         }
@@ -1038,6 +1041,61 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+    }
+
+    @Override
+    public boolean onFling(MotionEvent downEvent, MotionEvent moveEvent, float velocityX, float velocityY) {
+        float diffY = moveEvent.getY() - downEvent.getY();
+        float diffX = moveEvent.getX() - downEvent.getX();
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            //right or left swipe
+            if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
+                if (diffX > 0) {
+                    nextPlayerView();
+                    return true;
+                }
+                else {
+                    previousPlayerView();
+                    return true;
+                }
+            }
+        }
+
+        else {
+            //up or down swipe
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        detector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
     /**
      * Custom Adapter class used to show A player's List of Resources in a ListView.
      */
@@ -1066,7 +1124,7 @@ public class GameActivity extends AppCompatActivity {
 
         /**
          * As the adapter iterates through the List of Resources that belong to Current Player,
-         * Create a display for that item. This ccreates a button that shows the value of that
+         * Create a display for that item. This creates a button that shows the value of that
          * Resource and a TextView that shows the name of the resource.
          * @param position - The current location in the Resource List.
          * @param convertView - The View to be changed before returning.

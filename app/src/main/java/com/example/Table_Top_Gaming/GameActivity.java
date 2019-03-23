@@ -279,14 +279,12 @@ public class GameActivity extends AppCompatActivity {
         String newResourceName = "newResource";
         int defaultValue = 0;
 
-        Resource resourceToBeAdded = new Resource(newResourceName, defaultValue);
-
         if (allPlayers) {
             for (Player currentPlayerToGetResource : game.getPlayers()) {
-                currentPlayerToGetResource.getResources().add(resourceToBeAdded);
+                currentPlayerToGetResource.getResources().add(new Resource(newResourceName, defaultValue));
             }
         } else {
-            game.getPlayers().get(currentPlayer).getResources().add(resourceToBeAdded);
+            game.getPlayers().get(currentPlayer).getResources().add(new Resource(newResourceName, defaultValue));
         }
         // Make sure the Display reflects the change in the data structure.
         customAdapter.notifyDataSetChanged();

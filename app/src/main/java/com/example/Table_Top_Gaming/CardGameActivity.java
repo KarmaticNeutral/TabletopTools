@@ -22,7 +22,6 @@ public class CardGameActivity extends AppCompatActivity {
     private int currentPlayer;
     private int numPlayers;
     private TextView playerNameHeader;
-    private CardGameActivity.CustomAdapter customAdapter;
 
     /**
      * Initialize values that are needed when the game Activity starts.

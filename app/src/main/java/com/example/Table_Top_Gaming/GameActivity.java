@@ -26,6 +26,10 @@ import java.util.List;
 import static android.view.View.generateViewId;
 
 public class GameActivity extends AppCompatActivity {
+
+    // Create a KEY for passing information to the next activity
+    public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
+
     private Game game;
     private Gson gson = new Gson();
     private int currentPlayer;
@@ -58,6 +62,9 @@ public class GameActivity extends AppCompatActivity {
 
             // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
+
+                //Check to see if there is information to grab from CardGameActivity
+                //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
                 if (intent.getExtras() != null) {
                     message = intent.getExtras().getString("Game");
                 }
@@ -1034,6 +1041,13 @@ public class GameActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void cardsClicked(View view) {
+        String gameInformation = gson.toJson(game);
+        Intent intent = new Intent(this, CardGameActivity.class);
+        intent.putExtra("Game", gameInformation);
+        startActivity(intent);
     }
 
     /**

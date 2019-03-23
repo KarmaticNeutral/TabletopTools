@@ -9,14 +9,25 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/tabletop_tools_launcher_alpha"
         android:label="Table Top Gaming"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/tabletop_tools_launcher_alpha_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditPlayerScoreDialogActivity"></activity>
-        <activity android:name=".AuthenticationActivity" />
-
+        <activity android:name=".EditPlayerScoreDialogActivity" />
+        <activity android:name=".AuthenticationActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.Table_Top_Gaming.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.Table_Top_Gaming.GameActivity" />
+        </activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"

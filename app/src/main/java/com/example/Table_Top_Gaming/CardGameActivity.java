@@ -22,10 +22,10 @@ public class CardGameActivity extends AppCompatActivity {
     private int currentPlayer;
     private int numPlayers;
     private TextView playerNameHeader;
+    private CardGameActivity.CustomAdapter customAdapter;
 
     /**
      * Initialize values that are needed when the game Activity starts.
-     *
      * @param savedInstanceState
      */
     @Override
@@ -39,7 +39,6 @@ public class CardGameActivity extends AppCompatActivity {
         // Grab the information from LoadGameActivity passed to this Activity and place it in the
         // string message
         String message = intent.getStringExtra(LoadGameActivity.EXTRA_MESSAGE);
-
         RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
     }
 }

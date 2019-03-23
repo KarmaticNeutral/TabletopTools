@@ -52,5 +52,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="530dp" />
-
 </android.support.constraint.ConstraintLayout>

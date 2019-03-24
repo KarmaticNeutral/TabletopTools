@@ -71,8 +71,8 @@ public class PlayingCardDeck implements Deck{
     }
 
     @Override
-    public List<PlayingCard> drawHand(int numCards) {
-        List<PlayingCard> hand = new ArrayList<>();
+    public List<Card> drawHand(int numCards) {
+        List<Card> hand = new ArrayList<>();
         if (!deck.isEmpty()) {
             while (!deck.isEmpty() && numCards > 0) {
                 hand.add(deck.get(0));

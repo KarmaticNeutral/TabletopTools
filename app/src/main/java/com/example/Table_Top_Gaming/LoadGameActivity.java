@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +42,9 @@ public class LoadGameActivity extends AppCompatActivity {
 
     private ArrayList <String> GAME_NAMES;
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+
     public LoadGameActivity() {
         GAME_NAMES = new ArrayList<>();
     }
@@ -49,28 +54,39 @@ public class LoadGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_game);
 
-        FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-        Task<QuerySnapshot> snapshotTask = firebase.collection("savedGames").get();
-        Log.d("PIE", "Before onSuccess in the code");
-        snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
-                Log.d("PIE", "Inside Onsucess Outside List");
-                for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
-                    String filePath = currentDocumentSnapshot.getReference().getPath();
-                    Log.d("PIE", "onSuccess: Filepath of a Saved Game:" + filePath);
+        //used to get the user
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
-                    if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
-                        Log.d("PIE", "Inside IF Name&Save; List Length: " + GAME_NAMES.size());
-                        GAME_NAMES.add(currentDocumentSnapshot.get("Name").toString());
+        FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+        if (user != null) {
+            Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
+            Log.d("PIE", "Before onSuccess in the code");
+            snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                    Log.d("PIE", "Inside Onsucess Outside List");
+                    for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
+                        String filePath = currentDocumentSnapshot.getReference().getPath();
+                        Log.d("PIE", "onSuccess: Filepath of a Saved Game:" + filePath);
+
+                        if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
+                            Log.d("PIE", "Inside IF Name&Save; List Length: " + GAME_NAMES.size());
+                            GAME_NAMES.add(currentDocumentSnapshot.get("Name").toString());
+                        }
                     }
+                    CustomAdapter customAdapter = new CustomAdapter();
+                    ListView savedGamesListView = (ListView) findViewById(R.id.savedGamesListView);
+                    savedGamesListView.setAdapter(customAdapter);
                 }
-                CustomAdapter customAdapter = new CustomAdapter();
-                ListView savedGamesListView = (ListView) findViewById(R.id.savedGamesListView);
-                savedGamesListView.setAdapter(customAdapter);
-            }
-        });
+            });
+        }
+        else
+        {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         Log.d("PIE", "After onSuccess in the code");
     }
 
@@ -102,7 +118,7 @@ public class LoadGameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     FirebaseFirestore firebase = FirebaseFirestore.getInstance();
-                    Task<QuerySnapshot> snapshotTask = firebase.collection("savedGames").get();
+                    Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
                     Log.d("PIE", "Before onSuccess in the code");
                     snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override

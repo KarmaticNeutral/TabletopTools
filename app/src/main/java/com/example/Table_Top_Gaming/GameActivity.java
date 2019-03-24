@@ -29,6 +29,10 @@ import java.util.List;
 import static android.view.View.generateViewId;
 
 public class GameActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+
+    // Create a KEY for passing information to the next activity
+    public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
+
     private Game game;
     private Gson gson = new Gson();
     private int currentPlayer;
@@ -62,6 +66,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
             // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
+
+                //Check to see if there is information to grab from CardGameActivity
+                //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
                 if (intent.getExtras() != null) {
                     message = intent.getExtras().getString("Game");
                 }
@@ -282,14 +289,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         String newResourceName = "newResource";
         int defaultValue = 0;
 
-        Resource resourceToBeAdded = new Resource(newResourceName, defaultValue);
-
         if (allPlayers) {
             for (Player currentPlayerToGetResource : game.getPlayers()) {
-                currentPlayerToGetResource.getResources().add(resourceToBeAdded);
+                currentPlayerToGetResource.getResources().add(new Resource(newResourceName, defaultValue));
             }
         } else {
-            game.getPlayers().get(currentPlayer).getResources().add(resourceToBeAdded);
+            game.getPlayers().get(currentPlayer).getResources().add(new Resource(newResourceName, defaultValue));
         }
         // Make sure the Display reflects the change in the data structure.
         customAdapter.notifyDataSetChanged();
@@ -1039,6 +1044,13 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void cardsClicked(View view) {
+        String gameInformation = gson.toJson(game);
+        Intent intent = new Intent(this, CardGameActivity.class);
+        intent.putExtra("Game", gameInformation);
+        startActivity(intent);
     }
 
     @Override

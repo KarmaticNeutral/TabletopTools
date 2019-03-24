@@ -6,11 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +33,9 @@ public class SaveGameActivity extends AppCompatActivity {
     private String fileName;
     private String message;
     private Intent intent;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +48,17 @@ public class SaveGameActivity extends AppCompatActivity {
         // Store the game information in message
         message = intent.getExtras().getString("Game");
 
-
+        //used to get the user
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
     }
+
+
 
     /*
         This function creates a save file and writes the game information to it
     */
+
     public void createSave(View view) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -57,7 +69,7 @@ public class SaveGameActivity extends AppCompatActivity {
 
         saveGame.put("Name", saveName);
         saveGame.put("savedGame", message);
-        db.collection("savedGames")
+        db.collection(user.getUid())
                 .add(saveGame)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -72,6 +84,8 @@ public class SaveGameActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+        Toast.makeText(this,"Information Saved", Toast.LENGTH_LONG).show();
 
 
 //        // Create the object that it can open files
@@ -108,4 +122,5 @@ public class SaveGameActivity extends AppCompatActivity {
         intent2.putExtra(EXTRA_MESSAGE_SAVE, message);
         startActivity(intent2);
     }
+
 }

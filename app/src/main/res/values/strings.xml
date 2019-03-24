@@ -53,4 +53,7 @@
     <string name="d20">d20</string>
     <string name="roll_plus">+</string>
     <string name="roll">Roll</string>
+    <string name="player_name_header">Player Name Header</string>
+    <string name="return_to_score">Return to Score</string>
+    <string name="go_to_cards">Go To Cards</string>
 </resources>

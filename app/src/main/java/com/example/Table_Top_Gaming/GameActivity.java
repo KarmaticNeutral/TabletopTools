@@ -1,5 +1,6 @@
 package com.example.Table_Top_Gaming;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -336,6 +339,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         final DieRoller dieRoller = new DieRoller();
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
+
         final TextView toBeRolled = (TextView) view.findViewById(R.id.diceBeingRolled);
         final TextView total = (TextView) view.findViewById(R.id.sumOfDice);
 

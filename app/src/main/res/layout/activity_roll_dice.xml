@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,7 @@
     <TextView
         android:id="@+id/diceBeingRolled"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:text=""
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/sumOfDice"
@@ -20,7 +21,7 @@
     <TextView
         android:id="@+id/sumOfDice"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:text=""
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/d6"
@@ -31,7 +32,7 @@
     <Button
         android:id="@+id/d4"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/d4"
         app:layout_constraintTop_toBottomOf="@+id/sumOfDice"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -41,7 +42,7 @@
     <Button
         android:id="@+id/d6"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/d6"
         app:layout_constraintTop_toBottomOf="@+id/sumOfDice"
         app:layout_constraintLeft_toRightOf="@id/d4"
@@ -51,7 +52,7 @@
     <Button
         android:id="@+id/d8"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/d8"
         app:layout_constraintTop_toBottomOf="@+id/sumOfDice"
         app:layout_constraintLeft_toRightOf="@id/d6"
@@ -61,7 +62,7 @@
     <Button
         android:id="@+id/d10"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/d10"
         app:layout_constraintTop_toBottomOf="@+id/d4"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -71,7 +72,7 @@
     <Button
         android:id="@+id/d20"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/d20"
         app:layout_constraintTop_toBottomOf="@+id/d6"
         app:layout_constraintLeft_toRightOf="@id/d10"
@@ -81,7 +82,7 @@
     <Button
         android:id="@+id/dx"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/dx"
         app:layout_constraintTop_toBottomOf="@+id/d8"
         app:layout_constraintLeft_toRightOf="@id/d20"
@@ -91,7 +92,7 @@
     <Button
         android:id="@+id/seven"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/seven"
         app:layout_constraintTop_toBottomOf="@+id/d10"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -101,7 +102,7 @@
     <Button
         android:id="@+id/eight"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/eight"
         app:layout_constraintTop_toBottomOf="@+id/d20"
         app:layout_constraintLeft_toRightOf="@id/seven"
@@ -111,7 +112,7 @@
     <Button
         android:id="@+id/nine"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/nine"
         app:layout_constraintTop_toBottomOf="@+id/dx"
         app:layout_constraintLeft_toRightOf="@id/eight"
@@ -121,7 +122,7 @@
     <Button
         android:id="@+id/four"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/four"
         app:layout_constraintTop_toBottomOf="@+id/seven"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -131,7 +132,7 @@
     <Button
         android:id="@+id/five"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/five"
         app:layout_constraintTop_toBottomOf="@+id/eight"
         app:layout_constraintLeft_toRightOf="@id/four"
@@ -141,7 +142,7 @@
     <Button
         android:id="@+id/six"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/six"
         app:layout_constraintTop_toBottomOf="@+id/nine"
         app:layout_constraintLeft_toRightOf="@id/five"
@@ -151,7 +152,7 @@
     <Button
         android:id="@+id/three"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/three"
         app:layout_constraintTop_toBottomOf="@+id/six"
         app:layout_constraintLeft_toRightOf="@id/two"
@@ -162,7 +163,7 @@
     <Button
         android:id="@+id/two"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/two"
         app:layout_constraintTop_toBottomOf="@+id/five"
         app:layout_constraintLeft_toRightOf="@id/one"
@@ -172,7 +173,7 @@
     <Button
         android:id="@+id/one"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/one"
         app:layout_constraintTop_toBottomOf="@+id/four"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -182,7 +183,7 @@
     <Button
         android:id="@+id/zero"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:text="@string/zero"
         app:layout_constraintTop_toBottomOf="@+id/two"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -192,7 +193,7 @@
     <Button
         android:id="@+id/roll_plus"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:text="@string/roll_plus"
         app:layout_constraintTop_toBottomOf="@+id/delete"
         app:layout_constraintLeft_toRightOf="@id/nine"
@@ -202,7 +203,7 @@
     <Button
         android:id="@+id/roll"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:text="@string/roll"
         app:layout_constraintTop_toBottomOf="@+id/roll_plus"
         app:layout_constraintLeft_toRightOf="@id/three"
@@ -212,7 +213,7 @@
     <Button
         android:id="@+id/delete"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:text="@string/delete"
         android:textSize="10sp"
         app:layout_constraintTop_toBottomOf="@+id/sumOfDice"

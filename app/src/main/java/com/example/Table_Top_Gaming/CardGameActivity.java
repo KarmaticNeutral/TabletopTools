@@ -50,6 +50,7 @@ public class CardGameActivity extends AppCompatActivity {
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
         RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand());
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     public void returnToScore(View view) {

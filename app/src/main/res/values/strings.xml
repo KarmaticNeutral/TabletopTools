@@ -56,4 +56,5 @@
     <string name="player_name_header">Player Name Header</string>
     <string name="return_to_score">Return to Score</string>
     <string name="go_to_cards">Go To Cards</string>
+    <string name="dx">dx</string>
 </resources>

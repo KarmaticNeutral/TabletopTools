@@ -234,7 +234,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                         // Change the score to the number the user input instead of adding or subtracting it
                         game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(Integer.parseInt(input.getText().toString()));
-                        callingButton.setText(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                        setPlayerView();
                     }
                 })
                 .setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {

@@ -1085,11 +1085,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             //right or left swipe
             if (Math.abs(diffX) > 100 && Math.abs(velocityX) > 100) {
                 if (diffX > 0) {
-                    nextPlayerView();
+                    previousPlayerView();
                     return true;
                 }
                 else {
-                    previousPlayerView();
+                    nextPlayerView();
                     return true;
                 }
             }

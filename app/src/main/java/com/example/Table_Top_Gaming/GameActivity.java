@@ -32,6 +32,7 @@ import java.util.List;
 import static android.view.View.generateViewId;
 
 public class GameActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+    private static final String TAG = "GameActivity";
 
     // Create a KEY for passing information to the next activity
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
@@ -70,10 +71,13 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
 
-                //Check to see if there is information to grab from CardGameActivity
-                //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
-                if (intent.getExtras() != null) {
-                    message = intent.getExtras().getString("Game");
+                message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
+                if (message == null) {
+                    //Check to see if there is information to grab from CardGameActivity
+                    //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
+                    if (intent.getExtras() != null) {
+                        message = intent.getExtras().getString("Game");
+                    }
                 }
             }
         }
@@ -1052,8 +1056,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     public void cardsClicked(View view) {
         String gameInformation = gson.toJson(game);
-        Intent intent = new Intent(this, CardGameActivity.class);
-        intent.putExtra("Game", gameInformation);
+        Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
+        Intent intent = new Intent(GameActivity.this, CardGameActivity.class);
+        intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
     }
 

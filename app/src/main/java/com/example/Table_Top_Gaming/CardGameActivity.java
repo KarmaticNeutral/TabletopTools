@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +20,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 public class CardGameActivity extends AppCompatActivity {
-
+    private static final String TAG = "CardGameActivity";
     // Create a KEY for passing information to the next activity
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
     private Game game;
@@ -42,9 +43,17 @@ public class CardGameActivity extends AppCompatActivity {
 
         // Grab the information from GameActivity passed to this Activity and place it in the
         // string message
-        String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
+//        String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
+        Bundle extras = intent.getExtras();
+        if (extras == null) {
+            Log.d(TAG, "onCreate: Extras is empty!");
+        } else {
+            Log.d(TAG, "onCreate: Extras has content!");
+        }
+        String message = extras.getString(GameActivity.EXTRA_MESSAGE);
         Game game = gson.fromJson(message, Game.class);
         currentPlayer = 0;
+        Log.d(TAG, "onCreate: Game String: " + message);
         numPlayers = game.getPlayers().size();
         playerNameHeader = findViewById(R.id.playerNameHeader);
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
@@ -55,8 +64,8 @@ public class CardGameActivity extends AppCompatActivity {
 
     public void returnToScore(View view) {
         String gameInformation = gson.toJson(game);
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("Game", gameInformation);
+        Intent intent = new Intent(CardGameActivity.this, GameActivity.class);
+        intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
     }
 }

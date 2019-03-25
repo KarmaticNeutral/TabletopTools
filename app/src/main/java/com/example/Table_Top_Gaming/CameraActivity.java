@@ -49,12 +49,13 @@ public class CameraActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void captureFromCamera(View view) {
+        /*
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
         }
+        */
 
-        /*
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -75,7 +76,6 @@ public class CameraActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
-        */
     }
 
     // Opens default photo gallery app, and allows user to choose image.
@@ -127,17 +127,9 @@ public class CameraActivity extends AppCompatActivity {
                     game.getPlayers().get(currentPlayer).setPathToImage(uriString);
                     break;
                 case CAMERA_REQUEST_CODE:
-                    /*
                     Uri image = Uri.parse(cameraFilePath);
                     imageView.setImageURI(Uri.parse(cameraFilePath));
                     uriString = image.toString();
-                    game.getPlayers().get(currentPlayer).setPathToImage(uriString);
-                    break;
-                    */
-                    Bundle extras = data.getExtras();
-                    Uri imageBitmap = (Uri) extras.get("data");
-                    imageView.setImageURI(imageBitmap);
-                    uriString = imageBitmap.toString();
                     game.getPlayers().get(currentPlayer).setPathToImage(uriString);
                     break;
             }

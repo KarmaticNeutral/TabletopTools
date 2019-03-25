@@ -315,7 +315,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         boolean allPlayers = true;
         String newResourceName = "newResource";
         int defaultValue = 0;
- 
+
         if (allPlayers) {
             for (Player currentPlayerToGetResource : game.getPlayers()) {
                 currentPlayerToGetResource.getResources().add(new Resource(newResourceName, defaultValue));

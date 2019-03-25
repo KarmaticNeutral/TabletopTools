@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,9 +20,9 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 public class CardGameActivity extends AppCompatActivity {
-
+    private static final String TAG = "CardGameActivity";
     // Create a KEY for passing information to the next activity
-    public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
+    public static final String EXTRA_MESSAGE_CARD = "com.example.load.MESSAGE3";
     private Game game;
     private Gson gson = new Gson();
     private int currentPlayer;
@@ -42,20 +43,32 @@ public class CardGameActivity extends AppCompatActivity {
 
         // Grab the information from GameActivity passed to this Activity and place it in the
         // string message
-        String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
-        Game game = gson.fromJson(message, Game.class);
+//        String message = intent.getStringExtra(GameActivity.EXTRA_MESSAGE);
+        Bundle extras = intent.getExtras();
+        if (extras == null) {
+            Log.d(TAG, "onCreate: Extras is empty!");
+        } else {
+            Log.d(TAG, "onCreate: Extras has content!");
+        }
+        String message = extras.getString(GameActivity.EXTRA_MESSAGE);
+        game = gson.fromJson(message, Game.class);
         currentPlayer = 0;
+        Log.d(TAG, "onCreate: Game String: " + message);
         numPlayers = game.getPlayers().size();
         playerNameHeader = findViewById(R.id.playerNameHeader);
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
         RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand());
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     public void returnToScore(View view) {
+        assert game != null;
         String gameInformation = gson.toJson(game);
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("Game", gameInformation);
+        Log.d(TAG, "returnToScore: Game Info:" + gameInformation);
+        Intent intent = new Intent(CardGameActivity.this, GameActivity.class);
+        intent.putExtra(this.EXTRA_MESSAGE_CARD, gameInformation);
+        Log.d(TAG, "returnToScore: ExtraMessageInIntent: " + intent.getStringExtra(this.EXTRA_MESSAGE_CARD));
         startActivity(intent);
     }
 }

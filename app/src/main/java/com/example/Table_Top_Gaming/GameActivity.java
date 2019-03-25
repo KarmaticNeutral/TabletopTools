@@ -1,5 +1,6 @@
 package com.example.Table_Top_Gaming;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,10 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -31,6 +34,7 @@ import java.util.List;
 import static android.view.View.generateViewId;
 
 public class GameActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+    private static final String TAG = "GameActivity";
 
     // Create a KEY for passing information to the next activity
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
@@ -63,23 +67,27 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         // Grab the information from LoadGameActivity passed to this Activity and place it in the
         // string message
         String message = intent.getStringExtra(LoadGameActivity.EXTRA_MESSAGE);
-
+        Log.d(TAG, "onCreate: Extra From Load" + message);
         // If the GameActivity was reached by way of SaveGameActivity or NewGameActivity message
         // will be null
         if (message == null) {
 
             // Check to see if there is information to grab from the SaveGameActivity
             message = intent.getStringExtra(SaveGameActivity.EXTRA_MESSAGE_SAVE);
-
+            Log.d(TAG, "onCreate: Extra From Save: " + message);
             // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
 
-                //Check to see if there is information to grab from CardGameActivity
-                //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
-                if (intent.getExtras() != null) {
-                    message = intent.getExtras().getString("Game");
-                    if (intent.getExtras().getString("CurrentPlayer") != null) {
-                        currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+                message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE_CARD);
+                Log.d(TAG, "onCreate: Extra From Card: " + message);
+                if (message == null) {
+                    //Check to see if there is information to grab from CardGameActivity
+                    //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
+                    if (intent.getExtras() != null) {
+                        message = intent.getExtras().getString("Game");
+                        if (intent.getExtras().getString("CurrentPlayer") != null) {
+                            currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+                        }
                     }
                 }
             }
@@ -87,6 +95,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         detector = new GestureDetectorCompat(this,this);
 
+        // Set player to player number 1
+        currentPlayer = 0;
+        Log.d(TAG, "onCreate: GameContentMessage: " + message);
         // Parse the information saved in the String "message" and place it in the Game object
         game = gson.fromJson(message, Game.class);
 
@@ -239,7 +250,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                         // Change the score to the number the user input instead of adding or subtracting it
                         game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(Integer.parseInt(input.getText().toString()));
-                        callingButton.setText(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                        setPlayerView();
                     }
                 })
                 .setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
@@ -332,6 +343,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         final DieRoller dieRoller = new DieRoller();
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
+
         final TextView toBeRolled = (TextView) view.findViewById(R.id.diceBeingRolled);
         final TextView total = (TextView) view.findViewById(R.id.sumOfDice);
 
@@ -1044,8 +1056,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     public void cardsClicked(View view) {
         String gameInformation = gson.toJson(game);
-        Intent intent = new Intent(this, CardGameActivity.class);
-        intent.putExtra("Game", gameInformation);
+        Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
+        Intent intent = new Intent(GameActivity.this, CardGameActivity.class);
+        intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
     }
 

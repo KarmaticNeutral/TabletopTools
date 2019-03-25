@@ -10,7 +10,7 @@ import java.util.List;
 public class Player {
 
     private String name;
-    private String pathToImage;
+    private String uriString;
     private URI image; //Will hold the image resource
     private List<Card> hand;
     private boolean canDrawHand;
@@ -24,7 +24,7 @@ public class Player {
     public Player(String name) {
 
         this.name = name;
-        pathToImage = null;
+        uriString = "";
         hand = new ArrayList<>();
         canDrawHand = true;
         resources = new ArrayList<>();
@@ -53,11 +53,11 @@ public class Player {
     }
 
     public String getPathToImage() {
-        return pathToImage;
+        return uriString;
     }
 
     public void setPathToImage(String pathToImage) {
-        this.pathToImage = pathToImage;
+        this.uriString = pathToImage;
     }
 
     public void setHand(List<Card> hand2) {

@@ -3,6 +3,7 @@ package com.example.Table_Top_Gaming;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     private GameActivity.CustomAdapter customAdapter;
     private GestureDetectorCompat detector;
 
+    private ImageButton profilePicture;
+
     /**
      * Initialize values that are needed when the game Activity starts.
      * @param savedInstanceState
@@ -49,6 +53,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Set player to player number 1
+        currentPlayer = 0;
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -71,14 +78,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                 //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
                 if (intent.getExtras() != null) {
                     message = intent.getExtras().getString("Game");
+                    if (intent.getExtras().getString("CurrentPlayer") != null) {
+                        currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+                    }
                 }
             }
         }
 
         detector = new GestureDetectorCompat(this,this);
-
-        // Set player to player number 1
-        currentPlayer = 0;
 
         // Parse the information saved in the String "message" and place it in the Game object
         game = gson.fromJson(message, Game.class);
@@ -94,6 +101,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         playerNameHeader = (TextView) findViewById(R.id.playerNameHeader);
 
+        profilePicture = (ImageButton) findViewById(R.id.playerProfileImageButton);
 
         setPlayerView();
     }
@@ -249,6 +257,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
      */
     public void setPlayerView() {
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
+        String uriString = game.getPlayers().get(currentPlayer).getPathToImage();
+        if (uriString != null) {
+            profilePicture.setImageURI(Uri.parse(uriString));
+        }
+        else {
+           profilePicture.setImageResource(R.drawable.ic_default_avatar_24dp);
+        }
+
         customAdapter.notifyDataSetChanged();
     }
 
@@ -305,31 +321,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
      * @param view The button that called the function.
      */
     public void cameraDialog(View view) {
-
-        // setup the alert builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Profile Photo");
-
-        // add the buttons
-        builder.setPositiveButton("Take picture",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                /* BUTTON DOES NOTHING! */
-                //onCameraClick();
-            }
-        });
-        builder.setNegativeButton("Select from gallery",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                /* BUTTON DOES NOTHING! */
-                //onGalleryClick();
-            }
-        });
-        builder.setNeutralButton("Cancel", null);
-
-        // create and show the alert dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        String gameGson = gson.toJson(game);
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra("Game", gameGson);
+        intent.putExtra("CurrentPlayer", Integer.toString(currentPlayer));
+        startActivity(intent);
     }
 
     public void diceClicked(View view2) {

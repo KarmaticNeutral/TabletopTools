@@ -60,18 +60,19 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         // Grab the information from LoadGameActivity passed to this Activity and place it in the
         // string message
         String message = intent.getStringExtra(LoadGameActivity.EXTRA_MESSAGE);
-
+        Log.d(TAG, "onCreate: Extra From Load" + message);
         // If the GameActivity was reached by way of SaveGameActivity or NewGameActivity message
         // will be null
         if (message == null) {
 
             // Check to see if there is information to grab from the SaveGameActivity
             message = intent.getStringExtra(SaveGameActivity.EXTRA_MESSAGE_SAVE);
-
+            Log.d(TAG, "onCreate: Extra From Save: " + message);
             // Check to see if there is information to grab from the NewGameActivity
             if (message == null) {
 
-                message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
+                message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE_CARD);
+                Log.d(TAG, "onCreate: Extra From Card: " + message);
                 if (message == null) {
                     //Check to see if there is information to grab from CardGameActivity
                     //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
@@ -86,7 +87,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         // Set player to player number 1
         currentPlayer = 0;
-
+        Log.d(TAG, "onCreate: GameContentMessage: " + message);
         // Parse the information saved in the String "message" and place it in the Game object
         game = gson.fromJson(message, Game.class);
 

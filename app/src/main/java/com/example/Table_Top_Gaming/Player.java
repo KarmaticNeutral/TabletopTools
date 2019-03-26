@@ -12,7 +12,7 @@ public class Player {
     private String name;
     private String pathToImage;
     private URI image; //Will hold the image resource
-    private List<Card> hand;
+    private List<PlayingCard> hand;
     private boolean canDrawHand;
     private List<Resource> resources;
 
@@ -60,7 +60,7 @@ public class Player {
         this.pathToImage = pathToImage;
     }
 
-    public void setHand(List<Card> hand2) {
+    public void setHand(List<PlayingCard> hand2) {
         if (!canDrawHand || hand2 == null) {
             return;
         }
@@ -68,12 +68,12 @@ public class Player {
         canDrawHand = false;
     }
 
-    public List<Card> getHand() {
+    public List<PlayingCard> getHand() {
         return hand;
     }
 
-    public void addCardToHand(Card card) {
-        hand.add(card);
+    public void addCardToHand(PlayingCard playingCard) {
+        hand.add(playingCard);
     }
 
     public void setResources(List<Resource> resources) {

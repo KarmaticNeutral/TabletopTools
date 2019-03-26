@@ -3,6 +3,8 @@ package com.example.Table_Top_Gaming;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,28 +15,48 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
-    private List<Card> currentPlayerHand;
+    private List<PlayingCard> currentPlayerHand;
     private Context context;
 
-    public RecyclerViewAdapter(List<Card> hand) {
+    public RecyclerViewAdapter(List<PlayingCard> hand, Context context) {
         currentPlayerHand = hand;
+        this.context = context;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_card_view, viewGroup, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+        Log.d(TAG, "onBindViewHolder: called! position: " + i);
+        String cardImage = "";
+        cardImage += currentPlayerHand.get(i).getSuit();
+        cardImage += currentPlayerHand.get(i).getNumber();
 
+        int id = context.getResources().getIdentifier(cardImage, "drawable", context.getPackageName());
+        viewHolder.imageView.setImageResource(id);
+
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = viewHolder.getAdapterPosition();
+                Log.d(TAG, "onClick: clicked position " + viewHolder.getAdapterPosition());
+                currentPlayerHand.get(index);
+                currentPlayerHand.remove(index);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return currentPlayerHand.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RelativeLayout parentLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView.findViewById(R.id.card);
+            imageView = itemView.findViewById(R.id.card);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }

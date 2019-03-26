@@ -30,18 +30,18 @@ public class PlayingCardDeck implements Deck{
                 suitCount++;
             }
 
-            suit = Suit.Hearts;
+            suit = Suit.heart;
 
             if (suitCount == 2) {
-                suit = Suit.Spades;
+                suit = Suit.spade;
             }
 
             if (suitCount == 3) {
-                suit = Suit.Clubs;
+                suit = Suit.club;
             }
 
             if (suitCount == 4) {
-                suit = Suit.Diamonds;
+                suit = Suit.diamond;
             }
 
             card = new PlayingCard(cardIndex, suit);
@@ -71,8 +71,8 @@ public class PlayingCardDeck implements Deck{
     }
 
     @Override
-    public List<Card> drawHand(int numCards) {
-        List<Card> hand = new ArrayList<>();
+    public List<PlayingCard> drawHand(int numCards) {
+        List<PlayingCard> hand = new ArrayList<>();
         if (!deck.isEmpty()) {
             while (!deck.isEmpty() && numCards > 0) {
                 hand.add(deck.get(0));

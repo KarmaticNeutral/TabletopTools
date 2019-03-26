@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +30,9 @@ public class CardGameActivity extends AppCompatActivity {
     private int currentPlayer;
     private int numPlayers;
     private TextView playerNameHeader;
+    private RecyclerView recyclerView;
+    private ImageButton discardPileButton;
+    private ImageButton drawPileButton;
 
     /**
      * Initialize values that are needed when the game Activity starts.
@@ -57,9 +62,28 @@ public class CardGameActivity extends AppCompatActivity {
         numPlayers = game.getPlayers().size();
         playerNameHeader = findViewById(R.id.playerNameHeader);
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
-        RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand());
+        discardPileButton = findViewById(R.id.rightCard);
+        drawPileButton = findViewById(R.id.leftCard);
+
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        Log.d(TAG, "initRecyclerView: <- What that says.");
+        recyclerView = findViewById(R.id.handRecyclerView);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand(), this);
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void drawClicked(View view) {
+        game.getPlayers().get(currentPlayer).getHand().add(game.getDeck().drawCard());
+
+    }
+
+    public void discardClicked(View view) {
+        game.getPlayers().get(currentPlayer).getHand().add(game.getDiscardPile().get(game.getDiscardPile().size()));
+        game.getDiscardPile().remove(game.getDiscardPile().size());
     }
 
     public void returnToScore(View view) {

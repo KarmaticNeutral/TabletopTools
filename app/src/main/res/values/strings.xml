@@ -59,4 +59,9 @@
     <string name="dx">dx</string>
     <string name="draw_pile">Draw Pile</string>
     <string name="discard_pile">Discard Pile</string>
+    <string name="add_resource_ok">Ok</string>
+    <string name="add_resource_cancel">Cancel</string>
+    <string name="enter_resource">Enter Resource Name</string>
+    <string name="enter_resource_value">Enter Resource Value</string>
+    <string name="default_resource_value">0</string>
 </resources>

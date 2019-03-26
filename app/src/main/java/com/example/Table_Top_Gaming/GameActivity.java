@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     private TextView playerNameHeader;
     private GameActivity.CustomAdapter customAdapter;
     private GestureDetectorCompat detector;
+    private String newResourceName;
+    private int defaultResourceValue;
 
     private ImageButton profilePicture;
 
@@ -60,6 +63,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         // Set player to player number 1
         currentPlayer = 0;
+        newResourceName = "";
+        defaultResourceValue = 0;
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -311,20 +316,38 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
      * Add a blank resource to the resource List.
      * @param view - The View that called the function.
      */
-    public void onClickAddResource(View view) {
-        boolean allPlayers = true;
-        String newResourceName = "newResource";
-        int defaultValue = 0;
+    public void onClickAddResource(View view2) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
-        if (allPlayers) {
-            for (Player currentPlayerToGetResource : game.getPlayers()) {
-                currentPlayerToGetResource.getResources().add(new Resource(newResourceName, defaultValue));
-            }
-        } else {
-            game.getPlayers().get(currentPlayer).getResources().add(new Resource(newResourceName, defaultValue));
-        }
-        // Make sure the Display reflects the change in the data structure.
-        customAdapter.notifyDataSetChanged();
+        View view = getLayoutInflater().inflate(R.layout.activity_add_resource_dialog, null);
+
+        final EditText resourceName = (EditText) view.findViewById(R.id.enterResourceName);
+
+
+        final EditText resourceValue = (EditText) view.findViewById(R.id.enterResourceValue);
+
+        builder.setView(view)
+                .setPositiveButton(R.string.add_resource_ok, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The user hit "OK" do nothing they are done
+                        game.getPlayers().get(currentPlayer).getResources().add(new Resource(newResourceName, defaultResourceValue));
+                        game.getPlayers().get(currentPlayer).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
+                        game.getPlayers().get(currentPlayer).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
+
+                        // Make sure the Display reflects the change in the data structure.
+                        customAdapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(R.string.add_resource_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The user hit "CANCEL" do nothing they are done
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /**

@@ -314,7 +314,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     /**
      * Add a blank resource to the resource List.
-     * @param view - The View that called the function.
+     * @param view2 - The View that called the function.
      */
     public void onClickAddResource(View view2) {
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
@@ -331,7 +331,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // The user hit "OK" do nothing they are done
+                        // The user hit "OK" add the new resource with the name and amount they are done
                         game.getPlayers().get(currentPlayer).getResources().add(new Resource(newResourceName, defaultResourceValue));
                         game.getPlayers().get(currentPlayer).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
                         game.getPlayers().get(currentPlayer).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));

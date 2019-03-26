@@ -64,4 +64,5 @@
     <string name="enter_resource">Enter Resource Name</string>
     <string name="enter_resource_value">Enter Resource Value</string>
     <string name="default_resource_value">0</string>
+    <string name="return_to_game">Return to Game</string>
 </resources>

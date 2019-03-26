@@ -33,14 +33,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
-        /*
-        if (mAuth.getCurrentUser() != null){
-            //start profile activity
-            finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
-        */
-
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
 
         progressDialog = new ProgressDialog(this);

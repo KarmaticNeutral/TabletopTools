@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth firebaseAuth;
     private Button buttonLogOut;
     private TextView textViewUserEmail;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +56,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonLogOut.setOnClickListener(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail = (TextView) findViewById(R.id.textView5);
 
         if (user != null) {
             textViewUserEmail.setText("Welcome " + user.getEmail());
+            buttonLogOut.setText("Sign Out");
         }
         else {
             textViewUserEmail.setText("Welcome Guest");
+            buttonLogOut.setText("Sign In");
         }
     }
 
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void signIn(View view) {
+    public void signIn() {
         Intent intent = new Intent(this, LoginActivity.class);
         finish();
         startActivity(intent);
@@ -95,9 +98,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == buttonLogOut) {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
+            if (user != null) {
+                firebaseAuth.signOut();
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
+            }
+            else {
+                signIn();
+            }
         }
     }
 

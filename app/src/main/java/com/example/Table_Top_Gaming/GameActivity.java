@@ -700,7 +700,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     toBeRolled.setText(toBeRolled.getText().toString() + "d4");
                     for (int i = 0; i < numDice; i++) {
-                        dieRoller.addDie(new D4());
+                        dieRoller.addDie(new Die(4));
                     }
                     Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
@@ -747,7 +747,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     toBeRolled.setText(toBeRolled.getText().toString() + "d6");
                     for (int i = 0; i < numDice; i++) {
-                        dieRoller.addDie(new D6());
+                        dieRoller.addDie(new Die(6));
                     }
                     Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
@@ -794,7 +794,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     toBeRolled.setText(toBeRolled.getText().toString() + "d8");
                     for (int i = 0; i < numDice; i++) {
-                        dieRoller.addDie(new D8());
+                        dieRoller.addDie(new Die(8));
                     }
                     Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
@@ -841,7 +841,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     toBeRolled.setText(toBeRolled.getText().toString() + "d10");
                     for (int i = 0; i < numDice; i++) {
-                        dieRoller.addDie(new D10());
+                        dieRoller.addDie(new Die(10));
                     }
                     Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
@@ -890,7 +890,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     toBeRolled.setText(toBeRolled.getText().toString() + "d20");
                     for (int i = 0; i < numDice; i++) {
-                        dieRoller.addDie(new D20());
+                        dieRoller.addDie(new Die(20));
                     }
                     Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
@@ -906,11 +906,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                            if (dieRoller.getDice().get(i) instanceof D4) {
+                            if (dieRoller.getDice().get(i).getNumSides() == 4) {
                                 dieRoller.getDice().remove(i);
                                 i = 0;
                                 if (dieRoller.getDice().size() > 0) {
-                                    if (dieRoller.getDice().get(0) instanceof D4 && dieRoller.getDice().size() == 1) {
+                                    if (dieRoller.getDice().get(0).getNumSides() == 4 && dieRoller.getDice().size() == 1) {
                                         dieRoller.getDice().clear();
                                     }
                                 }
@@ -923,11 +923,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                            if (dieRoller.getDice().get(i) instanceof D6) {
+                            if (dieRoller.getDice().get(i).getNumSides() == 6) {
                                 dieRoller.getDice().remove(i);
                                 i = 0;
                                 if (dieRoller.getDice().size() > 0) {
-                                    if (dieRoller.getDice().get(0) instanceof D6 && dieRoller.getDice().size() == 1) {
+                                    if (dieRoller.getDice().get(0).getNumSides() == 6 && dieRoller.getDice().size() == 1) {
                                         dieRoller.getDice().clear();
                                     }
                                 }
@@ -939,11 +939,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
                             toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                             for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                                if (dieRoller.getDice().get(i) instanceof D8) {
+                                if (dieRoller.getDice().get(i).getNumSides() == 8) {
                                     dieRoller.getDice().remove(i);
                                     i = 0;
                                     if (dieRoller.getDice().size() > 0) {
-                                        if (dieRoller.getDice().get(0) instanceof D8 && dieRoller.getDice().size() == 1) {
+                                        if (dieRoller.getDice().get(0).getNumSides() == 8 && dieRoller.getDice().size() == 1) {
                                             dieRoller.getDice().clear();
                                         }
                                     }
@@ -957,11 +957,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '1') {
                                 toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
                                 for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                                    if (dieRoller.getDice().get(i) instanceof D10) {
+                                    if (dieRoller.getDice().get(i).getNumSides() == 10) {
                                         dieRoller.getDice().remove(i);
                                         i = 0;
                                         if (dieRoller.getDice().size() > 0) {
-                                            if (dieRoller.getDice().get(0) instanceof D10 && dieRoller.getDice().size() == 1) {
+                                            if (dieRoller.getDice().get(0).getNumSides() == 10 && dieRoller.getDice().size() == 1) {
                                                 dieRoller.getDice().clear();
                                             }
                                         }
@@ -973,11 +973,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '2') {
                                 toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
                                 for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                                    if (dieRoller.getDice().get(i) instanceof D20) {
+                                    if (dieRoller.getDice().get(i).getNumSides() == 20) {
                                         dieRoller.getDice().remove(i);
                                         i = 0;
                                         if (dieRoller.getDice().size() > 0) {
-                                            if (dieRoller.getDice().get(0) instanceof D20 && dieRoller.getDice().size() == 1) {
+                                            if (dieRoller.getDice().get(0).getNumSides() == 20 && dieRoller.getDice().size() == 1) {
                                                 dieRoller.getDice().clear();
                                             }
                                         }

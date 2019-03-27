@@ -19,6 +19,7 @@ public class Die implements Comparable<Die>{
     public Die(int numSides) {
         this.numSides = numSides;
         numRolled = 0;
+        rand = new Random();
         name = "d" + Integer.toString(numSides);
     }
 

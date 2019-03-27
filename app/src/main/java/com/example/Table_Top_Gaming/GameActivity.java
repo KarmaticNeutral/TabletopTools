@@ -910,6 +910,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                                 dieRoller.getDice().remove(i);
                                 i = 0;
                                 if (dieRoller.getDice().size() > 0) {
+                                    // This if statement now compares the current die to a "d4". 
                                     if (dieRoller.getDice().get(0).getNumSides() == 4 && dieRoller.getDice().size() == 1) {
                                         dieRoller.getDice().clear();
                                     }

@@ -10,7 +10,7 @@
     <string name="player_number">Player 1</string>
     <string name="player_name">Enter Name</string>
     <string name="ok">OK</string>
-    <string name="start">Start New Game</string>
+    <string name="start">Done</string>
     <string name="second_ok">OK</string>
     <string name="save_game">Save</string>
     <string name="save_screen">Save Game</string>
@@ -57,4 +57,16 @@
     <string name="return_to_score">Return to Score</string>
     <string name="go_to_cards">Go To Cards</string>
     <string name="dx">dx</string>
+    <string name="draw_pile">Draw Pile</string>
+    <string name="discard_pile">Discard Pile</string>
+    <string name="add_resource_ok">Ok</string>
+    <string name="add_resource_cancel">Cancel</string>
+    <string name="enter_resource">Enter Resource Name</string>
+    <string name="enter_resource_value">Enter Resource Value</string>
+    <string name="default_resource_value">0</string>
+    <string name="return_to_game">Return to Game</string>
+    <string name="new_game_plus">+</string>
+    <string name="new_game_minus">-</string>
+    <string name="cloud_saves">Cloud Saves</string>
+    <string name="local_saves">Local Saves</string>
 </resources>

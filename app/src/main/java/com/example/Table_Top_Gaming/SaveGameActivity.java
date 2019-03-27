@@ -55,8 +55,9 @@ public class SaveGameActivity extends AppCompatActivity {
 
 
 
-    /*
-        This function creates a save file and writes the game information to it
+    /**
+     * This function creates a save file and writes the game information to it
+     * @param view sets context of function
     */
 
     public void createSave(View view) {
@@ -86,35 +87,6 @@ public class SaveGameActivity extends AppCompatActivity {
                 });
 
         Toast.makeText(this,"Information Saved", Toast.LENGTH_LONG).show();
-
-
-//        // Create the object that it can open files
-//        FileOutputStream fos = null;
-//
-//        // Open "save.txt" and write the message in "temp" in it
-//        // Next display a toast showing the file path and files saved to
-//        try {
-//            fos = openFileOutput(fileName, MODE_PRIVATE);
-//            fos.write(message.getBytes());
-//
-//            // Display the file path the information is being saved to
-//            Toast.makeText(this, "Saved to " + getFilesDir() + "/" + fileName,
-//                    Toast.LENGTH_LONG).show();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//
-//            // Close the file
-//        } finally {
-//            if (fos != null) {
-//                try {
-//                    fos.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
 
         // After the information is saved pass back the game information and restart the
         // GameActivity

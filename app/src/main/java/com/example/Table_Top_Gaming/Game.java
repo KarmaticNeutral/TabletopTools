@@ -6,6 +6,7 @@ import java.util.List;
 public class Game {
     private List<Player> players;
     private PlayingCardDeck deck;
+    private List<PlayingCard> discardPile;
 
     /**
      *  Default constructor for the Game Class. Gives default values for the contained variables.
@@ -13,6 +14,7 @@ public class Game {
     public Game() {
         players = new ArrayList<>();
         deck = new PlayingCardDeck();
+        discardPile = new ArrayList<>();
     }
 
     /**
@@ -22,6 +24,14 @@ public class Game {
     public Game(List<Player> players) {
         this.players = players;
         deck = new PlayingCardDeck();
+    }
+
+    public List<PlayingCard> getDiscardPile() {
+        return discardPile;
+    }
+
+    public void setDiscardPile(List<PlayingCard> discardPile) {
+        this.discardPile = discardPile;
     }
 
     public PlayingCardDeck getDeck() {

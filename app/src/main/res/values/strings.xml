@@ -10,7 +10,7 @@
     <string name="player_number">Player 1</string>
     <string name="player_name">Enter Name</string>
     <string name="ok">OK</string>
-    <string name="start">Start New Game</string>
+    <string name="start">Done</string>
     <string name="second_ok">OK</string>
     <string name="save_game">Save</string>
     <string name="save_screen">Save Game</string>
@@ -65,4 +65,6 @@
     <string name="enter_resource_value">Enter Resource Value</string>
     <string name="default_resource_value">0</string>
     <string name="return_to_game">Return to Game</string>
+    <string name="new_game_plus">+</string>
+    <string name="new_game_minus">-</string>
 </resources>

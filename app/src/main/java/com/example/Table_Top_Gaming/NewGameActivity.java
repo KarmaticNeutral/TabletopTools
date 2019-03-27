@@ -32,6 +32,10 @@ public class NewGameActivity extends AppCompatActivity {
         index = 0;
     }
 
+    /**
+     * Prompts the user for the number of players and adjusts UI based on input
+     * @param view
+     */
     public void setNumPlayers(View view) {
         // Grab the number of players entered by the user from the text field
         EditText edit = (EditText) findViewById(R.id.editText3);
@@ -55,8 +59,9 @@ public class NewGameActivity extends AppCompatActivity {
         clear(edit);
     }
 
-    /*
-    This function clears the text field after a name is entered
+    /**
+     * This function clears the text field after a name is entered
+     * @param edit the text that will change
      */
     public void clear(EditText edit) {
         edit.setText("");

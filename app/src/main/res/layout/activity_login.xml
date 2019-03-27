@@ -35,6 +35,7 @@
 
         <TextView
             android:textAlignment="center"
+            android:textColor="@color/fui_linkColor"
             android:text="Don't Have An Account? Sign Up Here"
             android:id="@+id/textViewSignUp"
             android:layout_width="match_parent"

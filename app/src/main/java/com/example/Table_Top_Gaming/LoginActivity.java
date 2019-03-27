@@ -46,7 +46,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewSignup.setOnClickListener(this);
     }
 
+    /**
+     * Grabs the users inputted information based on the database
+     */
     private void userLogin() {
+        //grab the email and password
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -85,6 +89,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * allows the user to login or sign up
+     * @param v sets the context of the function
+     */
     @Override
     public void onClick(View v) {
         if(v == buttonSignIn) {

@@ -53,6 +53,7 @@
 
         <TextView
             android:textAlignment="center"
+            android:textColor="@color/fui_linkColor"
             android:text="Already Registered? Sign In Here"
             android:id="@+id/textViewSignIn"
             android:layout_width="match_parent"

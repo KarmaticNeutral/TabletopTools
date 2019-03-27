@@ -53,7 +53,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         textViewSignin.setOnClickListener(this);
     }
 
+    /**
+     * Allows the user to create a new account
+     */
     private void registerUser() {
+        //grab the user information
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -97,6 +101,10 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         progressDialog.dismiss();
     }
 
+    /**
+     * Allows the user to register or switch to login activity
+     * @param v Sets the context of the function
+     */
     @Override
     public void onClick(View v){
         if(v == buttonRegister) {

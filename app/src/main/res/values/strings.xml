@@ -67,4 +67,6 @@
     <string name="return_to_game">Return to Game</string>
     <string name="new_game_plus">+</string>
     <string name="new_game_minus">-</string>
+    <string name="cloud_saves">Cloud Saves</string>
+    <string name="local_saves">Local Saves</string>
 </resources>

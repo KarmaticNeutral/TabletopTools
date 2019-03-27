@@ -41,36 +41,26 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addResourceButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContainerLayout">
+        app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton">
     </ListView>
 
 
-    <Button
+    <ImageButton
         android:id="@+id/saveGameButton"
+        android:src="@drawable/save"
+        android:scaleType="fitCenter"
         android:layout_width="100dp"
-        android:layout_height="45dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:onClick="saveGame"
-        android:text="@string/save_game"
         app:layout_constraintLeft_toRightOf="@id/playerNameHeader"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <LinearLayout
-        android:id="@+id/buttonContainerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-        app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
-        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/addResourceButton"
@@ -81,57 +71,56 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="onClickAddResource"
-            android:text="@string/add_resource"
-            app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/drawHandButton"
-            app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
-            app:layout_constraintVertical_bias="0.433" />
+            android:text="@string/plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resourceListView"/>
 
-        <Button
-            android:id="@+id/drawCardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="drawCard"
-            android:text="@string/draw_card"
-            app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-            app:layout_constraintEnd_toStartOf="@+id/drawHandButton"
-            app:layout_constraintHorizontal_bias="0.636"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton"
-            app:layout_constraintVertical_bias="0.425" />
-
-        <Button
-            android:id="@+id/drawHandButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/goToCardImageButton"
+            android:src="@drawable/aces"
+            android:scaleType="fitCenter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="cardsClicked"
-            android:text="@string/go_to_cards"
             app:layout_constraintBottom_toTopOf="@+id/resourceListView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerProfileImageButton" />
-    </LinearLayout>
+            app:layout_constraintLeft_toRightOf="@id/playerProfileImageButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/saveGameButton" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/goToGridImageButton"
+        android:src="@drawable/grid"
+        android:layout_width="0dp"
+        android:scaleType="fitCenter"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="gridClicked"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/playerNameHeader"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/diceButton"/>
+
+    <ImageButton
         android:id="@+id/diceButton"
+        android:scaleType="fitCenter"
+        android:src="@drawable/die"
         android:layout_width="100dp"
-        android:layout_height="45dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:onClick="diceClicked"
-        android:text="@string/dice"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/playerNameHeader"
-        app:layout_constraintTop_toTopOf="parent" />/>
+        app:layout_constraintTop_toBottomOf="@id/goToGridImageButton"
+        app:layout_constraintBottom_toTopOf="@id/resourceListView"/>
 
 </android.support.constraint.ConstraintLayout>

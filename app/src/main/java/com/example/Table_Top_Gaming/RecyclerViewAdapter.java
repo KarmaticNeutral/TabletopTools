@@ -16,11 +16,13 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private List<PlayingCard> currentPlayerHand;
+    private List<PlayingCard> discardPile;
     private Context context;
 
-    public RecyclerViewAdapter(List<PlayingCard> hand, Context context) {
+    public RecyclerViewAdapter(List<PlayingCard> hand, List<PlayingCard> discardPile, Context context) {
         currentPlayerHand = hand;
         this.context = context;
+        this.discardPile = discardPile;
     }
 
 
@@ -47,8 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 int index = viewHolder.getAdapterPosition();
                 Log.d(TAG, "onClick: clicked position " + viewHolder.getAdapterPosition());
-                currentPlayerHand.get(index);
+                PlayingCard playingCard = currentPlayerHand.get(index);
                 currentPlayerHand.remove(index);
+                discardPile.add(playingCard);
                 notifyDataSetChanged();
             }
         });

@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -33,6 +34,7 @@ public class CardGameActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton discardPileButton;
     private ImageButton drawPileButton;
+    RecyclerViewAdapter recyclerViewAdapter;
 
     /**
      * Initialize values that are needed when the game Activity starts.
@@ -71,19 +73,26 @@ public class CardGameActivity extends AppCompatActivity {
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: <- What that says.");
         recyclerView = findViewById(R.id.handRecyclerView);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand(), this);
+        recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand(), game.getDiscardPile(), this);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void drawClicked(View view) {
         game.getPlayers().get(currentPlayer).getHand().add(game.getDeck().drawCard());
+        recyclerViewAdapter.notifyDataSetChanged();
 
     }
 
     public void discardClicked(View view) {
-        game.getPlayers().get(currentPlayer).getHand().add(game.getDiscardPile().get(game.getDiscardPile().size()));
-        game.getDiscardPile().remove(game.getDiscardPile().size());
+        if(game.getDiscardPile().size() == 0) {
+            Toast.makeText(this, "The Discard Pile Is Empty.",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            game.getPlayers().get(currentPlayer).getHand().add(game.getDiscardPile().get(game.getDiscardPile().size() - 1));
+            game.getDiscardPile().remove(game.getDiscardPile().size() - 1);
+            recyclerViewAdapter.notifyDataSetChanged();
+        }
     }
 
     public void returnToScore(View view) {

@@ -107,6 +107,7 @@ public class NewGameActivity extends AppCompatActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            Log.d(TAG, "getView: Making view for player " + position + ". Their name is " + players.get(position).getName());
             convertView = getLayoutInflater().inflate(R.layout.custom_player_name_layout, null);
             final EditText editText = (EditText)convertView.findViewById(R.id.playerNameEditText);
 

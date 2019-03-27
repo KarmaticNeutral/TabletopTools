@@ -1,26 +1,17 @@
 package com.example.Table_Top_Gaming;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 public class CardGameActivity extends AppCompatActivity {
     private static final String TAG = "CardGameActivity";
@@ -64,8 +55,17 @@ public class CardGameActivity extends AppCompatActivity {
         numPlayers = game.getPlayers().size();
         playerNameHeader = findViewById(R.id.playerNameHeader);
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
-        discardPileButton = findViewById(R.id.rightCard);
-        drawPileButton = findViewById(R.id.leftCard);
+        discardPileButton = findViewById(R.id.discardButton);
+        if (game.getDiscardPile().size() == 0) {
+            discardPileButton.setImageResource(R.drawable.gray_back);
+            //TODO get an empty discard image that is better than this.
+        } else {
+            String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
+                    game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
+            int id = this.getResources().getIdentifier(cardToDiplay, "drawable", this.getPackageName());
+            discardPileButton.setImageResource(id);
+        }
+        drawPileButton = findViewById(R.id.deckButton);
 
         initRecyclerView();
     }
@@ -88,10 +88,22 @@ public class CardGameActivity extends AppCompatActivity {
         if(game.getDiscardPile().size() == 0) {
             Toast.makeText(this, "The Discard Pile Is Empty.",
                     Toast.LENGTH_LONG).show();
+            discardPileButton.setImageResource(R.drawable.gray_back);
+            //TODO get an empty discard image that is better than this.
         } else {
             game.getPlayers().get(currentPlayer).getHand().add(game.getDiscardPile().get(game.getDiscardPile().size() - 1));
             game.getDiscardPile().remove(game.getDiscardPile().size() - 1);
             recyclerViewAdapter.notifyDataSetChanged();
+
+            if (game.getDiscardPile().size() == 0) {
+                discardPileButton.setImageResource(R.drawable.gray_back);
+                //TODO get an empty discard image that is better than this.
+            } else {
+                String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
+                        game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
+                int id = this.getResources().getIdentifier(cardToDiplay, "drawable", this.getPackageName());
+                discardPileButton.setImageResource(id);
+            }
         }
     }
 

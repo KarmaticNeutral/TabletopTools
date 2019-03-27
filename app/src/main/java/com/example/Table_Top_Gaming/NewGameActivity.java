@@ -106,13 +106,20 @@ public class NewGameActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_player_name_layout, null);
             final EditText editText = (EditText)convertView.findViewById(R.id.playerNameEditText);
 
             editText.setText(players.get(position).getName());
-            editText.setId(R.id.playerNameEditText + position);
 
+            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(!hasFocus) {
+                        players.get(position).setName(editText.getText().toString());
+                    }
+                }
+            });
             return convertView;
         }
     }

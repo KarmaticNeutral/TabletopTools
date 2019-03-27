@@ -332,9 +332,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // The user hit "OK" add the new resource with the name and amount they are done
-                        game.getPlayers().get(currentPlayer).getResources().add(new Resource(newResourceName, defaultResourceValue));
-                        game.getPlayers().get(currentPlayer).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
-                        game.getPlayers().get(currentPlayer).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
+                        for (int i = 0; i < game.getPlayers().size(); i++) {
+                            game.getPlayers().get(i).getResources().add(new Resource(newResourceName, defaultResourceValue));
+                            game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
+                            game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
+                        }
 
                         // Make sure the Display reflects the change in the data structure.
                         customAdapter.notifyDataSetChanged();

@@ -1,6 +1,8 @@
 package com.example.Table_Top_Gaming;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SaveGameActivity extends AppCompatActivity {
+public class SaveGameActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_MESSAGE_SAVE = "com.example.Table_Top_Gaming.MESSAGE2";
     public static final String TAG = "hey";
@@ -35,6 +37,10 @@ public class SaveGameActivity extends AppCompatActivity {
     private Intent intent;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
+    private Button buttonLocalSave;
+    private Button buttonCloudSave;
+    private SharedPreferences sharedPreferences;
+    private String name;
 
 
     @Override
@@ -51,16 +57,24 @@ public class SaveGameActivity extends AppCompatActivity {
         //used to get the user
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+
+        //local save button
+        buttonLocalSave = (Button) findViewById(R.id.buttonLocalSave);
+        buttonLocalSave.setOnClickListener(this);
+
+        //cloud save button
+        buttonCloudSave = (Button) findViewById(R.id.saveGameButton);
+        buttonLocalSave.setOnClickListener(this);
+
     }
 
 
 
     /**
      * This function creates a save file and writes the game information to it
-     * @param view sets context of function
     */
 
-    public void createSave(View view) {
+    public void createCloudSave() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -95,4 +109,26 @@ public class SaveGameActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    public void createLocalSave() {
+        EditText editText = (EditText) findViewById(R.id.saveNameTextBox);
+        name = editText.getText().toString() + "|+|" + message;
+        sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("savedGame", name);
+        editor.commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == buttonLocalSave)
+        {
+            createLocalSave();
+            String value = sharedPreferences.getString("savedGame", "");
+            Toast.makeText(this, value, Toast.LENGTH_LONG).show();
+        }
+        if (v == buttonCloudSave)
+        {
+            createCloudSave();
+        }
+    }
 }

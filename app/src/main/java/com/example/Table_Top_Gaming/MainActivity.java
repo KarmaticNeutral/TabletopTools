@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     public void signIn() {
         Intent intent = new Intent(this, LoginActivity.class);
-        finish();
         startActivity(intent);
     }
 

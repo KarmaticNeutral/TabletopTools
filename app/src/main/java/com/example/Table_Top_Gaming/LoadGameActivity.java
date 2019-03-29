@@ -1,6 +1,8 @@
 package com.example.Table_Top_Gaming;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +37,7 @@ public class LoadGameActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
+    private SharedPreferences sharedPreferences;
 
     public LoadGameActivity() {
         CLOUD_GAME_NAMES = new ArrayList<>();
@@ -48,6 +52,9 @@ public class LoadGameActivity extends AppCompatActivity {
         //used to get the user
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+
+        //gets the local saves
+        sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
 
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
         if (user != null) {
@@ -78,12 +85,15 @@ public class LoadGameActivity extends AppCompatActivity {
             });
 
             //TODO add the name of all games put into shared prefs or files to LOCAL_GAME_NAMES
+
+            String value = sharedPreferences.getString("savedGame", "");
+            Toast.makeText(this, "This is the shared pref: " + value, Toast.LENGTH_LONG).show();
         }
-        else
-        {
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+        //else
+        //{
+            //finish();
+            //startActivity(new Intent(this, LoginActivity.class));
+        //}
         Log.d("PIE", "After onSuccess in the code");
     }
 
@@ -115,6 +125,7 @@ public class LoadGameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO recover game file from shared prefs or file here and convert it to the string below.
+
 
                     Intent intent = new Intent(LoadGameActivity.this, GameActivity.class);
                     intent.putExtra("Game", Objects.requireNonNull(/*TODO:A game message string*/""));

@@ -39,6 +39,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseUser user;
     private Button buttonLocalSave;
     private Button buttonCloudSave;
+    private Button buttonBack;
     private SharedPreferences sharedPreferences;
     private String name;
 
@@ -62,9 +63,12 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         buttonLocalSave = (Button) findViewById(R.id.buttonLocalSave);
         buttonLocalSave.setOnClickListener(this);
 
+        //temp back button
+        buttonBack = (Button) findViewById(R.id.buttonBackTemp);
+        buttonBack.setOnClickListener(this);
+
         //cloud save button
         buttonCloudSave = (Button) findViewById(R.id.saveGameButton);
-        buttonLocalSave.setOnClickListener(this);
 
     }
 
@@ -129,6 +133,11 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         if (v == buttonCloudSave)
         {
             createCloudSave();
+        }
+        if (v == buttonBack)
+        {
+            finish();
+            startActivity(new Intent(this, GameActivity.class));
         }
     }
 }

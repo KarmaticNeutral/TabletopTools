@@ -52,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 PlayingCard playingCard = currentPlayerHand.get(index);
                 currentPlayerHand.remove(index);
                 discardPile.add(playingCard);
-                notifyDataSetChanged();
+                ((CardGameActivity) context).updateImagesForCardLocations();
             }
         });
     }

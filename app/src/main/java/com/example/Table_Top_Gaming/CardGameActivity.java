@@ -70,6 +70,15 @@ public class CardGameActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    public void updateImagesForCardLocations() {
+        String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
+                game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
+        int id = this.getResources().getIdentifier(cardToDiplay, "drawable", this.getPackageName());
+        discardPileButton.setImageResource(id);
+
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: <- What that says.");
         recyclerView = findViewById(R.id.handRecyclerView);

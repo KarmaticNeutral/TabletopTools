@@ -53,7 +53,6 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     private GestureDetectorCompat detector;
     private String newResourceName;
     private int defaultResourceValue;
-
     private ImageButton profilePicture;
 
     /**

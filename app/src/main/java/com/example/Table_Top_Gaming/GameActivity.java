@@ -86,12 +86,16 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                 message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE_CARD);
                 Log.d(TAG, "onCreate: Extra From Card: " + message);
                 if (message == null) {
-                    //Check to see if there is information to grab from CardGameActivity
-                    //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
-                    if (intent.getExtras() != null) {
-                        message = intent.getExtras().getString("Game");
-                        if (intent.getExtras().getString("CurrentPlayer") != null) {
-                            currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+                    message = intent.getStringExtra(GridViewActivity.EXTRA_MESSAGE_GRID);
+                    Log.d(TAG, "onCreate: Extra From Grid: " + message);
+                    if (message == null) {
+                        //Check to see if there is information to grab from CardGameActivity
+                        //message = intent.getStringExtra(CardGameActivity.EXTRA_MESSAGE);
+                        if (intent.getExtras() != null) {
+                            message = intent.getExtras().getString("Game");
+                            if (intent.getExtras().getString("CurrentPlayer") != null) {
+                                currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+                            }
                         }
                     }
                 }
@@ -1084,6 +1088,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, CardGameActivity.class);
+        intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
+        startActivity(intent);
+    }
+
+    public void gridClicked(View view) {
+        String gameInformation = gson.toJson(game);
+        Log.d(TAG, "gridClicked: Game String: " + gameInformation);
+        Intent intent = new Intent(GameActivity.this, GridViewActivity.class);
         intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
     }

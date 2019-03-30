@@ -69,4 +69,5 @@
     <string name="new_game_minus">-</string>
     <string name="cloud_saves">Cloud Saves</string>
     <string name="local_saves">Local Saves</string>
+    <string name="shuffle">Shuffle</string>
 </resources>

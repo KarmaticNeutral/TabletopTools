@@ -28,6 +28,7 @@
         android:contentDescription="@string/player_profile_image"
         android:scaleType="fitCenter"
         android:onClick="cameraDialog"
+        android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

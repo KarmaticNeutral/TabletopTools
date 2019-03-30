@@ -70,13 +70,40 @@ public class CardGameActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    public void shuffleDeck() {
+        game.getDeck().shuffle();
+    }
+
+    public void putDiscardToDeck() {
+        while (game.getDiscardPile().size() > 0) {
+            game.getDeck().getDeck().add(game.getDiscardPile().get(0));
+            game.getDiscardPile().remove(0);
+        }
+    }
+
+    public void shuffleClicked(View view) {
+        putDiscardToDeck();
+        shuffleDeck();
+        updateImagesForCardLocations();
+    }
+
     public void updateImagesForCardLocations() {
-        String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
-                game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
-        int id = this.getResources().getIdentifier(cardToDiplay, "drawable", this.getPackageName());
-        discardPileButton.setImageResource(id);
+        if (game.getDiscardPile().size() > 0) {
+            String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
+                    game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
+            int id = this.getResources().getIdentifier(cardToDiplay, "drawable", this.getPackageName());
+            discardPileButton.setImageResource(id);
+        } else {
+            discardPileButton.setImageResource(R.drawable.gray_back);
+        }
 
         recyclerViewAdapter.notifyDataSetChanged();
+
+        if (game.getDeck().getDeck().size() == 0) {
+            drawPileButton.setImageResource(R.drawable.gray_back);
+        } else {
+            drawPileButton.setImageResource(R.drawable.red_back);
+        }
     }
 
     private void initRecyclerView() {
@@ -88,9 +115,14 @@ public class CardGameActivity extends AppCompatActivity {
     }
 
     public void drawClicked(View view) {
-        game.getPlayers().get(currentPlayer).getHand().add(game.getDeck().drawCard());
-        recyclerViewAdapter.notifyDataSetChanged();
-
+        if (game.getDeck().getDeck().size() > 0) {
+            game.getPlayers().get(currentPlayer).getHand().add(game.getDeck().drawCard());
+            recyclerViewAdapter.notifyDataSetChanged();
+            updateImagesForCardLocations();
+        } else {
+            Toast.makeText(this, "The Draw Pile Is Empty.",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     public void discardClicked(View view) {

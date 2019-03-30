@@ -4,12 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp"
     android:background="@drawable/background">
 
     <ImageButton
         android:id="@+id/deckButton"
-        android:padding="15dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
@@ -24,7 +22,6 @@
 
     <ImageButton
         android:id="@+id/discardButton"
-        android:padding="15dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
@@ -38,34 +35,47 @@
 
     <TextView
         android:id="@+id/playerNameHeader"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif-black"
         android:text="@string/player_name_header"
+        android:textAlignment="center"
+        android:textColor="@color/browser_actions_text_color"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/deckButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/returnToScore" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:rotation="270"
         android:id="@+id/handRecyclerView"
         app:layout_constraintTop_toBottomOf="@id/discardButton"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/returnToScore"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/returnToScore"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/return_to_score"
         android:onClick="returnToScore"
-        app:layout_constraintBottom_toTopOf="@+id/playerNameHeader"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/shuffle"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/handRecyclerView" />
+
+    <Button
+        android:id="@+id/shuffle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Shuffle"
+        android:onClick="shuffleClicked"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/returnToScore"
+        app:layout_constraintTop_toBottomOf="@id/handRecyclerView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </android.support.constraint.ConstraintLayout>

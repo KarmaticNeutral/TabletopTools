@@ -34,6 +34,10 @@ import java.util.List;
 
 import static android.view.View.generateViewId;
 
+/**
+ * This is the main activity of the application that allows the players to keep track of their
+ * scores and use a deck of cards
+ */
 public class GameActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private static final String TAG = "GameActivity";
 
@@ -368,14 +372,24 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
+    /**
+     * This function calls a dialog box that lets a user roll different kinds of dice and displays
+     * the results on the screen
+     * @param view2 this is the button that calls this function
+     */
     public void diceClicked(View view2) {
+        // Create a new dieRoller that will keep track of all the dice
         final DieRoller dieRoller = new DieRoller();
+
+        // Create a new Alert Dialog and set the view to the dice rolling custom layout
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
 
+        // Create variables for the different text fields on the dice rolling custom layout
         final TextView toBeRolled = (TextView) view.findViewById(R.id.diceBeingRolled);
         final TextView total = (TextView) view.findViewById(R.id.sumOfDice);
 
+        // Create buttons for all the different buttons on the dice rolling custom layout
         Button zero = (Button) view.findViewById(R.id.zero);
         Button one = (Button) view.findViewById(R.id.one);
         Button two = (Button) view.findViewById(R.id.two);
@@ -395,6 +409,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         Button d10 = (Button) view.findViewById(R.id.d10);
         Button d20 = (Button) view.findViewById(R.id.d20);
 
+        // The zero button has been pressed check for foolish user input
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -421,6 +436,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The one button has been pressed check for foolish user input
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -448,6 +464,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The two button has been pressed check for foolish user input
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -475,6 +492,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The three button has been pressed check for foolish user input
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -502,6 +520,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The four button has been pressed check for foolish user input
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -529,6 +548,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The five button has been pressed check for foolish user input
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -556,6 +576,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The six button has been pressed check for foolish user input
         six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -583,6 +604,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The seven button has been pressed check for foolish user input
         seven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -610,6 +632,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The eight button has been pressed check for foolish user input
         eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -637,6 +660,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The nine button has been pressed check for foolish user input
         nine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -664,6 +688,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The D4 button has been pressed check for foolish user input and a some D4 to the dieRoller
         d4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -711,6 +736,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The D6 button has been pressed check for foolish user input and a some D6 to the dieRoller
         d6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -758,6 +784,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The D8 button has been pressed check for foolish user input and a some D8 to the dieRoller
         d8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -805,6 +832,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The D10 button has been pressed check for foolish user input and a some D10 to the dieRoller
         d10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -852,6 +880,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The D20 button has been pressed check for foolish user input and a some D20 to the dieRoller
         d20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -901,6 +930,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The delete button has been pressed, delete the text on the screen and remove dice from the diceRoller if necessary
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1006,6 +1036,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The plus button has been press just display a plus on the screen and check for foolish user input
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1033,6 +1064,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        // The roll button has been pressed roll all the dice and display the results to the screen and check for foolish user input
         roll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1069,21 +1101,29 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         });
 
         builder.setView(view)
+                // Add a OK button to the dialog
                 .setPositiveButton(R.string.player_score_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // The user hit "OK" do nothing they are done
                     }
                 }).setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // The user hit "CANCEL" do nothing they are done
-            }
-        });
+                    // Add a CANCEL button to the dialog
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The user hit "CANCEL" do nothing they are done
+                    }
+                });
+
+        // Create and show the dialog to the screen
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
+    /**
+     * This function starts the card activity when the button is pressed
+     * @param view this is the view that calls this function
+     */
     public void cardsClicked(View view) {
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
@@ -1100,29 +1140,70 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
+    /**
+     * Overrides the onDown motion even when the user places their finger on the screen
+     * @param e is the motion event detected
+     * @return always return false because this is never to be used but must be overridden
+     */
     @Override
     public boolean onDown(MotionEvent e) {
         return false;
     }
 
+    /**
+     * Overrides the onShowPress motion event, to be honest, have no idea what this does but we are
+     * not going to call this function but it must be overridden
+     * @param e is the motion event detected
+     */
     @Override
     public void onShowPress(MotionEvent e) {
     }
 
+    /**
+     * Overrides the onSingleTapUp motion event, to be honest, have no idea what this does but we are
+     * not going to call this function but it must be overridden
+     * @param e is the motion event detected
+     * @return false because we don't use this function
+     */
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         return false;
     }
 
+    /**
+     * Overrides the onScroll motion event when the user scrolls up or down on the screen and calls
+     * this function when that happens. We will not call or use this function though and it must be
+     * overridden
+     * @param e1 detects a down motion even
+     * @param e2 detects an directional motion even
+     * @param distanceX detects the distance that was input horizontally
+     * @param distanceY detects the distance that was input vertically
+     * @return false because we never use this function
+     */
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return false;
     }
 
+    /**
+     * Overrides the onLongPress motion even that calls this function when the user holds their finger
+     * on the screen. This function is never called though so it is empty
+     * @param e is the motion even detected
+     */
     @Override
     public void onLongPress(MotionEvent e) {
     }
 
+    /**
+     * Overrides the swipe motion even and detects if the user swiped left of right. If the user
+     * swipes left display the next player, if the user swipes right display the previous player
+     * @param downEvent detects when the user has placed their finger on the screen
+     * @param moveEvent detects the distance swiped by the user
+     * @param velocityX detects the speed the user swiped vertically
+     * @param velocityY detects the speed the user swiped horizontally
+     * @return true if a swipe right of left was detected and the function as played its roll, or
+     * false if the user swiped up or down that should not do anything
+     */
     @Override
     public boolean onFling(MotionEvent downEvent, MotionEvent moveEvent, float velocityX, float velocityY) {
         float diffY = moveEvent.getY() - downEvent.getY();
@@ -1149,6 +1230,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         return false;
     }
 
+    /**
+     * If a motion even was detected notify the motion detector and call the proper function
+     * @param event the motion event detected
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         detector.onTouchEvent(event);

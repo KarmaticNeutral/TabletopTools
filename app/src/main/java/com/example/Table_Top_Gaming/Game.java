@@ -3,6 +3,10 @@ package com.example.Table_Top_Gaming;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class keeps all the information of the game and individual players including a list of
+ * players a deck of cards and a discard pile
+ */
 public class Game {
     private List<Player> players;
     private PlayingCardDeck deck;

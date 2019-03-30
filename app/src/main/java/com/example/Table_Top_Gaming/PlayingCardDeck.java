@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class represents an normal deck of 52 cards
+ */
 public class PlayingCardDeck implements Deck{
     private List<PlayingCard> deck;
 
-    /*
+    /**
     This function creates the normal 52 cards in a deck and stores them in a list, then after all
     PlayingCards have been added the list is shuffled
      */
@@ -52,12 +55,19 @@ public class PlayingCardDeck implements Deck{
         shuffle();
     }
 
+    /**
+     * Shuffle the deck of cards
+     */
     @Override
     public void shuffle() {
         // This shuffles the List of Playing Cards
         Collections.shuffle(deck);
     }
 
+    /**
+     * Draw a card
+     * @return the card drawn
+     */
     @Override
     public PlayingCard drawCard() {
         if (!deck.isEmpty()) {
@@ -70,6 +80,11 @@ public class PlayingCardDeck implements Deck{
         }
     }
 
+    /**
+     * Draw a hand from the deck
+     * @param numCards is the number of cards to be drawn
+     * @return a list of cards that represents the cards drawn
+     */
     @Override
     public List<PlayingCard> drawHand(int numCards) {
         List<PlayingCard> hand = new ArrayList<>();
@@ -85,6 +100,7 @@ public class PlayingCardDeck implements Deck{
         }
         return hand;
     }
+
 
     public List<PlayingCard> getDeck() {
         return this.deck;

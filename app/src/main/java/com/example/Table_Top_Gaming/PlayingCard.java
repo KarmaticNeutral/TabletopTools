@@ -1,10 +1,18 @@
 package com.example.Table_Top_Gaming;
 
+/**
+ * This class represents a individual playing card with a number and suit
+ */
 public class PlayingCard implements Card, Comparable<PlayingCard> {
     private Suit suit;
     private int number;
 
 
+    /**
+     * Create a new card with a number and suit
+     * @param number set the number of the card to this number
+     * @param suit set the suit of the card to this suit
+     */
     public PlayingCard(int number, Suit suit) {
         this.number = number;
         this.suit = suit;

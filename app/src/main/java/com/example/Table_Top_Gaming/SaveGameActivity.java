@@ -28,6 +28,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the SaveGameActivity window and provides the different functions and buttons
+ * for this activity
+ */
 public class SaveGameActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_MESSAGE_SAVE = "com.example.Table_Top_Gaming.MESSAGE2";
@@ -44,6 +48,10 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     private String name;
 
 
+    /**
+     * Create the SaveGameActivity window and set the default values
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +121,9 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         startActivity(intent2);
     }
 
+    /**
+     * Creates a local save for a game
+     */
     public void createLocalSave() {
         EditText editText = (EditText) findViewById(R.id.saveNameTextBox);
         name = editText.getText().toString() + "|+|" + message;

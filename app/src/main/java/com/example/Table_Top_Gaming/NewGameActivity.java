@@ -23,6 +23,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the NewGameActivity window and sets the buttons and functions for this window
+ */
 public class NewGameActivity extends AppCompatActivity {
     private static final String TAG = "NewGameActivity";
     private Game game;
@@ -31,6 +34,10 @@ public class NewGameActivity extends AppCompatActivity {
     private ListView listView;
     private CustomAdapter customAdapter;
 
+    /**
+     * Create the NewGameActivity window and set the default values
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +52,19 @@ public class NewGameActivity extends AppCompatActivity {
         //TODO: figure out why player 1 is not shown in the listView.
     }
 
+    /**
+     * Add a player to the game
+     * @param view the button that calls this function
+     */
     public void addPlayer(View view) {
         players.add(new Player("Player " + (players.size() + 1)));
         customAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Remove a player from the game
+     * @param view the button that calls this funciton
+     */
     public void subtractPlayer(View view) {
         if (players.size() > 1) {
             players.remove(players.size() - 1);
@@ -60,7 +75,7 @@ public class NewGameActivity extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
     This function starts a new game when the button is pressed and all the required information has
     been stored
      */

@@ -37,6 +37,9 @@ import java.util.Date;
 
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 
+/**
+ * This class represents the Main Activity window and sets the functions and buttons for that activity
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences prefs;
 
@@ -47,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //used to get the user information
     private FirebaseUser user;
 
+    /**
+     * Create the Main Activity and set the default values
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

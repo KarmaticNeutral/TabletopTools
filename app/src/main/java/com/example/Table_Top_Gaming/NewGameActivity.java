@@ -84,6 +84,7 @@ public class NewGameActivity extends AppCompatActivity {
         /*TODO find a way to cycle through the editText items to retreive names.
         This will probably require the getItem(int position) function in customAdapter.*/
 
+        getCurrentFocus().clearFocus();
         // Make a new Game object and give it the list of players
         game = new Game(players);
 
@@ -133,6 +134,9 @@ public class NewGameActivity extends AppCompatActivity {
                 public void onFocusChange(View v, boolean hasFocus) {
                     if(!hasFocus) {
                         players.get(position).setName(editText.getText().toString());
+                    }
+                    if (hasFocus) {
+                        editText.getText().clear();
                     }
                 }
             });

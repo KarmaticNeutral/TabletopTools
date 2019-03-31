@@ -77,7 +77,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
 
         //cloud save button
         buttonCloudSave = (Button) findViewById(R.id.saveGameButton);
-
+        buttonCloudSave.setOnClickListener(this);
     }
 
 

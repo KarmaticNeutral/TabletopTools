@@ -28,6 +28,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -54,6 +56,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     private String newResourceName;
     private int defaultResourceValue;
     private ImageButton profilePicture;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
 
     /**
      * Initialize values that are needed when the game Activity starts.
@@ -63,6 +67,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //firebase stuff
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
 
         // Set player to player number 1
         currentPlayer = 0;
@@ -369,6 +378,17 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         intent.putExtra("Game", gameGson);
         intent.putExtra("CurrentPlayer", Integer.toString(currentPlayer));
         startActivity(intent);
+    }
+
+
+    public void Logout(View view) {
+        if (user != null) {
+            firebaseAuth.signOut();
+            //end the activity
+            finish();
+            //starts activity and logs them out back into the main activity
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
     /**

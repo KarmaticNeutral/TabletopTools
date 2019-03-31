@@ -342,6 +342,15 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         final EditText resourceValue = (EditText) view.findViewById(R.id.enterResourceValue);
 
+        resourceValue.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    resourceValue.getText().clear();
+                }
+            }
+        });
+
         builder.setView(view)
                 .setPositiveButton(R.string.add_resource_ok, new DialogInterface.OnClickListener() {
 

@@ -124,4 +124,20 @@
         app:layout_constraintTop_toBottomOf="@id/goToGridImageButton"
         app:layout_constraintBottom_toTopOf="@id/resourceListView"/>
 
+    <Button
+        android:id="@+id/buttonMainSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="Logout"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addResourceButton"
+        app:layout_constraintTop_toBottomOf="@+id/goToCardImageButton"
+        app:layout_constraintVertical_bias="1.0" />
+
 </android.support.constraint.ConstraintLayout>

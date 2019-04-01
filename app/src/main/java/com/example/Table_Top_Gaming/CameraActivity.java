@@ -81,7 +81,7 @@ public class CameraActivity extends AppCompatActivity {
     // Opens default photo gallery app, and allows user to choose image.
     public void pickFromGallery(View view) {
         //Create an Intent with action as ACTION_PICK
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         // Sets the type as image/*. This ensures only components of type image are selected
         intent.setType("image/*");
         //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.

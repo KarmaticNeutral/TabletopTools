@@ -133,7 +133,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         playerNameHeader = (TextView) findViewById(R.id.playerNameHeader);
 
+        // Sets the player profile picture to a default.
         profilePicture = (ImageButton) findViewById(R.id.playerProfileImageButton);
+        profilePicture.setImageResource(R.drawable.avatar);
 
         setPlayerView();
     }
@@ -289,9 +291,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
      */
     public void setPlayerView() {
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
+
         String uriString = game.getPlayers().get(currentPlayer).getPathToImage();
-        if (uriString != null) {
+        if (!uriString.equals("")) {
             profilePicture.setImageURI(Uri.parse(uriString));
+            Log.d(TAG, "Profile picture set.\nUriString=" + uriString);
         }
         else {
            profilePicture.setImageResource(R.drawable.avatar);

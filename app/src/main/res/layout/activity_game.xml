@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerNameHeader"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:src="@drawable/avatar" />
 
     <ListView
         android:id="@+id/resourceListView"

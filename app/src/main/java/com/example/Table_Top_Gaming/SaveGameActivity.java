@@ -126,10 +126,10 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
      */
     public void createLocalSave() {
         EditText editText = (EditText) findViewById(R.id.saveNameTextBox);
-        name = editText.getText().toString() + "|+|" + message;
+        name = editText.getText().toString();
         sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("savedGame", name);
+        editor.putString(name, message);
         editor.commit();
     }
 
@@ -138,7 +138,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         if(v == buttonLocalSave)
         {
             createLocalSave();
-            String value = sharedPreferences.getString("savedGame", "");
+            String value = sharedPreferences.getString(name, "");
             Toast.makeText(this, value, Toast.LENGTH_LONG).show();
         }
         if (v == buttonCloudSave)

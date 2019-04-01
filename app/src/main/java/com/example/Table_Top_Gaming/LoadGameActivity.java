@@ -25,12 +25,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class LoadGameActivity extends AppCompatActivity {
 
     // Create a KEY for passing information to the next activity
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
+    private static final String TAG = "LoadGameActivity";
 
     private ArrayList <String> CLOUD_GAME_NAMES;
     private ArrayList <String> LOCAL_GAME_NAMES;
@@ -38,6 +40,7 @@ public class LoadGameActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private SharedPreferences sharedPreferences;
+
 
     public LoadGameActivity() {
         CLOUD_GAME_NAMES = new ArrayList<>();
@@ -77,30 +80,33 @@ public class LoadGameActivity extends AppCompatActivity {
                     CustomFirebaseAdapter customAdapterCloud = new CustomFirebaseAdapter();
                     ListView cloudGamesListView = (ListView) findViewById(R.id.cloudSavedGamesListView);
                     cloudGamesListView.setAdapter(customAdapterCloud);
-
-                    CustomLocalAdapter customAdapterLocal = new CustomLocalAdapter();
-                    ListView localGamesListView = (ListView) findViewById(R.id.localSavedGamesListView);
-                    localGamesListView.setAdapter(customAdapterLocal);
                 }
             });
-
-            //TODO add the name of all games put into shared prefs or files to LOCAL_GAME_NAMES
-
-            String value = sharedPreferences.getString("savedGame", "");
-            Toast.makeText(this, "This is the shared pref: " + value, Toast.LENGTH_LONG).show();
         }
-        //else
-        //{
-            //finish();
-            //startActivity(new Intent(this, LoginActivity.class));
-        //}
+
+        createLocal();
         Log.d("PIE", "After onSuccess in the code");
+    }
+
+    public void createLocal() {
+        CustomLocalAdapter customAdapterLocal = new CustomLocalAdapter();
+        ListView localGamesListView = (ListView) findViewById(R.id.localSavedGamesListView);
+        localGamesListView.setAdapter(customAdapterLocal);
+
+        Map<String, ?> key = sharedPreferences.getAll();
+
+        for (Map.Entry<String, ?> entry: key.entrySet()) {
+            LOCAL_GAME_NAMES.add(entry.getKey());
+            Log.v("map values",entry.getKey() + "Size: " + LOCAL_GAME_NAMES.size());
+        }
     }
 
     class CustomLocalAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
+
+            Log.d("map values","Size: " + LOCAL_GAME_NAMES.size());
             return LOCAL_GAME_NAMES.size();
         }
 
@@ -115,20 +121,21 @@ public class LoadGameActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);
 
-            TextView textView = (TextView) convertView.findViewById(R.id.textViewName);
+            final TextView textView = (TextView) convertView.findViewById(R.id.textViewName);
             Button button = (Button) convertView.findViewById(R.id.selectionButton);
+            Log.d(TAG, "getView: Before setText");
+            textView.setText(LOCAL_GAME_NAMES.get(position));
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO recover game file from shared prefs or file here and convert it to the string below.
-
+                    String gameInfo = sharedPreferences.getString(LOCAL_GAME_NAMES.get(position), "");
 
                     Intent intent = new Intent(LoadGameActivity.this, GameActivity.class);
-                    intent.putExtra("Game", Objects.requireNonNull(/*TODO:A game message string*/""));
+                    intent.putExtra(LoadGameActivity.EXTRA_MESSAGE, gameInfo);
                     startActivity(intent);
                 }
             });

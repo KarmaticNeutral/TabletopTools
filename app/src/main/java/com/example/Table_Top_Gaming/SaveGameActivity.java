@@ -36,7 +36,6 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
 
     public static final String EXTRA_MESSAGE_SAVE = "com.example.Table_Top_Gaming.MESSAGE2";
     public static final String TAG = "hey";
-    private String fileName;
     private String message;
     private Intent intent;
     private FirebaseAuth firebaseAuth;
@@ -50,7 +49,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
 
     /**
      * Create the SaveGameActivity window and set the default values
-     * @param savedInstanceState
+     * @param savedInstanceState Just the beginning state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,17 +84,20 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     /**
      * This function creates a save file and writes the game information to it
     */
-
     public void createCloudSave() {
 
+        //get the instance of firebase
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        //saveGame is going to store the information that we want to put inside the cloud
         Map <String, Object> saveGame = new HashMap<>();
         TextView textView = findViewById(R.id.saveNameTextBox);
         String saveName = textView.getText().toString();
 
         saveGame.put("Name", saveName);
         saveGame.put("savedGame", message);
+
+        //store info in the the users specific cloud
         db.collection(user.getUid())
                 .add(saveGame)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -125,6 +127,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
      * Creates a local save for a game
      */
     public void createLocalSave() {
+        //grabs the save game name and either creates or makes a new save game
         EditText editText = (EditText) findViewById(R.id.saveNameTextBox);
         name = editText.getText().toString();
         sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
@@ -133,13 +136,15 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         editor.commit();
     }
 
+    /**
+     * In essence the button hub, holds all the buttons functionality
+     * @param v the view
+     */
     @Override
     public void onClick(View v) {
         if(v == buttonLocalSave)
         {
             createLocalSave();
-            String value = sharedPreferences.getString(name, "");
-            Toast.makeText(this, value, Toast.LENGTH_LONG).show();
         }
         if (v == buttonCloudSave)
         {
@@ -147,8 +152,11 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         }
         if (v == buttonBack)
         {
-            finish();
-            startActivity(new Intent(this, GameActivity.class));
+            //need this to go back to main page
+            Intent intent = new Intent(SaveGameActivity.this, GameActivity.class);
+            //game activity requires something to be passed in
+            intent.putExtra(EXTRA_MESSAGE_SAVE, message);
+            startActivity(intent);
         }
     }
 }

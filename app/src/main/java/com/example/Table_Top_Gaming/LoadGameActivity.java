@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * This Activity is for user loading a game either locally or from the cloud
+ */
 public class LoadGameActivity extends AppCompatActivity {
 
     // Create a KEY for passing information to the next activity
@@ -37,11 +40,17 @@ public class LoadGameActivity extends AppCompatActivity {
     private ArrayList <String> CLOUD_GAME_NAMES;
     private ArrayList <String> LOCAL_GAME_NAMES;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser user;
+    //firebase authentication variables
+    private FirebaseAuth firebaseAuth; //instance of
+    private FirebaseUser user; //user info
+
+    //local saves
     private SharedPreferences sharedPreferences;
 
 
+    /**
+     * Initializes the Array List necessary to store and display data to the screen
+     */
     public LoadGameActivity() {
         CLOUD_GAME_NAMES = new ArrayList<>();
         LOCAL_GAME_NAMES = new ArrayList<>();
@@ -59,15 +68,30 @@ public class LoadGameActivity extends AppCompatActivity {
         //gets the local saves
         sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
 
+        createCloud();
+
+        createLocal();
+        Log.d("PIE", "After onSuccess in the code");
+    }
+
+    /**
+     * Creates a cloud save list that will be displayed in a list view on the screen
+     */
+    public void createCloud() {
+
+
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+
+        //do this only if the user is logged in
         if (user != null) {
+            //get information that is stored under their username
             Task<QuerySnapshot> snapshotTask = firebase.collection(user.getUid()).get();
             Log.d("PIE", "Before onSuccess in the code");
             snapshotTask.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                     List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
-                    Log.d("PIE", "Inside Onsucess Outside List");
+                    Log.d("PIE", "Inside Onsuccess Outside List");
                     for (DocumentSnapshot currentDocumentSnapshot : documentSnapshots) {
                         String filePath = currentDocumentSnapshot.getReference().getPath();
                         Log.d("PIE", "onSuccess: Filepath of a Saved Game:" + filePath);
@@ -83,16 +107,18 @@ public class LoadGameActivity extends AppCompatActivity {
                 }
             });
         }
-
-        createLocal();
-        Log.d("PIE", "After onSuccess in the code");
     }
 
+    /**
+     * Creates a local save list that will be displayed in a list view on the screen
+     */
     public void createLocal() {
         CustomLocalAdapter customAdapterLocal = new CustomLocalAdapter();
         ListView localGamesListView = (ListView) findViewById(R.id.localSavedGamesListView);
         localGamesListView.setAdapter(customAdapterLocal);
 
+        //gets all the names of saved games that the user has saved in shared prefs and stores it
+        //in LOCAL_GAME_NAMES
         Map<String, ?> key = sharedPreferences.getAll();
 
         for (Map.Entry<String, ?> entry: key.entrySet()) {
@@ -104,11 +130,7 @@ public class LoadGameActivity extends AppCompatActivity {
     class CustomLocalAdapter extends BaseAdapter {
 
         @Override
-        public int getCount() {
-
-            Log.d("map values","Size: " + LOCAL_GAME_NAMES.size());
-            return LOCAL_GAME_NAMES.size();
-        }
+        public int getCount() { return LOCAL_GAME_NAMES.size(); }
 
         @Override
         public Object getItem(int position) {
@@ -120,13 +142,19 @@ public class LoadGameActivity extends AppCompatActivity {
             return 0;
         }
 
+        /**
+         * Gets the view of the Local Saves for the List View and sets button functionality
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);
 
             final TextView textView = (TextView) convertView.findViewById(R.id.textViewName);
             Button button = (Button) convertView.findViewById(R.id.selectionButton);
-            Log.d(TAG, "getView: Before setText");
             textView.setText(LOCAL_GAME_NAMES.get(position));
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +194,13 @@ public class LoadGameActivity extends AppCompatActivity {
             return 0;
         }
 
+        /**
+         * Gets the view for the Cloud Saves and sets button functionality
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);

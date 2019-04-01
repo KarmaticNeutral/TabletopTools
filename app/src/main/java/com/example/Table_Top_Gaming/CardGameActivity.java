@@ -167,6 +167,7 @@ public class CardGameActivity extends AppCompatActivity {
         else {
             currentPlayer = numPlayers - 1;
         }
+        hideHand = true;
         updateImagesForCardLocations();
     }
 
@@ -177,6 +178,7 @@ public class CardGameActivity extends AppCompatActivity {
         if (currentPlayer >= numPlayers) {
             currentPlayer = 0;
         }
+        hideHand = true;
         updateImagesForCardLocations();
     }
 

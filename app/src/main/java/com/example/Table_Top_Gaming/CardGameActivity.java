@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,8 @@ public class CardGameActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageButton discardPileButton;
     private ImageButton drawPileButton;
-    RecyclerViewAdapter recyclerViewAdapter;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private boolean hideHand;
 
     /**
      * Initialize values that are needed when the game Activity starts.
@@ -67,6 +69,8 @@ public class CardGameActivity extends AppCompatActivity {
         }
         drawPileButton = findViewById(R.id.deckButton);
 
+        hideHand = true;
+
         initRecyclerView();
     }
 
@@ -97,19 +101,22 @@ public class CardGameActivity extends AppCompatActivity {
             discardPileButton.setImageResource(R.drawable.gray_back);
         }
 
-        recyclerViewAdapter.notifyDataSetChanged();
-
         if (game.getDeck().getDeck().size() == 0) {
             drawPileButton.setImageResource(R.drawable.gray_back);
         } else {
             drawPileButton.setImageResource(R.drawable.red_back);
         }
+
+        recyclerViewAdapter.notifyDataSetChangedWithBool(hideHand);
+
+        playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
+
     }
 
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: <- What that says.");
         recyclerView = findViewById(R.id.handRecyclerView);
-        recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand(), game.getDiscardPile(), this);
+        recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand(), game.getDiscardPile(), hideHand, this);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -146,6 +153,31 @@ public class CardGameActivity extends AppCompatActivity {
                 discardPileButton.setImageResource(id);
             }
         }
+    }
+
+    public void hideClicked(View view) {
+        hideHand = !hideHand;
+        updateImagesForCardLocations();
+    }
+
+    public void prevPlayerClicked(View view) {
+        if (currentPlayer > 0) {
+            currentPlayer--;
+        }
+        else {
+            currentPlayer = numPlayers - 1;
+        }
+        updateImagesForCardLocations();
+    }
+
+    public void nextPlayerClicked(View view) {
+        if (currentPlayer < numPlayers) {
+            currentPlayer++;
+        }
+        if (currentPlayer >= numPlayers) {
+            currentPlayer = 0;
+        }
+        updateImagesForCardLocations();
     }
 
     public void returnToScore(View view) {

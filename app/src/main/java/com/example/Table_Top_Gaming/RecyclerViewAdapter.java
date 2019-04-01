@@ -18,11 +18,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<PlayingCard> currentPlayerHand;
     private List<PlayingCard> discardPile;
     private Context context;
+    private boolean hideHand;
 
-    public RecyclerViewAdapter(List<PlayingCard> hand, List<PlayingCard> discardPile, Context context) {
+    public RecyclerViewAdapter(List<PlayingCard> hand, List<PlayingCard> discardPile, boolean hideHand, Context context) {
         currentPlayerHand = hand;
         this.context = context;
         this.discardPile = discardPile;
+        this.hideHand = hideHand;
     }
 
 
@@ -36,25 +38,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        Log.d(TAG, "onBindViewHolder: called! position: " + i);
-        String cardImage = "";
-        cardImage += currentPlayerHand.get(i).getSuit();
-        cardImage += currentPlayerHand.get(i).getNumber();
+        if (!hideHand) {
+            Log.d(TAG, "onBindViewHolder: called! position: " + i);
+            String cardImage = "";
+            cardImage += currentPlayerHand.get(i).getSuit();
+            cardImage += currentPlayerHand.get(i).getNumber();
 
-        int id = context.getResources().getIdentifier(cardImage, "drawable", context.getPackageName());
-        viewHolder.imageView.setImageResource(id);
+            int id = context.getResources().getIdentifier(cardImage, "drawable", context.getPackageName());
+            viewHolder.imageView.setImageResource(id);
 
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int index = viewHolder.getAdapterPosition();
-                Log.d(TAG, "onClick: clicked position " + viewHolder.getAdapterPosition());
-                PlayingCard playingCard = currentPlayerHand.get(index);
-                currentPlayerHand.remove(index);
-                discardPile.add(playingCard);
-                ((CardGameActivity) context).updateImagesForCardLocations();
-            }
-        });
+            viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int index = viewHolder.getAdapterPosition();
+                    Log.d(TAG, "onClick: clicked position " + viewHolder.getAdapterPosition());
+                    PlayingCard playingCard = currentPlayerHand.get(index);
+                    currentPlayerHand.remove(index);
+                    discardPile.add(playingCard);
+                    ((CardGameActivity) context).updateImagesForCardLocations();
+                }
+            });
+        } else {
+            viewHolder.imageView.setImageResource(R.drawable.red_back);
+        }
+    }
+
+    public void notifyDataSetChangedWithBool(boolean hideHand) {
+        this.hideHand = hideHand;
+        notifyDataSetChanged();
     }
 
     @Override

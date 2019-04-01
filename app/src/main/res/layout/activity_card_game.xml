@@ -10,28 +10,32 @@
         android:id="@+id/deckButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="25dp"
         android:scaleType="fitCenter"
         android:src="@drawable/red_back"
         android:contentDescription="@string/draw_pile"
         android:onClick="drawClicked"
-        app:layout_constraintBottom_toTopOf="@id/handRecyclerView"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@id/hideCheck"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/discardButton"
-        app:layout_constraintTop_toBottomOf="@id/playerNameHeader" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageButton
         android:id="@+id/discardButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="25dp"
         android:scaleType="fitCenter"
         android:src="@drawable/gray_back"
         android:contentDescription="@string/discard_pile"
         android:onClick="discardClicked"
-        app:layout_constraintBottom_toTopOf="@id/handRecyclerView"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@id/hideCheck"
         app:layout_constraintLeft_toRightOf="@id/deckButton"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playerNameHeader" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/playerNameHeader"
@@ -40,19 +44,19 @@
         android:fontFamily="sans-serif-black"
         android:text="@string/player_name_header"
         android:textAlignment="center"
-        android:textColor="@color/browser_actions_text_color"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/deckButton"
+        android:textColor="@color/browser_actions_bg_grey"
+        app:layout_constraintBottom_toTopOf="@id/handRecyclerView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/hideCheck" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:rotation="270"
         android:id="@+id/handRecyclerView"
-        app:layout_constraintTop_toBottomOf="@id/discardButton"
+        app:layout_constraintTop_toBottomOf="@id/playerNameHeader"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/returnToScore"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -78,4 +82,38 @@
         app:layout_constraintRight_toLeftOf="@id/returnToScore"
         app:layout_constraintTop_toBottomOf="@id/handRecyclerView"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <CheckBox
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/hideCheck"
+        android:text="@string/hide_hand"
+        android:onClick="hideClicked"
+        android:checked="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/prevPlayerButton"
+        app:layout_constraintTop_toBottomOf="@id/deckButton"
+        app:layout_constraintBottom_toTopOf="@id/playerNameHeader"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/prevPlayerButton"
+        android:onClick="prevPlayerClicked"
+        android:text="@string/prev_player"
+        app:layout_constraintLeft_toRightOf="@id/hideCheck"
+        app:layout_constraintRight_toLeftOf="@id/nextPlayerButton"
+        app:layout_constraintTop_toBottomOf="@id/discardButton"
+        app:layout_constraintBottom_toTopOf="@id/playerNameHeader" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextPlayerButton"
+        android:text="@string/next_player"
+        android:onClick="nextPlayerClicked"
+        app:layout_constraintLeft_toRightOf="@id/prevPlayerButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/discardButton"
+        app:layout_constraintBottom_toTopOf="@id/playerNameHeader" />
 </android.support.constraint.ConstraintLayout>

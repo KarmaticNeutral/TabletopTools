@@ -26,7 +26,6 @@
     <string name="change_score_to">Change To</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
-    <string name="next_player">&gt;</string>
     <string name="previous_player">&lt;</string>
     <string name="add_resource">Add Resource</string>
     <string name="playername">playerName</string>
@@ -71,4 +70,7 @@
     <string name="local_saves">Local Saves</string>
     <string name="shuffle">Shuffle</string>
     <string name="resource_name">Name</string>
+    <string name="hide_hand">Hide Hand</string>
+    <string name="next_player"><![CDATA[>]]></string>
+    <string name="prev_player"><![CDATA[<]]></string>
 </resources>

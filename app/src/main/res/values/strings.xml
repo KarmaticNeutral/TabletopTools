@@ -73,4 +73,5 @@
     <string name="hide_hand">Hide Hand</string>
     <string name="next_player"><![CDATA[>]]></string>
     <string name="prev_player"><![CDATA[<]]></string>
+    <string name="a_card_from_the_current_player_s_hand">A card from the current Player\'s Hand.</string>
 </resources>

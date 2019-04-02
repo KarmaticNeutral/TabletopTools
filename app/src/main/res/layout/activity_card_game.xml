@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:text="@string/player_name_header"
+        android:background="@null"
         android:textAlignment="center"
         android:textSize="26sp"
         android:textColor="@color/browser_actions_bg_grey"
@@ -54,8 +55,8 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:rotation="270"
         android:id="@+id/handRecyclerView"
+        android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/playerNameHeader"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/returnToScore"

@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 public class CardGameActivity extends AppCompatActivity {
     private static final String TAG = "CardGameActivity";
     // Create a KEY for passing information to the next activity
@@ -23,7 +25,6 @@ public class CardGameActivity extends AppCompatActivity {
     private int currentPlayer;
     private int numPlayers;
     private TextView playerNameHeader;
-    private RecyclerView recyclerView;
     private ImageButton discardPileButton;
     private ImageButton drawPileButton;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -31,7 +32,7 @@ public class CardGameActivity extends AppCompatActivity {
 
     /**
      * Initialize values that are needed when the game Activity starts.
-     * @param savedInstanceState
+     * @param savedInstanceState - as required by super(savedInstanceState)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class CardGameActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "onCreate: Extras has content!");
         }
-        String message = extras.getString(GameActivity.EXTRA_MESSAGE);
+        String message = Objects.requireNonNull(extras).getString(GameActivity.EXTRA_MESSAGE);
         game = gson.fromJson(message, Game.class);
         currentPlayer = 0;
         Log.d(TAG, "onCreate: Game String: " + message);
@@ -60,7 +61,6 @@ public class CardGameActivity extends AppCompatActivity {
         discardPileButton = findViewById(R.id.discardButton);
         if (game.getDiscardPile().size() == 0) {
             discardPileButton.setImageResource(R.drawable.gray_back);
-            //TODO get an empty discard image that is better than this.
         } else {
             String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
                     game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
@@ -115,10 +115,10 @@ public class CardGameActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: <- What that says.");
-        recyclerView = findViewById(R.id.handRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
         recyclerViewAdapter = new RecyclerViewAdapter(game.getPlayers().get(currentPlayer).getHand(), game.getDiscardPile(), hideHand, this);
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     public void drawClicked(View view) {
@@ -137,7 +137,6 @@ public class CardGameActivity extends AppCompatActivity {
             Toast.makeText(this, "The Discard Pile Is Empty.",
                     Toast.LENGTH_LONG).show();
             discardPileButton.setImageResource(R.drawable.gray_back);
-            //TODO get an empty discard image that is better than this.
         } else {
             game.getPlayers().get(currentPlayer).getHand().add(game.getDiscardPile().get(game.getDiscardPile().size() - 1));
             game.getDiscardPile().remove(game.getDiscardPile().size() - 1);
@@ -145,7 +144,6 @@ public class CardGameActivity extends AppCompatActivity {
 
             if (game.getDiscardPile().size() == 0) {
                 discardPileButton.setImageResource(R.drawable.gray_back);
-                //TODO get an empty discard image that is better than this.
             } else {
                 String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
                         game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
@@ -168,7 +166,7 @@ public class CardGameActivity extends AppCompatActivity {
             currentPlayer = numPlayers - 1;
         }
         hideHand = true;
-        CheckBox checkBox = (CheckBox) findViewById(R.id.hideCheck);
+        CheckBox checkBox = findViewById(R.id.hideCheck);
         checkBox.setChecked(true);
         updateImagesForCardLocations();
     }
@@ -181,7 +179,7 @@ public class CardGameActivity extends AppCompatActivity {
             currentPlayer = 0;
         }
         hideHand = true;
-        CheckBox checkBox = (CheckBox) findViewById(R.id.hideCheck);
+        CheckBox checkBox = findViewById(R.id.hideCheck);
         checkBox.setChecked(true);
         updateImagesForCardLocations();
     }
@@ -191,8 +189,8 @@ public class CardGameActivity extends AppCompatActivity {
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "returnToScore: Game Info:" + gameInformation);
         Intent intent = new Intent(CardGameActivity.this, GameActivity.class);
-        intent.putExtra(this.EXTRA_MESSAGE_CARD, gameInformation);
-        Log.d(TAG, "returnToScore: ExtraMessageInIntent: " + intent.getStringExtra(this.EXTRA_MESSAGE_CARD));
+        intent.putExtra(EXTRA_MESSAGE_CARD, gameInformation);
+        Log.d(TAG, "returnToScore: ExtraMessageInIntent: " + intent.getStringExtra(EXTRA_MESSAGE_CARD));
         startActivity(intent);
     }
 }

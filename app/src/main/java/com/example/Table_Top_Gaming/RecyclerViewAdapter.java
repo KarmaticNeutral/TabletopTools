@@ -63,8 +63,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public void notifyDataSetChangedWithBool(boolean hideHand) {
+    public void notifyDataSetChangedWithExtras(boolean hideHand, List <PlayingCard> currentPlayerHand) {
         this.hideHand = hideHand;
+        this.currentPlayerHand = currentPlayerHand;
         notifyDataSetChanged();
     }
 

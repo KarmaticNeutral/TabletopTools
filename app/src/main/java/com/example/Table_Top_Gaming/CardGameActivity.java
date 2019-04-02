@@ -107,7 +107,7 @@ public class CardGameActivity extends AppCompatActivity {
             drawPileButton.setImageResource(R.drawable.red_back);
         }
 
-        recyclerViewAdapter.notifyDataSetChangedWithBool(hideHand);
+        recyclerViewAdapter.notifyDataSetChangedWithExtras(hideHand, game.getPlayers().get(currentPlayer).getHand());
 
         playerNameHeader.setText(game.getPlayers().get(currentPlayer).getName());
 
@@ -168,6 +168,8 @@ public class CardGameActivity extends AppCompatActivity {
             currentPlayer = numPlayers - 1;
         }
         hideHand = true;
+        CheckBox checkBox = (CheckBox) findViewById(R.id.hideCheck);
+        checkBox.setChecked(true);
         updateImagesForCardLocations();
     }
 
@@ -179,6 +181,8 @@ public class CardGameActivity extends AppCompatActivity {
             currentPlayer = 0;
         }
         hideHand = true;
+        CheckBox checkBox = (CheckBox) findViewById(R.id.hideCheck);
+        checkBox.setChecked(true);
         updateImagesForCardLocations();
     }
 

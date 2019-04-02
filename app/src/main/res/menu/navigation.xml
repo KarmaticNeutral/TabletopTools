@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_dice"
+        android:icon="@drawable/die"
+        android:title="@string/dice" />
+
+    <item
+        android:id="@+id/navigation_grid"
+        android:icon="@drawable/grid"
+        android:title="@string/grid" />
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/grid"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/navigation_cards"
+        android:icon="@drawable/aces"
+        android:title="@string/card" />
+
+    <item
+        android:id="@+id/navigation_save"
+        android:icon="@drawable/save"
+        android:title="@string/save" />
+
+</menu>

@@ -74,4 +74,8 @@
     <string name="next_player"><![CDATA[>]]></string>
     <string name="prev_player"><![CDATA[<]]></string>
     <string name="a_card_from_the_current_player_s_hand">A card from the current Player\'s Hand.</string>
+    <string name="grid">Grid</string>
+    <string name="home">Home</string>
+    <string name="card">Card</string>
+    <string name="save">Save</string>
 </resources>

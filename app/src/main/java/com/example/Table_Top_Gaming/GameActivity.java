@@ -694,10 +694,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    return;
-                }
-                else {
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
@@ -708,7 +705,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     int numDice;
                     if (toBeRolled.getText().toString().length() > 1) {
-                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
@@ -742,10 +739,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    return;
-                }
-                else {
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
@@ -756,7 +750,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     int numDice;
                     if (toBeRolled.getText().toString().length() > 1) {
-                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
@@ -790,10 +784,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    return;
-                }
-                else {
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
@@ -804,7 +795,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     int numDice;
                     if (toBeRolled.getText().toString().length() > 1) {
-                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
@@ -838,10 +829,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    return;
-                }
-                else {
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
@@ -852,7 +840,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     int numDice;
                     if (toBeRolled.getText().toString().length() > 1) {
-                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
@@ -888,10 +876,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                     }
                 }
 
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    return;
-                }
-                else {
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
@@ -902,7 +887,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
                     int numDice;
                     if (toBeRolled.getText().toString().length() > 1) {
-                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex, toBeRolled.getText().toString().length()));
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
@@ -1018,7 +1003,6 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                 }
                 if (toBeRolled.getText().toString().length() > 0) {
                     toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -1));
-                    return;
                 }
             }
         });
@@ -1044,7 +1028,6 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
                             toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
-                            return;
                         }
                     }
                 }
@@ -1079,7 +1062,6 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                                 total.setText(dieRoller.display());
                                 dieRoller.getDice().clear();
                                 toBeRolled.setText("");
-                                return;
                             }
                         }
                     }

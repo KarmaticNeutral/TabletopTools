@@ -10,21 +10,25 @@
     <item
         android:id="@+id/navigation_grid"
         android:icon="@drawable/grid"
-        android:title="@string/grid" />
+        android:title="@string/grid"
+        android:onClick="gridClicked"/>
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/grid"
-        android:title="@string/home" />
+        android:title="@string/home"
+        android:onClick="homeClicked"/>
 
     <item
         android:id="@+id/navigation_cards"
         android:icon="@drawable/aces"
-        android:title="@string/card" />
+        android:title="@string/card"
+        android:onClick="cardClicked"/>
 
     <item
         android:id="@+id/navigation_save"
         android:icon="@drawable/save"
-        android:title="@string/save" />
+        android:title="@string/save"
+        android:onClick="saveClicked"/>
 
 </menu>

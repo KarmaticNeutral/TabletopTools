@@ -79,7 +79,6 @@ public class CardGameActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationMenu);
         bottomNavigationView.setSelectedItemId(R.id.navigation_cards);
     }
@@ -192,16 +191,6 @@ public class CardGameActivity extends AppCompatActivity {
         CheckBox checkBox = findViewById(R.id.hideCheck);
         checkBox.setChecked(true);
         updateImagesForCardLocations();
-    }
-
-    public void returnToScore(View view) {
-        assert game != null;
-        String gameInformation = gson.toJson(game);
-        Log.d(TAG, "returnToScore: Game Info:" + gameInformation);
-        Intent intent = new Intent(CardGameActivity.this, GameActivity.class);
-        intent.putExtra(EXTRA_MESSAGE_CARD, gameInformation);
-        Log.d(TAG, "returnToScore: ExtraMessageInIntent: " + intent.getStringExtra(EXTRA_MESSAGE_CARD));
-        startActivity(intent);
     }
 
     /**
@@ -953,5 +942,27 @@ public class CardGameActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationMenu);
         bottomNavigationView.setSelectedItemId(R.id.navigation_cards);
+    }
+
+    public void gridClicked(MenuItem menuItem) {
+
+    }
+
+    public void saveClicked(MenuItem menuItem) {
+
+    }
+
+    public void homeClicked(MenuItem menuItem) {
+        assert game != null;
+        String gameInformation = gson.toJson(game);
+        Log.d(TAG, "returnToScore: Game Info:" + gameInformation);
+        Intent intent = new Intent(CardGameActivity.this, GameActivity.class);
+        intent.putExtra(EXTRA_MESSAGE_CARD, gameInformation);
+        Log.d(TAG, "returnToScore: ExtraMessageInIntent: " + intent.getStringExtra(EXTRA_MESSAGE_CARD));
+        startActivity(intent);
+    }
+
+    public void cardClicked(MenuItem menuItem) {
+
     }
 }

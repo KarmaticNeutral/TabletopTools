@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Looper;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,59 +140,10 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         profilePicture.setImageResource(R.drawable.avatar);
 
         setPlayerView();
-    }
 
-    /**
-     * This function converts the information saved in the game object to a string and passes that
-     * to the SaveGameActivity.
-     * @param view
-     */
-    public void saveGame(View view) {
-        String gameInformation = gson.toJson(game);
-        Intent intent = new Intent(this, SaveGameActivity.class);
-        intent.putExtra("Game", gameInformation);
-        startActivity(intent);
-    }
 
-    /**
-     * If it is appropriate for currentPlayer to draw a card, they do.
-     * @param view - The View Object that called this function.
-     */
-    public void drawCard(View view) {
-
-        if (!game.getDeck().getDeck().isEmpty()) {
-            game.getPlayers().get(currentPlayer).addCardToHand(game.getDeck().drawCard());
-        }
-
-        else {
-            Toast.makeText(this, "Cannot draw a card. There are no more cards in the deck",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        Log.i("GameActivity", game.getPlayers().get(currentPlayer).getName() + " has drawn a card");
-    }
-
-    /**
-     * If it is appropriate for currentPlayer to draw a full hand of cards, they do.
-     * @param view - The View Object that called this function.
-     */
-    public void drawHand(View view) {
-        int numCards = 5;
-
-        if (game.getDeck().getDeck().isEmpty()) {
-            Toast.makeText(this, "Cannot draw a hand. There are no more cards in the deck",
-                    Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (!game.getPlayers().get(currentPlayer).canDraw()) {
-            Toast.makeText(this, game.getPlayers().get(currentPlayer).getName() +
-                            " has already drawn a hand", Toast.LENGTH_LONG).show();
-            return;
-        }
-        game.getPlayers().get(currentPlayer).setHand(game.getDeck().drawHand(numCards));
-
-        Log.i("GameActivity", game.getPlayers().get(currentPlayer).getName() + " has drawn a hand");
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationMenu);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
 
     /**
@@ -402,7 +355,6 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
-
     public void Logout(View view) {
         if (user != null) {
             firebaseAuth.signOut();
@@ -416,9 +368,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     /**
      * This function calls a dialog box that lets a user roll different kinds of dice and displays
      * the results on the screen
-     * @param view2 this is the button that calls this function
+     * @param menuItem this is the button that calls this function
      */
-    public void diceClicked(View view2) {
+    public void diceClicked(MenuItem menuItem) {
         // Create a new dieRoller that will keep track of all the dice
         final DieRoller dieRoller = new DieRoller();
 
@@ -1163,9 +1115,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     /**
      * This function starts the card activity when the button is pressed
-     * @param view this is the view that calls this function
+     * @param menuItem this is the view that calls this function
      */
-    public void cardsClicked(View view) {
+    public void cardClicked(MenuItem menuItem) {
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, CardGameActivity.class);
@@ -1173,12 +1125,28 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
-    public void gridClicked(View view) {
+    public void gridClicked(MenuItem menuItem) {
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "gridClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, GridViewActivity.class);
         intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
+    }
+
+    /**
+     * This function converts the information saved in the game object to a string and passes that
+     * to the SaveGameActivity.
+     * @param menuItem
+     */
+    public void saveClicked(MenuItem menuItem) {
+        String gameInformation = gson.toJson(game);
+        Intent intent = new Intent(this, SaveGameActivity.class);
+        intent.putExtra("Game", gameInformation);
+        startActivity(intent);
+    }
+
+    public void homeClicked(MenuItem menuItem) {
+
     }
 
     /**

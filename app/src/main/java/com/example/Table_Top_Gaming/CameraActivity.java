@@ -102,7 +102,11 @@ public class CameraActivity extends AppCompatActivity {
         //Create an Intent with action as ACTION_OPEN_DOCUMENT
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
-        // Make sure that the user has given storage permissions.
+        /*
+        Make sure that the user has given storage permissions.
+        Note that granting the WRITE_EXTERNAL_STORAGE permission automatically grants the
+        READ_EXTERNAL_STORAGE permission.
+        */
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "Write storage permission denied");
 

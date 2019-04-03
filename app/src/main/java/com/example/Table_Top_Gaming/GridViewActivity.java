@@ -66,7 +66,7 @@ public class GridViewActivity extends AppCompatActivity {
                     TextView textView = new TextView(this);
                     textView.setWidth(100);
                     textView.setHeight(50);
-                    textView.setTextColor(Color.BLACK);
+                    textView.setTextColor(Color.WHITE);
                     if (j == -1) {
                         textView.setText("");
                     } else {
@@ -79,7 +79,7 @@ public class GridViewActivity extends AppCompatActivity {
                     textView.setWidth(100);
                     textView.setHeight(50);
                     textView.setText(game.getPlayers().get(0).getResources().get(i).getName());
-                    textView.setTextColor(Color.BLACK);
+                    textView.setTextColor(Color.WHITE);
                     row.addView(textView);
                 } else {
                     if (game.getPlayers().get(j).getResources() != null) {

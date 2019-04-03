@@ -6,51 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".AddResourceDialogActivity">
 
-    <TextView
-        android:id="@+id/resourceNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/enter_resource"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/enterResourceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/enter_resource"
         android:inputType="textPersonName"
-        android:text="@string/resource_name"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resourceNameTextView" />
-
-    <TextView
-        android:id="@+id/resourceValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/enter_resource_value"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterResourceName" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/enter_resource" />
 
     <EditText
         android:id="@+id/enterResourceValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/enter_resource_value"
         android:inputType="number"
-        android:text="@string/default_resource_value"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resourceValueTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/enterResourceName" />
 </android.support.constraint.ConstraintLayout>

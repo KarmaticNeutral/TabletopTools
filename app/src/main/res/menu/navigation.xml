@@ -4,7 +4,8 @@
     <item
         android:id="@+id/navigation_dice"
         android:icon="@drawable/die"
-        android:title="@string/dice" />
+        android:title="@string/dice"
+        android:onClick="diceClicked"/>
 
     <item
         android:id="@+id/navigation_grid"

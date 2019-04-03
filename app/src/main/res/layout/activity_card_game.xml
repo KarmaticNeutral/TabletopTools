@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:text="@string/return_to_score"
         android:onClick="returnToScore"
-        app:layout_constraintBottom_toTopOf="@id/navigation"
+        app:layout_constraintBottom_toTopOf="@id/navigationMenu"
         app:layout_constraintLeft_toRightOf="@id/shuffle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/handRecyclerView" />
@@ -82,7 +82,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/returnToScore"
         app:layout_constraintTop_toBottomOf="@id/handRecyclerView"
-        app:layout_constraintBottom_toTopOf="@id/navigation"/>
+        app:layout_constraintBottom_toTopOf="@id/navigationMenu"/>
 
     <CheckBox
         android:layout_width="0dp"
@@ -119,7 +119,7 @@
         app:layout_constraintBottom_toTopOf="@id/playerNameHeader" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/navigationMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"

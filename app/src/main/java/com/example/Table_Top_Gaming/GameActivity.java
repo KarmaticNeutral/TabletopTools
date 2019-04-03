@@ -1,12 +1,10 @@
 package com.example.Table_Top_Gaming;
 
-import android.app.Dialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Looper;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
@@ -14,29 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 import java.util.List;
-
-import static android.view.View.generateViewId;
+import java.util.Objects;
 
 /**
  * This is the main activity of the application that allows the players to keep track of their
@@ -63,7 +55,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     /**
      * Initialize values that are needed when the game Activity starts.
-     * @param savedInstanceState
+     * @param savedInstanceState The saved Instance state sent in to initialize this activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +100,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         if (intent.getExtras() != null) {
                             message = intent.getExtras().getString("Game");
                             if (intent.getExtras().getString("CurrentPlayer") != null) {
-                                currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+                                currentPlayer = Integer.parseInt(Objects.requireNonNull(intent.getExtras().getString("CurrentPlayer")));
                             }
                         }
                     }
@@ -129,20 +121,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         //Create a custom adapter for this activity
         customAdapter = new CustomAdapter(this);
         // Predefine  the ListView
-        ListView resourceListView = (ListView) findViewById(R.id.resourceListView);
+        ListView resourceListView = findViewById(R.id.resourceListView);
         //Set up the custom adapter for the discovered ListView.
         resourceListView.setAdapter(customAdapter);
 
-        playerNameHeader = (TextView) findViewById(R.id.playerNameHeader);
+        playerNameHeader = findViewById(R.id.playerNameHeader);
 
         // Sets the player profile picture to a default.
-        profilePicture = (ImageButton) findViewById(R.id.playerProfileImageButton);
+        profilePicture = findViewById(R.id.playerProfileImageButton);
         profilePicture.setImageResource(R.drawable.avatar);
 
         setPlayerView();
 
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationMenu);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
 
@@ -156,13 +148,13 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
         // Using a custom Layout from the EditPlayerScoreDialogActivity so we have to get that view
-        View view = getLayoutInflater().inflate(R.layout.activity_edit_player_score_dialog, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_edit_player_score_dialog, null);
 
         // Get the text field where the user will input a change in score
-        final EditText input = (EditText) view.findViewById(R.id.difference_in_score);
+        final EditText input = view.findViewById(R.id.difference_in_score);
 
         // Get the text view that displays the players score on the new activity window
-        final TextView difference = (TextView) view.findViewById(R.id.player_score);
+        final TextView difference = view.findViewById(R.id.player_score);
 
         // Set the score display on the new window equal to Player 1's score
         String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getName();
@@ -171,11 +163,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         // There is a plus and a minus button on this custom layout so we have to grab them
         // and define them in this activity
-        Button plus = (Button) view.findViewById(R.id.plus_button);
-        Button minus = (Button) view.findViewById(R.id.minus_button);
+        Button plus = view.findViewById(R.id.plus_button);
+        Button minus = view.findViewById(R.id.minus_button);
 
         // When the user clicks the plus button add the input to the player's score
         plus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
                 // Set this integer to the amount the user wants to change the score by
@@ -190,12 +183,13 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                 difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                callingButton.setText(" " + game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                callingButton.setText(String.format(" %d", game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount()));
             }
         });
 
         // When the user clicks the minus button subtract the input from the player's score
         minus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
                 // Set this integer to the amount the user wants to change the score by
@@ -210,7 +204,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                 difference.setText(resourceInfo);
 
                 // Change the display on the GameActivity window score button to the new amount
-                callingButton.setText(" " + game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                callingButton.setText(String.format(" %d", game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount()));
             }
         });
 
@@ -292,12 +286,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     public void onClickAddResource(View view2) {
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
-        View view = getLayoutInflater().inflate(R.layout.activity_add_resource_dialog, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_add_resource_dialog, null);
 
-        final EditText resourceName = (EditText) view.findViewById(R.id.enterResourceName);
+        final EditText resourceName = view.findViewById(R.id.enterResourceName);
 
 
-        final EditText resourceValue = (EditText) view.findViewById(R.id.enterResourceValue);
+        final EditText resourceValue = view.findViewById(R.id.enterResourceValue);
 
         resourceName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -376,31 +370,31 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         // Create a new Alert Dialog and set the view to the dice rolling custom layout
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-        View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
 
         // Create variables for the different text fields on the dice rolling custom layout
-        final TextView toBeRolled = (TextView) view.findViewById(R.id.diceBeingRolled);
-        final TextView total = (TextView) view.findViewById(R.id.sumOfDice);
+        final TextView toBeRolled = view.findViewById(R.id.diceBeingRolled);
+        final TextView total = view.findViewById(R.id.sumOfDice);
 
         // Create buttons for all the different buttons on the dice rolling custom layout
-        Button zero = (Button) view.findViewById(R.id.zero);
-        Button one = (Button) view.findViewById(R.id.one);
-        Button two = (Button) view.findViewById(R.id.two);
-        Button three = (Button) view.findViewById(R.id.three);
-        Button four = (Button) view.findViewById(R.id.four);
-        Button five = (Button) view.findViewById(R.id.five);
-        Button six = (Button) view.findViewById(R.id.six);
-        Button seven = (Button) view.findViewById(R.id.seven);
-        Button eight = (Button) view.findViewById(R.id.eight);
-        Button nine = (Button) view.findViewById(R.id.nine);
-        Button delete = (Button) view.findViewById(R.id.delete);
-        Button plus = (Button) view.findViewById(R.id.roll_plus);
-        Button roll = (Button) view.findViewById(R.id.roll);
-        Button d4 = (Button) view.findViewById(R.id.d4);
-        Button d6 = (Button) view.findViewById(R.id.d6);
-        Button d8 = (Button) view.findViewById(R.id.d8);
-        Button d10 = (Button) view.findViewById(R.id.d10);
-        Button d20 = (Button) view.findViewById(R.id.d20);
+        Button zero = view.findViewById(R.id.zero);
+        Button one = view.findViewById(R.id.one);
+        Button two = view.findViewById(R.id.two);
+        Button three = view.findViewById(R.id.three);
+        Button four = view.findViewById(R.id.four);
+        Button five = view.findViewById(R.id.five);
+        Button six = view.findViewById(R.id.six);
+        Button seven = view.findViewById(R.id.seven);
+        Button eight = view.findViewById(R.id.eight);
+        Button nine = view.findViewById(R.id.nine);
+        Button delete = view.findViewById(R.id.delete);
+        Button plus = view.findViewById(R.id.roll_plus);
+        Button roll = view.findViewById(R.id.roll);
+        Button d4 = view.findViewById(R.id.d4);
+        Button d6 = view.findViewById(R.id.d6);
+        Button d8 = view.findViewById(R.id.d8);
+        Button d10 = view.findViewById(R.id.d10);
+        Button d20 = view.findViewById(R.id.d20);
 
         // The zero button has been pressed check for foolish user input
         zero.setOnClickListener(new View.OnClickListener() {
@@ -425,7 +419,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "0");
+                toBeRolled.setText(String.format("%s0", toBeRolled.getText().toString()));
             }
         });
 
@@ -434,7 +428,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "1");
+                    toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -453,7 +447,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "1");
+                toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
             }
         });
 
@@ -462,7 +456,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "2");
+                    toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -481,7 +475,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "2");
+                toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
             }
         });
 
@@ -490,7 +484,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "3");
+                    toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -509,7 +503,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "3");
+                toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
             }
         });
 
@@ -518,7 +512,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "4");
+                    toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -537,7 +531,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "4");
+                toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
             }
         });
 
@@ -546,7 +540,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "5");
+                    toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -565,7 +559,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "5");
+                toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
             }
         });
 
@@ -574,7 +568,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "6");
+                    toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -593,7 +587,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "6");
+                toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
             }
         });
 
@@ -602,7 +596,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "7");
+                    toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -621,7 +615,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "7");
+                toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
             }
         });
 
@@ -630,7 +624,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "8");
+                    toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -649,7 +643,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "8");
+                toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
             }
         });
 
@@ -658,7 +652,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "9");
+                    toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -677,7 +671,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "9");
+                toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
             }
         });
 
@@ -720,7 +714,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d4");
+                    toBeRolled.setText(String.format("%sd4", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(4));
                     }
@@ -768,7 +762,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d6");
+                    toBeRolled.setText(String.format("%sd6", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(6));
                     }
@@ -816,7 +810,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d8");
+                    toBeRolled.setText(String.format("%sd8", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(8));
                     }
@@ -864,7 +858,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d10");
+                    toBeRolled.setText(String.format("%sd10", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(10));
                     }
@@ -914,7 +908,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d20");
+                    toBeRolled.setText(String.format("%sd20", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(20));
                     }
@@ -965,19 +959,19 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                     }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8'
                             && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
-                            for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                                if (dieRoller.getDice().get(i).getNumSides() == 8) {
-                                    dieRoller.getDice().remove(i);
-                                    i = 0;
-                                    if (dieRoller.getDice().size() > 0) {
-                                        if (dieRoller.getDice().get(0).getNumSides() == 8 && dieRoller.getDice().size() == 1) {
-                                            dieRoller.getDice().clear();
-                                        }
+                        toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
+                        for (int i = 0; i < dieRoller.getDice().size(); i ++) {
+                            if (dieRoller.getDice().get(i).getNumSides() == 8) {
+                                dieRoller.getDice().remove(i);
+                                i = 0;
+                                if (dieRoller.getDice().size() > 0) {
+                                    if (dieRoller.getDice().get(0).getNumSides() == 8 && dieRoller.getDice().size() == 1) {
+                                        dieRoller.getDice().clear();
                                     }
                                 }
                             }
-                            return;
+                        }
+                        return;
                     }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
@@ -1042,14 +1036,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            toBeRolled.setText(toBeRolled.getText().toString() + " + ");
+                            toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
                             return;
                         }
                     }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            toBeRolled.setText(toBeRolled.getText().toString() + " + ");
+                            toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
                             return;
                         }
                     }
@@ -1101,12 +1095,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         // The user hit "OK" do nothing they are done
                     }
                 }).setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
-                    // Add a CANCEL button to the dialog
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The user hit "CANCEL" do nothing they are done
-                    }
-                });
+            // Add a CANCEL button to the dialog
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // The user hit "CANCEL" do nothing they are done
+            }
+        });
 
         // Create and show the dialog to the screen
         AlertDialog dialog = builder.create();
@@ -1121,7 +1115,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, CardGameActivity.class);
-        intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
+        intent.putExtra(EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
     }
 
@@ -1129,14 +1123,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "gridClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, GridViewActivity.class);
-        intent.putExtra(this.EXTRA_MESSAGE, gameInformation);
+        intent.putExtra(EXTRA_MESSAGE, gameInformation);
         startActivity(intent);
     }
 
     /**
      * This function converts the information saved in the game object to a string and passes that
      * to the SaveGameActivity.
-     * @param menuItem
+     * @param menuItem The Item in the Bottom Nav Bar that was clicked.
      */
     public void saveClicked(MenuItem menuItem) {
         String gameInformation = gson.toJson(game);
@@ -1233,6 +1227,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         }
 
         else {
+            return false;
             //up or down swipe
         }
 
@@ -1242,7 +1237,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     /**
      * If a motion even was detected notify the motion detector and call the proper function
      * @param event the motion event detected
-     * @return
+     * @return boolean
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -1285,6 +1280,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
          * @param parent - The containing ViewGroup.
          * @return - The convertView after the appropriate changes have been made.
          */
+        @SuppressLint({"InflateParams", "DefaultLocale", "ViewHolder"})
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.v(TAG, "getView: Position:" + position);
@@ -1294,8 +1290,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             Log.v(TAG, "getView: Post convert = inflate");
 
             //Get references to both of the new Views.
-            TextView textView = (TextView) convertView.findViewById(R.id.resourceNameTextView);
-            Button button = (Button) convertView.findViewById(R.id.resourceButton);
+            TextView textView = convertView.findViewById(R.id.resourceNameTextView);
+            Button button = convertView.findViewById(R.id.resourceButton);
 
             // We want to know if they are somehow null.
             assert button != null;
@@ -1306,7 +1302,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             //Initialize the Values to be displayed.
             textView.setText(currentPlayerResources.get(position).getName());
             int amount = currentPlayerResources.get(position).getAmount();
-            button.setText(" " + amount);
+            button.setText(String.format("%d", amount));
 
             //Assign each View a new ID so that we don't call the wrong View when all of the custom
             //Buttons share an ID.

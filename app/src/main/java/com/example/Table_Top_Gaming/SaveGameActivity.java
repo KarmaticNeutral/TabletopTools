@@ -17,14 +17,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -38,14 +33,10 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     public static final String EXTRA_MESSAGE_SAVE = "com.example.Table_Top_Gaming.MESSAGE2";
     public static final String TAG = "hey";
     private String message;
-    private Intent intent;
-    private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private Button buttonLocalSave;
     private Button buttonCloudSave;
     private Button buttonBack;
-    private SharedPreferences sharedPreferences;
-    private String name;
 
 
     /**
@@ -58,7 +49,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_save_game);
 
         // Get the intent
-        intent = getIntent();
+        Intent intent = getIntent();
 
         // Store the game information in message
         message = Objects.requireNonNull(intent.getExtras()).getString("Game");
@@ -69,19 +60,19 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
             message = intent.getExtras().getString(CardGameActivity.EXTRA_MESSAGE_CARD);
         }
         //used to get the user
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
         //local save button
-        buttonLocalSave = (Button) findViewById(R.id.buttonLocalSave);
+        buttonLocalSave = findViewById(R.id.buttonLocalSave);
         buttonLocalSave.setOnClickListener(this);
 
         //temp back button
-        buttonBack = (Button) findViewById(R.id.buttonBackTemp);
+        buttonBack = findViewById(R.id.buttonBackTemp);
         buttonBack.setOnClickListener(this);
 
         //cloud save button
-        buttonCloudSave = (Button) findViewById(R.id.saveGameButton);
+        buttonCloudSave = findViewById(R.id.saveGameButton);
         buttonCloudSave.setOnClickListener(this);
     }
 
@@ -135,11 +126,11 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     public void createLocalSave() {
         //grabs the save game name and either creates or makes a new save game
         EditText editText = (EditText) findViewById(R.id.saveNameTextBox);
-        name = editText.getText().toString();
-        sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
+        String name = editText.getText().toString();
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(name, message);
-        editor.commit();
+        editor.apply();
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.example.Table_Top_Gaming;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +16,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+
+import java.text.MessageFormat;
+import java.util.Objects;
 
 public class GridViewActivity extends AppCompatActivity {
     private static final String TAG = "GridViewActivity";
@@ -37,7 +41,7 @@ public class GridViewActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: Extras has content!");
         }
 
-        String message = extras.getString(GameActivity.EXTRA_MESSAGE);
+        String message = Objects.requireNonNull(extras).getString(GameActivity.EXTRA_MESSAGE);
         if (message == null) {
             message = extras.getString(CardGameActivity.EXTRA_MESSAGE_CARD);
         }
@@ -49,7 +53,7 @@ public class GridViewActivity extends AppCompatActivity {
     }
 
     public void buildTable() {
-        TableLayout tableLayout = (TableLayout) findViewById(R.id.table_main);
+        TableLayout tableLayout = findViewById(R.id.table_main);
         //Start at -1 so that You get a row showing player names first
         //End at size +1 to get an extra row with player names
         for (int i = -1; i < game.getPlayers().get(0).getResources().size() + 1; i++) {
@@ -82,7 +86,7 @@ public class GridViewActivity extends AppCompatActivity {
                         Button button = new Button(this);
                         button.setWidth(100);
                         button.setHeight(50);
-                        button.setText(Integer.toString(game.getPlayers().get(j).getResources().get(i).getAmount()));
+                        button.setText(MessageFormat.format("{0}", game.getPlayers().get(j).getResources().get(i).getAmount()));
                         row.addView(button);
                     }
                 }
@@ -130,31 +134,31 @@ public class GridViewActivity extends AppCompatActivity {
 
         // Create a new Alert Dialog and set the view to the dice rolling custom layout
         AlertDialog.Builder builder = new AlertDialog.Builder(GridViewActivity.this);
-        View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
 
         // Create variables for the different text fields on the dice rolling custom layout
-        final TextView toBeRolled = (TextView) view.findViewById(R.id.diceBeingRolled);
-        final TextView total = (TextView) view.findViewById(R.id.sumOfDice);
+        final TextView toBeRolled = view.findViewById(R.id.diceBeingRolled);
+        final TextView total = view.findViewById(R.id.sumOfDice);
 
         // Create buttons for all the different buttons on the dice rolling custom layout
-        Button zero = (Button) view.findViewById(R.id.zero);
-        Button one = (Button) view.findViewById(R.id.one);
-        Button two = (Button) view.findViewById(R.id.two);
-        Button three = (Button) view.findViewById(R.id.three);
-        Button four = (Button) view.findViewById(R.id.four);
-        Button five = (Button) view.findViewById(R.id.five);
-        Button six = (Button) view.findViewById(R.id.six);
-        Button seven = (Button) view.findViewById(R.id.seven);
-        Button eight = (Button) view.findViewById(R.id.eight);
-        Button nine = (Button) view.findViewById(R.id.nine);
-        Button delete = (Button) view.findViewById(R.id.delete);
-        Button plus = (Button) view.findViewById(R.id.roll_plus);
-        Button roll = (Button) view.findViewById(R.id.roll);
-        Button d4 = (Button) view.findViewById(R.id.d4);
-        Button d6 = (Button) view.findViewById(R.id.d6);
-        Button d8 = (Button) view.findViewById(R.id.d8);
-        Button d10 = (Button) view.findViewById(R.id.d10);
-        Button d20 = (Button) view.findViewById(R.id.d20);
+        Button zero = view.findViewById(R.id.zero);
+        Button one = view.findViewById(R.id.one);
+        Button two = view.findViewById(R.id.two);
+        Button three = view.findViewById(R.id.three);
+        Button four = view.findViewById(R.id.four);
+        Button five = view.findViewById(R.id.five);
+        Button six = view.findViewById(R.id.six);
+        Button seven = view.findViewById(R.id.seven);
+        Button eight = view.findViewById(R.id.eight);
+        Button nine = view.findViewById(R.id.nine);
+        Button delete = view.findViewById(R.id.delete);
+        Button plus = view.findViewById(R.id.roll_plus);
+        Button roll = view.findViewById(R.id.roll);
+        Button d4 = view.findViewById(R.id.d4);
+        Button d6 = view.findViewById(R.id.d6);
+        Button d8 = view.findViewById(R.id.d8);
+        Button d10 = view.findViewById(R.id.d10);
+        Button d20 = view.findViewById(R.id.d20);
 
         // The zero button has been pressed check for foolish user input
         zero.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +183,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "0");
+                toBeRolled.setText(String.format("%s0", toBeRolled.getText().toString()));
             }
         });
 
@@ -188,7 +192,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "1");
+                    toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -207,7 +211,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "1");
+                toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
             }
         });
 
@@ -216,7 +220,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "2");
+                    toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -235,7 +239,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "2");
+                toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
             }
         });
 
@@ -244,7 +248,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "3");
+                    toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -263,7 +267,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "3");
+                toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
             }
         });
 
@@ -272,7 +276,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "4");
+                    toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -291,7 +295,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "4");
+                toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
             }
         });
 
@@ -300,7 +304,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "5");
+                    toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -319,7 +323,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "5");
+                toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
             }
         });
 
@@ -328,7 +332,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "6");
+                    toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -347,7 +351,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "6");
+                toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
             }
         });
 
@@ -356,7 +360,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "7");
+                    toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -375,7 +379,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "7");
+                toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
             }
         });
 
@@ -384,7 +388,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "8");
+                    toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -403,7 +407,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "8");
+                toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
             }
         });
 
@@ -412,7 +416,7 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(toBeRolled.getText().toString() + "9");
+                    toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
                     return;
                 }
 
@@ -431,7 +435,7 @@ public class GridViewActivity extends AppCompatActivity {
                         }
                     }
                 }
-                toBeRolled.setText(toBeRolled.getText().toString() + "9");
+                toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
             }
         });
 
@@ -474,7 +478,7 @@ public class GridViewActivity extends AppCompatActivity {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d4");
+                    toBeRolled.setText(String.format("%sd4", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(4));
                     }
@@ -522,7 +526,7 @@ public class GridViewActivity extends AppCompatActivity {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d6");
+                    toBeRolled.setText(String.format("%sd6", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(6));
                     }
@@ -570,7 +574,7 @@ public class GridViewActivity extends AppCompatActivity {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d8");
+                    toBeRolled.setText(String.format("%sd8", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(8));
                     }
@@ -618,7 +622,7 @@ public class GridViewActivity extends AppCompatActivity {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d10");
+                    toBeRolled.setText(String.format("%sd10", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(10));
                     }
@@ -668,7 +672,7 @@ public class GridViewActivity extends AppCompatActivity {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
-                    toBeRolled.setText(toBeRolled.getText().toString() + "d20");
+                    toBeRolled.setText(String.format("%sd20", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(20));
                     }
@@ -796,14 +800,14 @@ public class GridViewActivity extends AppCompatActivity {
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            toBeRolled.setText(toBeRolled.getText().toString() + " + ");
+                            toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
                             return;
                         }
                     }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            toBeRolled.setText(toBeRolled.getText().toString() + " + ");
+                            toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
                             return;
                         }
                     }

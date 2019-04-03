@@ -69,7 +69,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:onClick="Logout"
-        android:text="Log Out"
+        android:text="@string/log_out"
         app:layout_constraintBottom_toTopOf="@id/navigationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addResourceButton"

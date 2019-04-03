@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * This class represents the SaveGameActivity window and provides the different functions and buttons
@@ -60,11 +61,13 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         intent = getIntent();
 
         // Store the game information in message
-        message = intent.getExtras().getString("Game");
+        message = Objects.requireNonNull(intent.getExtras()).getString("Game");
         if (message == null) {
             message = intent.getExtras().getString(GridViewActivity.EXTRA_MESSAGE_GRID);
         }
-
+        if (message == null) {
+            message = intent.getExtras().getString(CardGameActivity.EXTRA_MESSAGE_CARD);
+        }
         //used to get the user
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();

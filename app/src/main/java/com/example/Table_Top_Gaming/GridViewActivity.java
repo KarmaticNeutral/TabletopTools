@@ -38,6 +38,9 @@ public class GridViewActivity extends AppCompatActivity {
         }
 
         String message = extras.getString(GameActivity.EXTRA_MESSAGE);
+        if (message == null) {
+            message = extras.getString(CardGameActivity.EXTRA_MESSAGE_CARD);
+        }
         game = gson.fromJson(message, Game.class);
 
         numPlayers = game.getPlayers().size();

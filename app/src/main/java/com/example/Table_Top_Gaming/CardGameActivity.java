@@ -948,11 +948,19 @@ public class CardGameActivity extends AppCompatActivity {
     }
 
     public void gridClicked(MenuItem menuItem) {
-
+        assert game != null;
+        String gameInformation = gson.toJson(game);
+        Intent intent = new Intent(this, GridViewActivity.class);
+        intent.putExtra(EXTRA_MESSAGE_CARD, gameInformation);
+        startActivity(intent);
     }
 
     public void saveClicked(MenuItem menuItem) {
-
+        assert game != null;
+        String gameInformation = gson.toJson(game);
+        Intent intent = new Intent(this, SaveGameActivity.class);
+        intent.putExtra(EXTRA_MESSAGE_CARD, gameInformation);
+        startActivity(intent);
     }
 
     public void homeClicked(MenuItem menuItem) {

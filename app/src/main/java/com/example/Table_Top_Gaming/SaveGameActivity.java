@@ -61,6 +61,9 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
 
         // Store the game information in message
         message = intent.getExtras().getString("Game");
+        if (message == null) {
+            message = intent.getExtras().getString(GridViewActivity.EXTRA_MESSAGE_GRID);
+        }
 
         //used to get the user
         firebaseAuth = FirebaseAuth.getInstance();

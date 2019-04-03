@@ -58,6 +58,9 @@ public class CardGameActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: Extras has content!");
         }
         String message = Objects.requireNonNull(extras).getString(GameActivity.EXTRA_MESSAGE);
+        if (message == null) {
+            message = extras.getString(GridViewActivity.EXTRA_MESSAGE_GRID);
+        }
         game = gson.fromJson(message, Game.class);
         currentPlayer = 0;
         Log.d(TAG, "onCreate: Game String: " + message);

@@ -60,6 +60,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             });
         } else {
             viewHolder.imageView.setImageResource(R.drawable.red_back);
+            viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Can't do anything when the back of the card is shown
+                }
+            });
         }
     }
 

@@ -22,6 +22,9 @@ import com.google.gson.Gson;
 
 import java.util.Objects;
 
+/**
+ *
+ */
 public class CardGameActivity extends AppCompatActivity {
     private static final String TAG = "CardGameActivity";
     // Create a KEY for passing information to the next activity
@@ -87,10 +90,16 @@ public class CardGameActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.navigation_cards);
     }
 
+    /**
+     *
+     */
     public void shuffleDeck() {
         game.getDeck().shuffle();
     }
 
+    /**
+     *
+     */
     public void putDiscardToDeck() {
         while (game.getDiscardPile().size() > 0) {
             game.getDeck().getDeck().add(game.getDiscardPile().get(0));
@@ -98,12 +107,19 @@ public class CardGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * But the cards in the discard pile into the draw pile then randomize it.
+     * @param view - The button that called this function onClick
+     */
     public void shuffleClicked(View view) {
         putDiscardToDeck();
         shuffleDeck();
         updateImagesForCardLocations();
     }
 
+    /**
+     * Update the screen to ensure that all of the correct images are shown
+     */
     public void updateImagesForCardLocations() {
         if (game.getDiscardPile().size() > 0) {
             String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
@@ -126,6 +142,9 @@ public class CardGameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Create the recycler view and get it ready to show the hand of the current player.
+     */
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: <- What that says.");
         RecyclerView recyclerView = findViewById(R.id.handRecyclerView);
@@ -134,6 +153,10 @@ public class CardGameActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
+    /**
+     * Take the top card from the draw pile and add it to the end of the player's hand.
+     * @param view - The button that called this function onClick
+     */
     public void drawClicked(View view) {
         if (game.getDeck().getDeck().size() > 0) {
             game.getPlayers().get(currentPlayer).getHand().add(game.getDeck().drawCard());
@@ -145,6 +168,10 @@ public class CardGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Take the top card from the discard pile and add it to the end of the player's hand.
+     * @param view - The button that called this function onClick
+     */
     public void discardClicked(View view) {
         if(game.getDiscardPile().size() == 0) {
             Toast.makeText(this, "The Discard Pile Is Empty.",
@@ -166,11 +193,19 @@ public class CardGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Toggle whether the current player's hand is shown or hidden.
+     * @param view - The button that called this function onClick
+     */
     public void hideClicked(View view) {
         hideHand = !hideHand;
         updateImagesForCardLocations();
     }
 
+    /**
+     * Change the current Player to the previous player and repopulate the views with their info.
+     * @param view - The button that called this function onClick
+     */
     public void prevPlayerClicked(View view) {
         if (currentPlayer > 0) {
             currentPlayer--;
@@ -184,6 +219,10 @@ public class CardGameActivity extends AppCompatActivity {
         updateImagesForCardLocations();
     }
 
+    /**
+     * Change the current Player to the next player and repopulate the views with their info.
+     * @param view - The button that called this function onClick
+     */
     public void nextPlayerClicked(View view) {
         if (currentPlayer < numPlayers) {
             currentPlayer++;
@@ -200,7 +239,7 @@ public class CardGameActivity extends AppCompatActivity {
     /**
      * This function calls a dialog box that lets a user roll different kinds of dice and displays
      * the results on the screen
-     * @param menuItem this is the MenuItem that calls this function
+     * @param menuItem - The menu item that called the function.
      */
     public void diceClicked(MenuItem menuItem) {
         // Create a new dieRoller that will keep track of all the dice
@@ -917,6 +956,7 @@ public class CardGameActivity extends AppCompatActivity {
                                 || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
                                 dieRoller.rollAllDice();
+
                                 total.setText(dieRoller.display());
                                 dieRoller.getDice().clear();
                                 toBeRolled.setText("");
@@ -960,6 +1000,10 @@ public class CardGameActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.navigation_cards);
     }
 
+    /**
+     * Move to the Grid activity.
+     * @param menuItem - The menu item that called the function.
+     */
     public void gridClicked(MenuItem menuItem) {
         assert game != null;
         String gameInformation = gson.toJson(game);
@@ -968,6 +1012,10 @@ public class CardGameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Move to the Save activity
+     * @param menuItem - The menu item that called the function.
+     */
     public void saveClicked(MenuItem menuItem) {
         assert game != null;
         String gameInformation = gson.toJson(game);
@@ -976,6 +1024,10 @@ public class CardGameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Move to the Home activity (GameActivity)
+     * @param menuItem - The menu item that called the function.
+     */
     public void homeClicked(MenuItem menuItem) {
         assert game != null;
         String gameInformation = gson.toJson(game);
@@ -986,6 +1038,11 @@ public class CardGameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * This method is defined so that if the user clicks the button the app won't crash.
+     * It does nothing.
+     * @param menuItem - The menu item that called the function.
+     */
     public void cardClicked(MenuItem menuItem) {
 
     }

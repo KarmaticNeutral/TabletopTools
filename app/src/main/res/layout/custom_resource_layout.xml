@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#000000"
+    android:background="#E7D0C1"
     android:layout_height="match_parent">
 
     <TextView
@@ -16,12 +16,14 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="0dp"
         android:text="resourceName"
+        android:background="#E7D0C1"
         android:textAlignment="center" />
 
     <Button
         android:id="@+id/resourceButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#794927"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"

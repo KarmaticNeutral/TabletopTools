@@ -4,8 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
@@ -20,17 +18,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
 public class CameraActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
-    private static final int MY_PERMISSIONS_REQUEST_READ_STORAGE = 4;
-    private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 5;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 4;
     ImageView imageView;
     private static final String TAG = "CameraActivity";
     private final int GALLERY_REQUEST_CODE = 1;

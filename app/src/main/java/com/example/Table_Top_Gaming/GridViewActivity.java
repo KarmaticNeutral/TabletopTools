@@ -444,7 +444,13 @@ public class GridViewActivity extends AppCompatActivity {
         d4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -489,7 +495,13 @@ public class GridViewActivity extends AppCompatActivity {
         d6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -534,7 +546,13 @@ public class GridViewActivity extends AppCompatActivity {
         d8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -579,7 +597,13 @@ public class GridViewActivity extends AppCompatActivity {
         d10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -625,7 +649,13 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {

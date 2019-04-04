@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GestureDetectorCompat;
@@ -61,6 +62,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        setTheme(R.style.AppThemeTwo);
 
         //firebase stuff
         firebaseAuth = FirebaseAuth.getInstance();
@@ -284,6 +286,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
      * @param view2 - The View that called the function.
      */
     public void onClickAddResource(View view2) {
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
         @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_add_resource_dialog, null);
@@ -317,14 +321,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // The user hit "OK" add the new resource with the name and amount they are done
-                        for (int i = 0; i < game.getPlayers().size(); i++) {
-                            game.getPlayers().get(i).getResources().add(new Resource(newResourceName, defaultResourceValue));
-                            game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
-                            game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
-                        }
 
-                        // Make sure the Display reflects the change in the data structure.
-                        customAdapter.notifyDataSetChanged();
+                        if (!resourceName.getText().toString().isEmpty()) {
+                            for (int i = 0; i < game.getPlayers().size(); i++) {
+                                game.getPlayers().get(i).getResources().add(new Resource(newResourceName, defaultResourceValue));
+                                game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
+
+                                if (!resourceValue.getText().toString().isEmpty()) {
+                                    game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
+                                }
+                            }
+
+                            // Make sure the Display reflects the change in the data structure.
+                            customAdapter.notifyDataSetChanged();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.add_resource_cancel, new DialogInterface.OnClickListener() {

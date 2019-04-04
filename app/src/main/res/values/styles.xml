@@ -7,6 +7,18 @@
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#FF0000</item>
         <item name="colorButtonNormal">#707074</item>
+        <!--<item name="android:background">#000000</item>-->
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:editTextColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
+    </style>
+
+    <style name="AppThemeTwo" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#FF0000</item>
+        <item name="colorButtonNormal">#707074</item>
         <item name="android:background">#000000</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:editTextColor">#FFFFFF</item>

@@ -1,41 +1,16 @@
 package com.example.Table_Top_Gaming;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.icu.text.SimpleDateFormat;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-
-import static android.media.MediaRecorder.VideoSource.CAMERA;
 
 /**
  * This class represents the Main Activity window and sets the functions and buttons for that activity
@@ -66,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         user = firebaseAuth.getCurrentUser();
 
-        textViewUserEmail = (TextView) findViewById(R.id.textView5);
+        textViewUserEmail = (TextView) findViewById(R.id.welcomeTextView);
 
         //if the user is logged in
         if (user != null) {

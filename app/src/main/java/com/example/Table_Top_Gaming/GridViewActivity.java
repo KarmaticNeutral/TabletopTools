@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.internal.BottomNavigationMenu;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +22,10 @@ import com.google.gson.Gson;
 import java.text.MessageFormat;
 import java.util.Objects;
 
+/**
+ * An activity designed to show the players and resources of the players lined up in a grid
+ * to allow them to be seen and read more easily.
+ */
 public class GridViewActivity extends AppCompatActivity {
     private static final String TAG = "GridViewActivity";
     public static final String EXTRA_MESSAGE_GRID = "com.example.load.GRIDMESSAGE";
@@ -27,6 +33,10 @@ public class GridViewActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private int numPlayers;
 
+    /**
+     * Receive the current game state and set the default values for the activity.
+     * @param savedInstanceState - The received instance state from the previous activity.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_view);
@@ -51,8 +61,14 @@ public class GridViewActivity extends AppCompatActivity {
         numPlayers = game.getPlayers().size();
 
         buildTable();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_grid);
     }
 
+    /**
+     *
+     */
     public void buildTable() {
         TableLayout tableLayout = findViewById(R.id.table_main);
         //Start at -1 so that You get a row showing player names first
@@ -98,6 +114,10 @@ public class GridViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Move to the Home activity (GameActivity)
+     * @param menuItem - The menu item that called the function.
+     */
     public void homeClicked(MenuItem menuItem) {
         assert game != null;
         String gameInformation = gson.toJson(game);
@@ -108,10 +128,19 @@ public class GridViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * This method is defined so that if the user clicks the button the app won't crash.
+     * It does nothing.
+     * @param menuItem - The menu item that called the function.
+     */
     public void gridClicked(MenuItem menuItem) {
 
     }
 
+    /**
+     * Move to the Card activity
+     * @param menuItem - The menu item that called the function.
+     */
     public void cardClicked(MenuItem menuItem) {
         assert game != null;
         String gameInformation = gson.toJson(game);
@@ -121,6 +150,10 @@ public class GridViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Move to the Save activity
+     * @param menuItem - The menu item that called the function.
+     */
     public void saveClicked(MenuItem menuItem) {
         assert game != null;
         String gameInformation = gson.toJson(game);
@@ -129,6 +162,11 @@ public class GridViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * This function calls a dialog box that lets a user roll different kinds of dice and displays
+     * the results on the screen
+     * @param menuItem - The menu item that called the function.
+     */
     public void diceClicked(MenuItem menuItem) {
         // Create a new dieRoller that will keep track of all the dice
         final DieRoller dieRoller = new DieRoller();
@@ -444,7 +482,13 @@ public class GridViewActivity extends AppCompatActivity {
         d4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -489,7 +533,13 @@ public class GridViewActivity extends AppCompatActivity {
         d6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -534,7 +584,13 @@ public class GridViewActivity extends AppCompatActivity {
         d8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -579,7 +635,13 @@ public class GridViewActivity extends AppCompatActivity {
         d10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -625,7 +687,13 @@ public class GridViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
                 if (toBeRolled.getText().toString().length() > 1) {
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {

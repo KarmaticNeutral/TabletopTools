@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#000000"
+    android:background="@color/colorBackground"
     android:layout_height="match_parent">
 
     <Button
@@ -15,7 +15,9 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="1dp"
         android:layout_toEndOf="@+id/textViewName"
-        android:text="@string/load" />
+        android:text="@string/load"
+        android:textColor="@color/defaultText"
+        android:background="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/textViewName"
@@ -25,5 +27,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="11dp"
         android:layout_marginTop="13dp"
-        android:text="" />
+        android:text=""
+        android:textColor="@color/defaultText"/>
 </RelativeLayout>

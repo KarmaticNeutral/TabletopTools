@@ -4,48 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/colorBackground"
     tools:context=".CameraActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="277dp"
-        android:layout_height="379dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/avatar"
-        android:contentDescription="@string/picturePreview" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/takePhoto2"
-        android:layout_width="87dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="40dp"
         android:onClick="captureFromCamera"
-        android:text="@string/cameraButton"
-        app:layout_constraintBottom_toTopOf="@+id/button12"
+        android:background="@color/colorAccent"
+        android:text="@string/camera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:onClick="pickFromGallery"
-        android:text="@string/galleryButton"
-        app:layout_constraintBottom_toTopOf="@+id/returnToGameButton"
+        android:text="@string/gallery"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/takePhoto2" />
 
     <Button
         android:id="@+id/returnToGameButton"
@@ -56,6 +55,7 @@
         android:layout_marginBottom="8dp"
         android:onClick="returnToGame"
         android:text="@string/return_to_game"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

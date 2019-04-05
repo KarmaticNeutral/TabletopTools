@@ -4,13 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -73,6 +72,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         currentPlayer = 0;
         newResourceName = "";
         defaultResourceValue = 0;
+
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -359,6 +359,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
+    /**
+     * Allows the user to sign in, holds the intent
+     */
+    public void signIn() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     public void Logout(View view) {
         if (user != null) {
             firebaseAuth.signOut();
@@ -366,6 +374,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             finish();
             //starts activity and logs them out back into the main activity
             startActivity(new Intent(this, MainActivity.class));
+        }
+        else {
+            signIn();
         }
     }
 

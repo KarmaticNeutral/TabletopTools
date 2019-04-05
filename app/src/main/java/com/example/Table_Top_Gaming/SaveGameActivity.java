@@ -125,7 +125,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
      */
     public void createLocalSave() {
         //grabs the save game name and either creates or makes a new save game
-        EditText editText = (EditText) findViewById(R.id.saveNameTextBox);
+        EditText editText = findViewById(R.id.saveNameTextBox);
         String name = editText.getText().toString();
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.Table_Top_Gaming", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -30,7 +30,7 @@ public class Game {
         deck = new PlayingCardDeck();
     }
 
-    public List<PlayingCard> getDiscardPile() {
+    List<PlayingCard> getDiscardPile() {
         return discardPile;
     }
 
@@ -38,7 +38,7 @@ public class Game {
         this.discardPile = discardPile;
     }
 
-    public PlayingCardDeck getDeck() {
+    PlayingCardDeck getDeck() {
         return deck;
     }
 
@@ -46,15 +46,15 @@ public class Game {
         this.deck = deck;
     }
 
-    public List<Player> getPlayers() {
+    List<Player> getPlayers() {
         return players;
     }
 
     /**
      * Basic setter for the player list that will write over existing players.
-     * @param players
+     * @param players A list of the players playing the game
      */
-    public void setPlayers(List<Player> players) {
+    void setPlayers(List<Player> players) {
         this.players = players;
     }
 
@@ -68,7 +68,7 @@ public class Game {
 
     /**
      * Remove the player at the designated index.
-     * @param index
+     * @param index the number of player that you want to remove
      */
     public void removePlayer(int index) {
         players.remove(index);

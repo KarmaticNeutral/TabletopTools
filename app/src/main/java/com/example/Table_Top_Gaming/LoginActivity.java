@@ -33,14 +33,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
-        buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
+        buttonSignIn = findViewById(R.id.buttonSignIn);
 
         progressDialog = new ProgressDialog(this);
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPass);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPass);
 
-        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
+        textViewSignup = findViewById(R.id.textViewSignUp);
 
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);

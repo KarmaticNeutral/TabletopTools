@@ -21,7 +21,7 @@ public class Player {
      * and the default image.
      * @param name Name of player.
      */
-    public Player(String name) {
+    Player(String name) {
 
         this.name = name;
         uriString = "";
@@ -52,11 +52,11 @@ public class Player {
         this.name = name;
     }
 
-    public String getPathToImage() {
+    String getPathToImage() {
         return uriString;
     }
 
-    public void setPathToImage(String pathToImage) {
+    void setPathToImage(String pathToImage) {
         this.uriString = pathToImage;
     }
 
@@ -68,7 +68,7 @@ public class Player {
         canDrawHand = false;
     }
 
-    public List<PlayingCard> getHand() {
+    List<PlayingCard> getHand() {
         return hand;
     }
 
@@ -80,7 +80,7 @@ public class Player {
         this.resources = resources;
     }
 
-    public List<Resource> getResources(){
+    List<Resource> getResources(){
         return resources;
     }
 }

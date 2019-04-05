@@ -4,11 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
@@ -16,7 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,10 +24,10 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
 public class CameraActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
-    private static final int MY_PERMISSIONS_REQUEST_READ_STORAGE = 4;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 5;
     ImageView imageView;
     private static final String TAG = "CameraActivity";
@@ -37,20 +35,18 @@ public class CameraActivity extends AppCompatActivity {
     private final int CAMERA_REQUEST_CODE = 2;
     private Gson gson = new Gson();
     private Game game;
-    private String gameGson;
     private int currentPlayer;
-    private String uriString;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
         Intent intent = getIntent();
-        gameGson = intent.getExtras().getString("Game");
+        String gameGson = Objects.requireNonNull(intent.getExtras()).getString("Game");
         game = gson.fromJson(gameGson, Game.class);
-        currentPlayer = Integer.parseInt(intent.getExtras().getString("CurrentPlayer"));
+        currentPlayer = Integer.parseInt(Objects.requireNonNull(intent.getExtras().getString("CurrentPlayer")));
 
     }
 
@@ -158,13 +154,13 @@ public class CameraActivity extends AppCompatActivity {
      */
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         // Result code is RESULT_OK only if the user selects an Image
-        if (resultCode == Activity.RESULT_OK)
+        if (resultCode == Activity.RESULT_OK) {
             switch (requestCode){
                 case GALLERY_REQUEST_CODE:
                     data.getData(); //returns the content URI for the selected Image
                     Uri selectedImage = data.getData();
                     imageView.setImageURI(selectedImage);
-                    uriString = selectedImage.toString();
+                    String uriString = Objects.requireNonNull(selectedImage).toString();
                     game.getPlayers().get(currentPlayer).setPathToImage(uriString);
                     break;
                 case CAMERA_REQUEST_CODE:
@@ -174,6 +170,7 @@ public class CameraActivity extends AppCompatActivity {
                     game.getPlayers().get(currentPlayer).setPathToImage(uriString);
                     break;
             }
+        }
     }
 
     /**

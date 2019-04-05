@@ -1,5 +1,6 @@
 package com.example.Table_Top_Gaming;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,12 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
  * This class represents the Main Activity window and sets the functions and buttons for that activity
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private SharedPreferences prefs;
 
     private FirebaseAuth firebaseAuth;
     private Button buttonLogOut;
-    //will be used to display the users email
-    private TextView textViewUserEmail;
     //used to get the user information
     private FirebaseUser user;
 
@@ -29,19 +27,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Create the Main Activity and set the default values
      * @param savedInstanceState
      */
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        prefs = getPreferences(Context.MODE_PRIVATE);
-        buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
+        SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
+        buttonLogOut = findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
         user = firebaseAuth.getCurrentUser();
 
-        textViewUserEmail = (TextView) findViewById(R.id.welcomeTextView);
+        //will be used to display the users email
+        TextView textViewUserEmail = findViewById(R.id.welcomeTextView);
 
         //if the user is logged in
         if (user != null) {

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -20,7 +19,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private boolean hideHand;
 
-    public RecyclerViewAdapter(List<PlayingCard> hand, List<PlayingCard> discardPile, boolean hideHand, Context context) {
+    RecyclerViewAdapter(List<PlayingCard> hand, List<PlayingCard> discardPile, boolean hideHand, Context context) {
         currentPlayerHand = hand;
         this.context = context;
         this.discardPile = discardPile;
@@ -69,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public void notifyDataSetChangedWithExtras(boolean hideHand, List <PlayingCard> currentPlayerHand) {
+    void notifyDataSetChangedWithExtras(boolean hideHand, List<PlayingCard> currentPlayerHand) {
         this.hideHand = hideHand;
         this.currentPlayerHand = currentPlayerHand;
         notifyDataSetChanged();
@@ -80,11 +79,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return currentPlayerHand.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         RelativeLayout parentLayout;
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.card);
             parentLayout = itemView.findViewById(R.id.parent_layout);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/colorBackground"
     tools:context=".AddResourceDialogActivity">
 
     <EditText
@@ -17,6 +17,8 @@
         android:hint="@string/enter_resource"
         android:inputType="textPersonName"
         android:textSize="24sp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/defaultText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/enter_resource" />
@@ -31,6 +33,8 @@
         android:hint="@string/enter_resource_value"
         android:inputType="number"
         android:textSize="24sp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/defaultText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterResourceName" />
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,7 @@
     <TextView
         android:id="@+id/resourceNameTextView"
         android:layout_width="match_parent"
+        android:textColor="@color/defaultText"
         android:layout_height="36dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -23,7 +24,8 @@
         android:id="@+id/resourceButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#794927"
+        android:textColor="@color/buttonText"
+        android:background="@color/colorAccent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"

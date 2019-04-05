@@ -79,4 +79,16 @@
     <string name="card">Card</string>
     <string name="save">Save</string>
     <string name="log_out">Log Out</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t Have An Account? Sign Up Here</string>
+    <string name="login">Login</string>
+    <string name="_1">1</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="registration">Registration</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="back">Back</string>
+    <string name="save_to_local">Save To Local</string>
 </resources>

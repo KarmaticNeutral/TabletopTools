@@ -59,28 +59,19 @@
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/playerNameHeader"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/returnToScore"
+        app:layout_constraintBottom_toTopOf="@id/shuffle"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <Button
-        android:id="@+id/returnToScore"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/return_to_score"
-        android:onClick="returnToScore"
-        app:layout_constraintBottom_toTopOf="@id/navigationMenu"
-        app:layout_constraintLeft_toRightOf="@id/shuffle"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/handRecyclerView" />
 
     <Button
         android:id="@+id/shuffle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/shuffle"
+        android:background="@color/colorAccent"
         android:onClick="shuffleClicked"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/returnToScore"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/handRecyclerView"
         app:layout_constraintBottom_toTopOf="@id/navigationMenu"/>
 
@@ -102,6 +93,8 @@
         android:id="@+id/prevPlayerButton"
         android:onClick="prevPlayerClicked"
         android:text="@string/prev_player"
+        android:padding="15dp"
+        android:background="@color/colorAccent"
         app:layout_constraintLeft_toRightOf="@id/hideCheck"
         app:layout_constraintRight_toLeftOf="@id/nextPlayerButton"
         app:layout_constraintTop_toBottomOf="@id/discardButton"
@@ -112,7 +105,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/nextPlayerButton"
         android:text="@string/next_player"
+        android:padding="15dp"
         android:onClick="nextPlayerClicked"
+        android:background="@color/colorAccent"
         app:layout_constraintLeft_toRightOf="@id/prevPlayerButton"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/discardButton"
@@ -124,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

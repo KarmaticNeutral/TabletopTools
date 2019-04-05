@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#000000"
+    android:background="@color/colorBackground"
     android:id="@+id/player_name_parent">
 
     <EditText
         android:id="@+id/playerNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/defaultText"
         android:text="Enter Player Name"
         android:textSize="28sp"
         app:layout_constraintTop_toTopOf="parent"/>

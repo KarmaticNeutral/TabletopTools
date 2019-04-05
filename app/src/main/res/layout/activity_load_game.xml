@@ -4,13 +4,14 @@
     android:id="@+id/activity_load_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/colorBackground"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:id="@+id/cloudSavesTextView"
+        android:textColor="@color/defaultText"
         android:text="@string/cloud_saves"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cloudSavedGamesListView"/>
@@ -27,6 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="75dp"
+        android:textColor="@color/defaultText"
         android:id="@+id/localSavesTextView"
         android:text="@string/local_saves"
         app:layout_constraintTop_toBottomOf="@id/cloudSavedGamesListView"

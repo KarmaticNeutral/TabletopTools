@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -61,9 +62,55 @@ public class GridViewActivity extends AppCompatActivity {
         numPlayers = game.getPlayers().size();
 
         buildTable();
+        initBotNav();
+    }
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
+    public void initBotNav() {
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
+        bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setSelectedItemId(R.id.navigation_grid);
+
+        View navDice = bottomNavigationView.findViewById(R.id.navigation_dice);
+        View navGrid = bottomNavigationView.findViewById(R.id.navigation_grid);
+        View navHome = bottomNavigationView.findViewById(R.id.navigation_home);
+        View navCard = bottomNavigationView.findViewById(R.id.navigation_cards);
+        View navSave = bottomNavigationView.findViewById(R.id.navigation_save);
+
+        navDice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                diceClicked();
+                bottomNavigationView.setSelectedItemId(R.id.navigation_grid);
+            }
+        });
+
+        navGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Set this to do nothing to clear out the old OnClick.
+            }
+        });
+
+        navHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeClicked();
+            }
+        });
+
+        navCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardClicked();
+            }
+        });
+
+        navSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveClicked();
+            }
+        });
     }
 
     /**
@@ -116,9 +163,8 @@ public class GridViewActivity extends AppCompatActivity {
 
     /**
      * Move to the Home activity (GameActivity)
-     * @param menuItem - The menu item that called the function.
      */
-    public void homeClicked(MenuItem menuItem) {
+    public void homeClicked() {
         assert game != null;
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "returnToScore: Game Info:" + gameInformation);
@@ -131,17 +177,15 @@ public class GridViewActivity extends AppCompatActivity {
     /**
      * This method is defined so that if the user clicks the button the app won't crash.
      * It does nothing.
-     * @param menuItem - The menu item that called the function.
      */
-    public void gridClicked(MenuItem menuItem) {
+    public void gridClicked() {
 
     }
 
     /**
      * Move to the Card activity
-     * @param menuItem - The menu item that called the function.
      */
-    public void cardClicked(MenuItem menuItem) {
+    public void cardClicked() {
         assert game != null;
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
@@ -152,9 +196,8 @@ public class GridViewActivity extends AppCompatActivity {
 
     /**
      * Move to the Save activity
-     * @param menuItem - The menu item that called the function.
      */
-    public void saveClicked(MenuItem menuItem) {
+    public void saveClicked() {
         assert game != null;
         String gameInformation = gson.toJson(game);
         Intent intent = new Intent(this, SaveGameActivity.class);
@@ -165,9 +208,8 @@ public class GridViewActivity extends AppCompatActivity {
     /**
      * This function calls a dialog box that lets a user roll different kinds of dice and displays
      * the results on the screen
-     * @param menuItem - The menu item that called the function.
      */
-    public void diceClicked(MenuItem menuItem) {
+    public void diceClicked() {
         // Create a new dieRoller that will keep track of all the dice
         final DieRoller dieRoller = new DieRoller();
 

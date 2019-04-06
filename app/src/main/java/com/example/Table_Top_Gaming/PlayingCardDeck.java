@@ -15,7 +15,7 @@ public class PlayingCardDeck implements Deck{
     This function creates the normal 52 cards in a deck and stores them in a list, then after all
     PlayingCards have been added the list is shuffled
      */
-    public PlayingCardDeck() {
+    PlayingCardDeck() {
         // Create an empty list of PlayingCards
         deck = new ArrayList<>();
 
@@ -102,7 +102,7 @@ public class PlayingCardDeck implements Deck{
     }
 
 
-    public List<PlayingCard> getDeck() {
+    List<PlayingCard> getDeck() {
         return this.deck;
     }
 }

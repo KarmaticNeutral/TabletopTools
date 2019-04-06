@@ -22,7 +22,7 @@ public class PlayingCard {
         return suit;
     }
 
-    public void setSuit(Suit suit) {
+    void setSuit(Suit suit) {
         this.suit = suit;
     }
 
@@ -34,7 +34,7 @@ public class PlayingCard {
         this.number = number;
     }
 
-    public int compareTo(PlayingCard o) {
+    int compareTo(PlayingCard o) {
         return this.number - (o.getNumber());
     }
 }

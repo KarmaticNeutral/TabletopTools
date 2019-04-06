@@ -1,6 +1,5 @@
 package com.example.Table_Top_Gaming;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ public class Player {
 
     private String name;
     private String uriString;
-    private URI image; //Will hold the image resource
     private List<PlayingCard> hand;
     private boolean canDrawHand;
     private List<Resource> resources;

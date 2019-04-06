@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="320dp"
-        android:layout_height="350dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +29,13 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
         android:onClick="captureFromCamera"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/camera"
         app:layout_constraintBottom_toTopOf="@+id/button12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button12"
@@ -45,10 +47,10 @@
         android:background="@color/colorAccent"
         android:onClick="pickFromGallery"
         android:text="@string/gallery"
-        app:layout_constraintBottom_toTopOf="@+id/returnToGameButton"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/takePhoto2" />
 
     <Button
         android:id="@+id/returnToGameButton"
@@ -59,7 +61,7 @@
         android:layout_marginBottom="8dp"
         android:onClick="returnToGame"
         android:text="@string/return_to_game"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

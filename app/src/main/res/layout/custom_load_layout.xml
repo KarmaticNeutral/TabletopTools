@@ -17,7 +17,7 @@
         android:layout_toEndOf="@+id/textViewName"
         android:text="@string/load"
         android:textColor="@color/defaultText"
-        android:background="@color/colorAccent"/>
+        android:backgroundTint="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/textViewName"

@@ -68,7 +68,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         buttonLocalSave.setOnClickListener(this);
 
         //temp back button
-        buttonBack = findViewById(R.id.buttonBackTemp);
+        buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
 
         //cloud save button

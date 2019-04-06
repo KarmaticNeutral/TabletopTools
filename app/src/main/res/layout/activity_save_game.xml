@@ -9,16 +9,16 @@
 
     <Button
         android:id="@+id/saveGameButton"
-        android:layout_width="207dp"
+        android:layout_width="0dp"
         android:layout_height="72dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Save To Cloud"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/save_to_cloud"
         android:textColor="@color/defaultText"
-        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLocalSave"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/buttonLocalSave"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.751" />
 
@@ -38,7 +38,7 @@
 
     <EditText
         android:id="@+id/saveNameTextBox"
-        android:layout_width="305dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -56,27 +56,29 @@
 
     <Button
         android:id="@+id/buttonLocalSave"
-        android:layout_width="207dp"
+        android:layout_width="0dp"
         android:layout_height="72dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/save_to_local"
         android:textColor="@color/defaultText"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/saveGameButton"
         app:layout_constraintVertical_bias="0.751" />
 
     <Button
-        android:id="@+id/buttonBackTemp"
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/back"
         android:textColor="@color/defaultText"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

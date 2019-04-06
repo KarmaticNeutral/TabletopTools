@@ -3,8 +3,10 @@ package com.example.Table_Top_Gaming;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
@@ -22,6 +24,11 @@ import com.google.gson.Gson;
 
 import java.text.MessageFormat;
 import java.util.Objects;
+
+import static com.example.Table_Top_Gaming.R.color.buttonText;
+import static com.example.Table_Top_Gaming.R.color.colorAccent;
+import static com.example.Table_Top_Gaming.R.color.colorBackground;
+import static com.example.Table_Top_Gaming.R.color.defaultText;
 
 /**
  * An activity designed to show the players and resources of the players lined up in a grid
@@ -41,7 +48,7 @@ public class GridViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_view);
-        setTheme(R.style.AppThemeTwo);
+        setTheme(R.style.AppTheme);
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -125,15 +132,17 @@ public class GridViewActivity extends AppCompatActivity {
         //End at size +1 to get an extra row with player names
         for (int i = -1; i < game.getPlayers().get(0).getResources().size() + 1; i++) {
             TableRow row = new TableRow(this);
+            row.setBackgroundColor(getResources().getColor(colorBackground));
             //Start at -1 so that you get a column of resource names first
             for (int j = -1; j < numPlayers; j++) {
                 Log.d(TAG, "onCreate: I: " + i + ", J: " + j);
                 if (i == -1 || i == game.getPlayers().get(0).getResources().size()) {
                     Log.d(TAG, "onCreate: Player Name Row.");
                     TextView textView = new TextView(this);
+                    textView.setBackgroundColor(getResources().getColor(colorBackground));
+                    textView.setTextColor(getResources().getColor(defaultText));
                     textView.setWidth(100);
                     textView.setHeight(50);
-                    textView.setTextColor(Color.WHITE);
                     if (j == -1) {
                         textView.setText("");
                     } else {
@@ -143,14 +152,17 @@ public class GridViewActivity extends AppCompatActivity {
                 } else if (j == -1) {
                     Log.d(TAG, "onCreate: Resource Name #" + i);
                     TextView textView = new TextView(this);
+                    textView.setBackgroundColor(getResources().getColor(colorBackground));
                     textView.setWidth(100);
                     textView.setHeight(50);
                     textView.setText(game.getPlayers().get(0).getResources().get(i).getName());
-                    textView.setTextColor(Color.WHITE);
+                    textView.setTextColor(getResources().getColor(defaultText));
                     row.addView(textView);
                 } else {
                     if (game.getPlayers().get(j).getResources() != null) {
                         Button button = new Button(this);
+                        button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(colorAccent)));
+                        button.setTextColor(getResources().getColor(buttonText));
                         button.setWidth(100);
                         button.setHeight(50);
                         button.setText(MessageFormat.format("{0}", game.getPlayers().get(j).getResources().get(i).getAmount()));

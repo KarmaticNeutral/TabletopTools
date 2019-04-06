@@ -48,7 +48,7 @@ public class CardGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_game);
-        setTheme(R.style.AppThemeTwo);
+        setTheme(R.style.AppTheme);
 
         // Get the intent for this Activity
         Intent intent = getIntent();

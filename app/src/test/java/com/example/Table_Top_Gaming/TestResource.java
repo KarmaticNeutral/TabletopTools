@@ -50,4 +50,5 @@ public class TestResource {
         r1.setAmount(0);
         assertEquals(0, r1.getAmount());
     }
+    
 }

@@ -3,6 +3,7 @@ package com.example.Table_Top_Gaming;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -47,7 +48,7 @@ public class GridViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_view);
-        setTheme(R.style.AppThemeTwo);
+        setTheme(R.style.AppTheme);
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -160,7 +161,7 @@ public class GridViewActivity extends AppCompatActivity {
                 } else {
                     if (game.getPlayers().get(j).getResources() != null) {
                         Button button = new Button(this);
-                        button.setBackgroundColor(getResources().getColor(colorAccent));
+                        button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(colorAccent)));
                         button.setTextColor(getResources().getColor(buttonText));
                         button.setWidth(100);
                         button.setHeight(50);

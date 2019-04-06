@@ -39,7 +39,7 @@
     <Button
         android:id="@+id/buttonSignIn"
         android:text="@string/sign_in"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/editTextPass"

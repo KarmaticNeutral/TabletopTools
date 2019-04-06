@@ -91,4 +91,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="back">Back</string>
     <string name="save_to_local">Save To Local</string>
+    <string name="save_to_cloud">Save To Cloud</string>
+    <string name="enter_player_name">Enter Player Name</string>
 </resources>

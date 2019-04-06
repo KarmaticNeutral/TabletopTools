@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/defaultText"
-        android:text="Enter Player Name"
+        android:text="@string/enter_player_name"
         android:textSize="28sp"
         app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>

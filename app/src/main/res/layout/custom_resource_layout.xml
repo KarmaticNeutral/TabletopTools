@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#E7D0C1"
+    android:background="@color/colorBackground"
     android:layout_height="match_parent">
 
     <TextView
@@ -16,8 +16,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="0dp"
-        android:text="resourceName"
-        android:background="#E7D0C1"
+        android:text=""
+        android:background="@color/colorBackground"
         android:textAlignment="center" />
 
     <Button
@@ -32,6 +32,6 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="47dp"
         android:layout_marginEnd="0dp"
-        android:text="resourceAmount"
+        android:text=""
         android:textAlignment="center" />
 </RelativeLayout>

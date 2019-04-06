@@ -13,7 +13,7 @@ public class Resource {
      * @param name set the name of the new resource to this name
      * @param amount set the amount value of the new resource to this amount
      */
-    public Resource(String name, int amount) {
+    Resource(String name, int amount) {
         this.name = name;
         this.amount = amount;
         weight = 0;
@@ -27,11 +27,11 @@ public class Resource {
         this.name = name;
     }
 
-    public int getAmount() {
+    int getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    void setAmount(int amount) {
         this.amount = amount;
     }
 

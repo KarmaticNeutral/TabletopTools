@@ -1,10 +1,11 @@
 package com.example.Table_Top_Gaming;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -35,13 +34,10 @@ public class LoadGameActivity extends AppCompatActivity {
 
     // Create a KEY for passing information to the next activity
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
-    private static final String TAG = "LoadGameActivity";
 
     private ArrayList <String> CLOUD_GAME_NAMES;
     private ArrayList <String> LOCAL_GAME_NAMES;
 
-    //firebase authentication variables
-    private FirebaseAuth firebaseAuth; //instance of
     private FirebaseUser user; //user info
 
     //local saves
@@ -62,7 +58,9 @@ public class LoadGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_load_game);
 
         //used to get the user
-        firebaseAuth = FirebaseAuth.getInstance();
+        //firebase authentication variables
+        //instance of
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
         //gets the local saves
@@ -98,11 +96,11 @@ public class LoadGameActivity extends AppCompatActivity {
 
                         if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
                             Log.d("PIE", "Inside IF Name&Save; List Length: " + CLOUD_GAME_NAMES.size());
-                            CLOUD_GAME_NAMES.add(currentDocumentSnapshot.get("Name").toString());
+                            CLOUD_GAME_NAMES.add(Objects.requireNonNull(currentDocumentSnapshot.get("Name")).toString());
                         }
                     }
                     CustomFirebaseAdapter customAdapterCloud = new CustomFirebaseAdapter();
-                    ListView cloudGamesListView = (ListView) findViewById(R.id.cloudSavedGamesListView);
+                    ListView cloudGamesListView = findViewById(R.id.cloudSavedGamesListView);
                     cloudGamesListView.setAdapter(customAdapterCloud);
                 }
             });
@@ -114,7 +112,7 @@ public class LoadGameActivity extends AppCompatActivity {
      */
     public void createLocal() {
         CustomLocalAdapter customAdapterLocal = new CustomLocalAdapter();
-        ListView localGamesListView = (ListView) findViewById(R.id.localSavedGamesListView);
+        ListView localGamesListView = findViewById(R.id.localSavedGamesListView);
         localGamesListView.setAdapter(customAdapterLocal);
 
         //gets all the names of saved games that the user has saved in shared prefs and stores it
@@ -149,12 +147,13 @@ public class LoadGameActivity extends AppCompatActivity {
          * @param parent
          * @return
          */
+        @SuppressLint({"ViewHolder", "InflateParams"})
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);
 
-            final TextView textView = (TextView) convertView.findViewById(R.id.textViewName);
-            Button button = (Button) convertView.findViewById(R.id.selectionButton);
+            final TextView textView = convertView.findViewById(R.id.textViewName);
+            Button button = convertView.findViewById(R.id.selectionButton);
             textView.setText(LOCAL_GAME_NAMES.get(position));
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -201,12 +200,13 @@ public class LoadGameActivity extends AppCompatActivity {
          * @param parent
          * @return
          */
+        @SuppressLint({"ViewHolder", "InflateParams"})
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);
 
-            TextView textView = (TextView) convertView.findViewById(R.id.textViewName);
-            Button button = (Button) convertView.findViewById(R.id.selectionButton);
+            TextView textView = convertView.findViewById(R.id.textViewName);
+            Button button = convertView.findViewById(R.id.selectionButton);
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override

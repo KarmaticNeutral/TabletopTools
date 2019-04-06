@@ -20,9 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private static final String TAG = "EmailPassword";
-    private static final int RC_SIGN_IN = 123;
-
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -42,12 +39,12 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         progressDialog = new ProgressDialog(this);
 
-        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonRegister = findViewById(R.id.buttonRegister);
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPass);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPass);
 
-        textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
+        textViewSignin = findViewById(R.id.textViewSignIn);
 
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);

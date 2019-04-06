@@ -1,12 +1,11 @@
 package com.example.Table_Top_Gaming;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,10 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.Table_Top_Gaming.Game;
-import com.example.Table_Top_Gaming.GameActivity;
-import com.example.Table_Top_Gaming.Player;
-import com.example.Table_Top_Gaming.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -28,10 +23,8 @@ import java.util.List;
  */
 public class NewGameActivity extends AppCompatActivity {
     private static final String TAG = "NewGameActivity";
-    private Game game;
     private List<Player> players;
     private Gson gson = new Gson();
-    private ListView listView;
     private CustomAdapter customAdapter;
 
     /**
@@ -46,7 +39,7 @@ public class NewGameActivity extends AppCompatActivity {
         players = new ArrayList<>();
         players.add(new Player("Player 1"));
 
-        listView = findViewById(R.id.playerNameList);
+        ListView listView = findViewById(R.id.playerNameList);
         customAdapter = new CustomAdapter(this, listView, players);
         listView.setAdapter(customAdapter);
         //TODO: figure out why player 1 is not shown in the listView.
@@ -88,7 +81,7 @@ public class NewGameActivity extends AppCompatActivity {
             getCurrentFocus().clearFocus();
         }
         // Make a new Game object and give it the list of players
-        game = new Game(players);
+        Game game = new Game(players);
 
         // Convert the Game object to a string and pass it to the next activity
         String gameInformation = gson.toJson(game);
@@ -123,11 +116,12 @@ public class NewGameActivity extends AppCompatActivity {
             return 0;
         }
 
+        @SuppressLint({"InflateParams", "ViewHolder"})
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.d(TAG, "getView: Making view for player " + position + ". Their name is " + players.get(position).getName());
             convertView = getLayoutInflater().inflate(R.layout.custom_player_name_layout, null);
-            final EditText editText = (EditText)convertView.findViewById(R.id.playerNameEditText);
+            final EditText editText = convertView.findViewById(R.id.playerNameEditText);
 
             editText.setText(players.get(position).getName());
 

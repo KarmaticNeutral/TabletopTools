@@ -21,7 +21,7 @@ public class DieRoller {
     /**
      * Creates a new and empty list of dice and sets all variables to 0 because the list is empty
      */
-    public DieRoller() {
+    DieRoller() {
         dice = new ArrayList<>();
         sum = 0;
         d4s = 0;
@@ -51,7 +51,7 @@ public class DieRoller {
      * A getter for the list of dice
      * @return the list of dice
      */
-    public List<Die> getDice() {
+    List<Die> getDice() {
         return dice;
     }
 
@@ -67,7 +67,7 @@ public class DieRoller {
      * Adds a die to the end of the list of dice
      * @param die is a die object to be added to the list of die
      */
-    public void addDie(Die die) {
+    void addDie(Die die) {
         dice.add(die);
     }
 
@@ -87,7 +87,7 @@ public class DieRoller {
      * Rolls all the dice, adds up all the rolls total into "sum" and counts the total of each
      * individual kind of die
      */
-    public void rollAllDice() {
+    void rollAllDice() {
         sum = 0;
         d4s = 0;
         d6s = 0;
@@ -130,7 +130,7 @@ public class DieRoller {
      * Organize all the rolls into a string along with the total of all the rolls
      * @return a string of all the nicely organized total of the rolls and each individual roll
      */
-    public String display() {
+    String display() {
         String rolls = "";
         Collections.sort(dice);
 

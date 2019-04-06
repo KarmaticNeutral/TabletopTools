@@ -5,30 +5,30 @@
         android:id="@+id/navigation_dice"
         android:icon="@drawable/die"
         android:title="@string/dice"
-        android:onClick="diceClicked"/>
+        android:enabled="true" />
 
     <item
         android:id="@+id/navigation_grid"
         android:icon="@drawable/grid"
         android:title="@string/grid"
-        android:onClick="gridClicked"/>
+        android:enabled="true" />
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/grid"
         android:title="@string/home"
-        android:onClick="homeClicked"/>
+        android:enabled="true" />
 
     <item
         android:id="@+id/navigation_cards"
         android:icon="@drawable/aces"
         android:title="@string/card"
-        android:onClick="cardClicked"/>
+        android:enabled="true" />
 
     <item
         android:id="@+id/navigation_save"
         android:icon="@drawable/save"
         android:title="@string/save"
-        android:onClick="saveClicked"/>
+        android:enabled="true" />
 
 </menu>

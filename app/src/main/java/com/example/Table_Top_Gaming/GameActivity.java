@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
@@ -135,11 +136,56 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         setPlayerView();
 
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        initBotNav();
     }
 
+    public void initBotNav() {
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
+        bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        View navDice = bottomNavigationView.findViewById(R.id.navigation_dice);
+        View navGrid = bottomNavigationView.findViewById(R.id.navigation_grid);
+        View navHome = bottomNavigationView.findViewById(R.id.navigation_home);
+        View navCard = bottomNavigationView.findViewById(R.id.navigation_cards);
+        View navSave = bottomNavigationView.findViewById(R.id.navigation_save);
+
+        navDice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                diceClicked();
+                bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+            }
+        });
+
+        navGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gridClicked();
+            }
+        });
+
+        navHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Set this to do nothing to clear out the old OnClick.
+            }
+        });
+
+        navCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardClicked();
+            }
+        });
+
+        navSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveClicked();
+            }
+        });
+    }
     /**
      * This function Allows the editing of a players score when the score button is pressed.
      * @param callingButton - The button that called this function.
@@ -372,9 +418,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     /**
      * This function calls a dialog box that lets a user roll different kinds of dice and displays
      * the results on the screen
-     * @param menuItem this is the button that calls this function
      */
-    public void diceClicked(MenuItem menuItem) {
+    public void diceClicked() {
         // Create a new dieRoller that will keep track of all the dice
         final DieRoller dieRoller = new DieRoller();
 
@@ -1131,9 +1176,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     /**
      * This function starts the card activity when the button is pressed
-     * @param menuItem this is the view that calls this function
      */
-    public void cardClicked(MenuItem menuItem) {
+    public void cardClicked() {
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "cardsClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, CardGameActivity.class);
@@ -1141,7 +1185,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
-    public void gridClicked(MenuItem menuItem) {
+    public void gridClicked() {
         String gameInformation = gson.toJson(game);
         Log.d(TAG, "gridClicked: Game String: " + gameInformation);
         Intent intent = new Intent(GameActivity.this, GridViewActivity.class);
@@ -1152,17 +1196,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     /**
      * This function converts the information saved in the game object to a string and passes that
      * to the SaveGameActivity.
-     * @param menuItem The Item in the Bottom Nav Bar that was clicked.
      */
-    public void saveClicked(MenuItem menuItem) {
+    public void saveClicked() {
         String gameInformation = gson.toJson(game);
         Intent intent = new Intent(this, SaveGameActivity.class);
         intent.putExtra("Game", gameInformation);
         startActivity(intent);
-    }
-
-    public void homeClicked(MenuItem menuItem) {
-
     }
 
     /**

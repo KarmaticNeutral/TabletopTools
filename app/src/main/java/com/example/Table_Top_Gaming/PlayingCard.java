@@ -13,12 +13,12 @@ public class PlayingCard implements Card, Comparable<PlayingCard> {
      * @param number set the number of the card to this number
      * @param suit set the suit of the card to this suit
      */
-    public PlayingCard(int number, Suit suit) {
+    PlayingCard(int number, Suit suit) {
         this.number = number;
         this.suit = suit;
     }
 
-    public Suit getSuit() {
+    Suit getSuit() {
         return suit;
     }
 

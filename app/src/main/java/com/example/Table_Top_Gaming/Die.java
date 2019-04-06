@@ -13,21 +13,11 @@ public class Die implements Comparable<Die>{
     private int numRolled;
 
     /**
-     * The default constructor creats a 6 sided dice.
-     */
-    public Die() {
-        numSides = 6;
-        numRolled = 0;
-        rand = new Random();
-        name = "d" + Integer.toString(numSides);
-    }
-
-    /**
      * This non-default constructor accepts a variable that sets the number of sides and creates a
      * die with that amount set in the parameters.
      * @param numSides indicates the number of sides the die will have
      */
-    public Die(int numSides) {
+    Die(int numSides) {
         this.numSides = numSides;
         numRolled = 0;
         rand = new Random();
@@ -38,7 +28,7 @@ public class Die implements Comparable<Die>{
      * A getter for the number of sides on the die
      * @return the number of sides the die has
      */
-    public int getNumSides() {
+    int getNumSides() {
         return numSides;
     }
 
@@ -54,7 +44,7 @@ public class Die implements Comparable<Die>{
      * A getter for the random number rolled on the die
      * @return the randomly rolled number of the die
      */
-    public int getNumRolled() {
+    int getNumRolled() {
         return numRolled;
     }
 
@@ -69,7 +59,7 @@ public class Die implements Comparable<Die>{
     /**
      * Roll the die and set the randomly rolled number to "numRolled"
      */
-    public void roll() {
+    void roll() {
         numRolled = (rand.nextInt(numSides) % numSides) + 1;
     }
 

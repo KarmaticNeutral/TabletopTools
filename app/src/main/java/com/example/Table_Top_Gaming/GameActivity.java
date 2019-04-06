@@ -455,10 +455,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // If the to be rolled string is blank or the last character is a space you should not be able to use the zero button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     return;
                 }
 
+                // Check if the last entered string was that of a die, if it was you should not be able to use the zero button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -467,6 +469,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last entered string was that of a die with 10 or 20 sides, if it is you should not be able to use the zero button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -474,6 +478,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all the checks add the 0 to the string
                 toBeRolled.setText(String.format("%s0", toBeRolled.getText().toString()));
             }
         });
@@ -482,11 +488,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the one button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the one button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -495,6 +504,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the one button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -502,6 +513,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the one button to the string
                 toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
             }
         });
@@ -510,11 +523,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the two button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the two button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -523,6 +539,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the two button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -530,6 +548,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the two button to the string
                 toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
             }
         });
@@ -538,11 +558,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the three button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the three button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -551,6 +574,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the three button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -558,6 +583,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the three button to the string
                 toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
             }
         });
@@ -566,11 +593,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the four button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the four button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -579,6 +609,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the four button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -586,6 +618,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the four button to the string
                 toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
             }
         });
@@ -594,11 +628,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the five button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the five button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -607,6 +644,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the five button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -614,6 +653,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the five button to the string
                 toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
             }
         });
@@ -622,11 +663,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the six button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the six button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -635,6 +679,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the six button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -642,6 +688,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the six button to the string
                 toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
             }
         });
@@ -650,11 +698,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         seven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the seven button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the seven button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -663,6 +714,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the seven button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -670,6 +723,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the seven button to the string
                 toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
             }
         });
@@ -678,11 +733,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the eight button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the eight button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -691,6 +749,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the eight button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -698,6 +758,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the eight button to the string
                 toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
             }
         });
@@ -706,11 +768,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         nine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty you should be able to use the nine button
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
                     return;
                 }
 
+                // If the last button pressed was a die button you should not be able to use the nine button
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -719,6 +784,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the nine button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -726,6 +793,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // Having cleared all checks add the nine button to the string
                 toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
             }
         });
@@ -734,13 +803,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         d4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check for a number before a die can be added, if there is no number return
                 if (toBeRolled.getText().toString().isEmpty()) {
                     return;
                 }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
                 if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
                         return;
                     }
+
+                    // Checks if the last button pressed was a die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -748,6 +824,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -755,8 +833,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
                 if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
                             startIndex = i + 1;
@@ -764,19 +846,24 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
 
+                    // Grab the correct number of dice
                     int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
                     if (toBeRolled.getText().toString().length() > 1) {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
+                    // Add all the dice to the dieRoller, a list of dice.
                     toBeRolled.setText(String.format("%sd4", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(4));
                     }
-                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -785,13 +872,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         d6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check for a number before a die can be added, if there is no number return
                 if (toBeRolled.getText().toString().isEmpty()) {
                     return;
                 }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
                 if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
                         return;
                     }
+
+                    // Checks if the last button pressed was a die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -799,6 +893,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -806,8 +902,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
                 if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
                             startIndex = i + 1;
@@ -815,19 +915,24 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
 
+                    // Grab the correct number of dice
                     int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
                     if (toBeRolled.getText().toString().length() > 1) {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
+                    // Add all the dice to the dieRoller, a list of dice.
                     toBeRolled.setText(String.format("%sd6", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(6));
                     }
-                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -836,13 +941,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         d8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check for a number before a die can be added, if there is no number return
                 if (toBeRolled.getText().toString().isEmpty()) {
                     return;
                 }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
                 if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
                         return;
                     }
+
+                    // Checks if the last button pressed was a die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -850,6 +962,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -857,8 +971,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
                 if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
                             startIndex = i + 1;
@@ -866,19 +984,24 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
 
+                    // Grab the correct number of dice
                     int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
                     if (toBeRolled.getText().toString().length() > 1) {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
+                    // Add all the dice to the dieRoller, a list of dice.
                     toBeRolled.setText(String.format("%sd8", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(8));
                     }
-                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -887,13 +1010,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         d10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check for a number before a die can be added, if there is no number return
                 if (toBeRolled.getText().toString().isEmpty()) {
                     return;
                 }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
                 if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
                         return;
                     }
+
+                    // Checks if the last button pressed was a die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -901,6 +1031,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -908,8 +1040,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
                 }
+
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
                 if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
                             startIndex = i + 1;
@@ -917,19 +1053,24 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
 
+                    // Grab the correct number of dice
                     int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
                     if (toBeRolled.getText().toString().length() > 1) {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
+                    // Add all the dice to the dieRoller, a list of dice.
                     toBeRolled.setText(String.format("%sd10", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(10));
                     }
-                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -938,14 +1079,20 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         d20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Check for a number before a die can be added, if there is no number return
                 if (toBeRolled.getText().toString().isEmpty()) {
                     return;
                 }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
                 if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
                         return;
                     }
+
+                    // Checks if the last button pressed was a die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
@@ -953,6 +1100,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -961,8 +1110,11 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                     }
                 }
 
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
                 if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
                     for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
                         if (toBeRolled.getText().toString().charAt(i) == ' ') {
                             startIndex = i + 1;
@@ -970,19 +1122,24 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                     }
 
+                    // Grab the correct number of dice
                     int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
                     if (toBeRolled.getText().toString().length() > 1) {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
                     }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
                     else {
                         numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
                     }
 
+                    // Add all the dice to the dieRoller, a list of dice.
                     toBeRolled.setText(String.format("%sd20", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(20));
                     }
-                    Log.i("e", "DIEROLLER SIZE: " + dieRoller.getDice().size());
                 }
             }
         });
@@ -991,10 +1148,15 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Check for more than one item in the string
                 if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last entered item in the string was a d4 die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
 
+                        // Delete "d4" from the string and remove all the d4 die objects from the list of die
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                             if (dieRoller.getDice().get(i).getNumSides() == 4) {
@@ -1010,9 +1172,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                         return;
                     }
+
+                    // Check if the last entered item in the string was a d6 die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                             && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
 
+                        // Delete "d6" from the string and remove all the d6 die objects from the list of die
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                             if (dieRoller.getDice().get(i).getNumSides() == 6) {
@@ -1027,8 +1192,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                         return;
                     }
+
+                    // Check if the last entered item in the string was a d8 die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8'
                             && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+
+                        // Delete "d8" from the string and remove all the d8 die objects from the list of die
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -2));
                         for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                             if (dieRoller.getDice().get(i).getNumSides() == 8) {
@@ -1043,10 +1212,14 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         }
                         return;
                     }
+
+                    // Check if the last entered item in the string was a d10 die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '1') {
+
+                                // Delete "d10" from the string and remove all the d10 die objects from the list of die
                                 toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
                                 for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                                     if (dieRoller.getDice().get(i).getNumSides() == 10) {
@@ -1062,7 +1235,10 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                                 return;
                             }
 
+                            // Check if the last entered item in the string was a d20 die
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '2') {
+
+                                // Delete "d20" from the string and remove all the d20 die objects from the list of die
                                 toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
                                 for (int i = 0; i < dieRoller.getDice().size(); i ++) {
                                     if (dieRoller.getDice().get(i).getNumSides() == 20) {
@@ -1081,11 +1257,15 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // Check if the last button press was the plus button, if true delete 3 characters at the end of the string
                     if (toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                         toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
                         return;
                     }
                 }
+
+                // If all the other checks have been cleared delete a character at a time in the string
                 if (toBeRolled.getText().toString().length() > 0) {
                     toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -1));
                 }
@@ -1096,10 +1276,13 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the last button pressed was a plus or the string is empty to nothing
                 if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
                     return;
                 }
 
+                // If the last button pressed was a d4, d6, or a d8 add " + " to the string
                 if (toBeRolled.getText().toString().length() > 1) {
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                             || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
@@ -1109,6 +1292,8 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                             return;
                         }
                     }
+
+                    // If the last button pressed was a d10 or d20 add " + " to the string
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
@@ -1123,27 +1308,38 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         roll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // If the string is empty the plus button should not be able to be used
                 if (toBeRolled.getText().toString().isEmpty()) {
                     return;
                 }
+
+                // Check if the string is not empty and that the last button pressed was not a plus button
                 if (!dieRoller.getDice().isEmpty() || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) != ' ') {
 
+                    // If the last button pressed was a die, roll the dice
                     if (toBeRolled.getText().toString().length() > 1) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
                                 || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
                                 || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
                                 dieRoller.rollAllDice();
+
+                                // Display the total sum of the dice rolled and clear the to be rolled text
                                 total.setText(dieRoller.display());
                                 dieRoller.getDice().clear();
                                 toBeRolled.setText("");
                                 return;
                             }
                         }
+
+                        // Check if the last button pressed was a d10 or 20 die if so roll the dice
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
                                 && toBeRolled.getText().toString().length() > 2) {
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
                                 dieRoller.rollAllDice();
+
+                                // Display the total sum of the dice rolled and clear the to be rolled text
                                 total.setText(dieRoller.display());
                                 dieRoller.getDice().clear();
                                 toBeRolled.setText("");

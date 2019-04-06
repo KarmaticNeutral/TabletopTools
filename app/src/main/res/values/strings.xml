@@ -91,4 +91,5 @@
     <string name="sign_out">Sign Out</string>
     <string name="back">Back</string>
     <string name="save_to_local">Save To Local</string>
+    <string name="picturePreviewImage">Preview of selected picture.</string>
 </resources>

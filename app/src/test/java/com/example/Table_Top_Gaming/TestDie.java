@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Unit tests for the Die Class
  */
-public class DieTest {
+public class TestDie {
     /**
     Test each of the dice that we have on the Dice dialog.
      */

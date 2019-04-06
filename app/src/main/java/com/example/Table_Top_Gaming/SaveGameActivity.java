@@ -145,7 +145,12 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         }
         if (v == buttonCloudSave)
         {
-            createCloudSave();
+            if(user != null) {
+                createCloudSave();
+            }
+            else {
+                Toast.makeText(this,"ERROR: Login First", Toast.LENGTH_LONG).show();
+            }
         }
         if (v == buttonBack)
         {

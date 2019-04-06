@@ -1,5 +1,6 @@
 package com.example.Table_Top_Gaming;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -123,6 +124,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     /**
      * Creates a local save for a game
      */
+    @SuppressLint("ShowToast")
     public void createLocalSave() {
         //grabs the save game name and either creates or makes a new save game
         EditText editText = findViewById(R.id.saveNameTextBox);

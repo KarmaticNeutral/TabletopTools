@@ -18,9 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -31,7 +29,7 @@ import java.util.Objects;
  */
 public class CameraActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
-    private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 5;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 4;
     ImageView imageView;
     private static final String TAG = "CameraActivity";
     private final int GALLERY_REQUEST_CODE = 1;

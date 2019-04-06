@@ -229,7 +229,7 @@ public class GridViewActivity extends AppCompatActivity {
         final DieRoller dieRoller = new DieRoller();
 
         // Create a new Alert Dialog and set the view to the dice rolling custom layout
-        AlertDialog.Builder builder = new AlertDialog.Builder(CardGameActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GridViewActivity.this);
         @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_roll_dice, null);
 
         // Create variables for the different text fields on the dice rolling custom layout

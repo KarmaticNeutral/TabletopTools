@@ -72,6 +72,13 @@ public class DieRoller {
     }
 
     /**
+     * Gets the size of the list of dice.
+     */
+    int getNumDice() {
+        return dice.size();
+    }
+
+    /**
      * Removes a die from the end of the list of die
      */
     public void removeDie() {

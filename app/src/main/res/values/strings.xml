@@ -93,4 +93,5 @@
     <string name="save_to_local">Save To Local</string>
     <string name="save_to_cloud">Save To Cloud</string>
     <string name="enter_player_name">Enter Player Name</string>
+    <string name="picturePreviewImage">Preview of selected picture.</string>
 </resources>

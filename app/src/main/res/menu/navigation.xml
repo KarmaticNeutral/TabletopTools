@@ -9,25 +9,25 @@
 
     <item
         android:id="@+id/navigation_grid"
-        android:icon="@drawable/grid"
+        android:icon="@drawable/grid_icon3"
         android:title="@string/grid"
         android:enabled="true" />
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/grid"
+        android:icon="@drawable/home"
         android:title="@string/home"
         android:enabled="true" />
 
     <item
         android:id="@+id/navigation_cards"
-        android:icon="@drawable/aces"
+        android:icon="@drawable/cards"
         android:title="@string/card"
         android:enabled="true" />
 
     <item
         android:id="@+id/navigation_save"
-        android:icon="@drawable/save"
+        android:icon="@drawable/save_icon"
         android:title="@string/save"
         android:enabled="true" />
 

@@ -55,6 +55,8 @@ public class TestPlayer {
         Resource r1 = new Resource("Arrows", 100);
         Resource r2 = new Resource("Knives", 2);
         List<Resource> resources = new ArrayList<>();
+        resources.add(r1);
+        resources.add(r2);
 
         Player p1 = new Player("Clint Barton");
         p1.setResources(resources);

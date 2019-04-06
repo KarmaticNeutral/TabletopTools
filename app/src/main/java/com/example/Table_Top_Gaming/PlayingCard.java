@@ -3,7 +3,7 @@ package com.example.Table_Top_Gaming;
 /**
  * This class represents a individual playing card with a number and suit
  */
-public class PlayingCard implements Card, Comparable<PlayingCard> {
+public class PlayingCard {
     private Suit suit;
     private int number;
 
@@ -34,13 +34,7 @@ public class PlayingCard implements Card, Comparable<PlayingCard> {
         this.number = number;
     }
 
-    @Override
     public int compareTo(PlayingCard o) {
         return this.number - (o.getNumber());
-    }
-
-    @Override
-    public void display() {
-
     }
 }

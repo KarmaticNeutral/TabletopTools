@@ -125,6 +125,9 @@ public class LoadGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * an adapter to work with the local game list to display and resume saved games stored locally
+     */
     class CustomLocalAdapter extends BaseAdapter {
 
         @Override
@@ -176,6 +179,10 @@ public class LoadGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * an adapter to work with the cloud game list to display and resume
+     * saved games stored in the cloud
+     */
     class CustomFirebaseAdapter extends BaseAdapter {
 
         @Override

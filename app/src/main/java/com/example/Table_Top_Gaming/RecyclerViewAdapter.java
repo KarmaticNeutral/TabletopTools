@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 
 import java.util.List;
 
+/**
+ * An adapter to go between the Card Activity and the game profile to display player's hands.
+ */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private List<PlayingCard> currentPlayerHand;
@@ -26,7 +29,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.hideHand = hideHand;
     }
 
-
+    /**
+     * Inflate the View Holder to contain the cards.
+     * @param viewGroup - The viewGroup to put the viewholder in.
+     * @param i - unused in this function but required in the override.
+     * @return a viewHolder containing the inflated content.
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -35,6 +43,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return viewHolder;
     }
 
+    /**
+     * What is going to be done when new data is bound to the on screen display list.
+     * @param viewHolder - the previously created viewHolder to be reassigned.
+     * @param i - a location in the connected information to give location of the accessed information.
+     */
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         if (!hideHand) {
@@ -68,6 +81,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
+    /**
+     * updates the onscreen information.
+     * @param hideHand - bool stating if the face of the cards should be seen.
+     * @param currentPlayerHand - List of PlayingCard objects to be displayed.
+     */
     void notifyDataSetChangedWithExtras(boolean hideHand, List<PlayingCard> currentPlayerHand) {
         this.hideHand = hideHand;
         this.currentPlayerHand = currentPlayerHand;
@@ -79,6 +97,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return currentPlayerHand.size();
     }
 
+    /**
+     * A holder for the image viewand relative layout to be held within.
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;

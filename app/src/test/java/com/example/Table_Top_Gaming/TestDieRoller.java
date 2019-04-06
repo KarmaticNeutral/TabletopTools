@@ -145,5 +145,4 @@ public class TestDieRoller {
         roller.setDice(diceList2);
         assertEquals(4, roller.getNumDice());
     }
-
 }

@@ -56,6 +56,7 @@ public class DieTest {
     /**
      * Test an odd number of sides
      */
+    @org.junit.Test
     public void testDieOdd() {
         Die d = new Die(13);
         assertEquals(13, d.getNumSides());

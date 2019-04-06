@@ -48,7 +48,7 @@ public class CardGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_game);
-        setTheme(R.style.AppTheme);
+        setTheme(R.style.DialogTheme);
 
         // Get the intent for this Activity
         Intent intent = getIntent();
@@ -89,6 +89,9 @@ public class CardGameActivity extends AppCompatActivity {
         initBotNav();
     }
 
+    /**
+     * Initialize the bottom navigation bar.
+     */
     public void initBotNav() {
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);

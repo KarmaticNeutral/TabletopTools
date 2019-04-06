@@ -12,4 +12,17 @@
         <item name="android:editTextColor">@color/defaultText</item>
         <item name="android:textColorHint">@color/hintText</item>
     </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorBackground</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:textColor">@color/defaultText</item>
+        <item name="android:editTextColor">@color/defaultText</item>
+        <item name="android:textColorHint">@color/hintText</item>
+    </style>
 </resources>

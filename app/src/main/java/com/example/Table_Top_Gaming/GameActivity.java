@@ -63,7 +63,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        setTheme(R.style.AppTheme);
+        setTheme(R.style.DialogTheme);
 
         //firebase stuff
         firebaseAuth = FirebaseAuth.getInstance();
@@ -139,6 +139,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         initBotNav();
     }
 
+    /**
+     * Initialize the bottom navigation bar.
+     */
     public void initBotNav() {
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
@@ -186,6 +189,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             }
         });
     }
+
     /**
      * This function Allows the editing of a players score when the score button is pressed.
      * @param callingButton - The button that called this function.

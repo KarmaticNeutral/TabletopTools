@@ -48,7 +48,7 @@ public class GridViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_view);
-        setTheme(R.style.AppTheme);
+        setTheme(R.style.DialogTheme);
 
         // Get the intent for this Activity
         Intent intent = getIntent();

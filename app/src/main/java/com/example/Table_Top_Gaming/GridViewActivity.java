@@ -65,7 +65,10 @@ public class GridViewActivity extends AppCompatActivity {
         initBotNav();
     }
 
-    public void initBotNav() {
+    /**
+     * Set up the bottom bar that allows app navigation.
+     */
+    private void initBotNav() {
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigationMenu);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setSelectedItemId(R.id.navigation_grid);

@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * An activity to allow us to take pictures to use as player profile pictures.
+ */
 public class CameraActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 4;
@@ -34,8 +37,34 @@ public class CameraActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private Game game;
     private int currentPlayer;
+    private String cameraFilePath;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        Log.i(TAG, "Time Stamp: " + timeStamp);
 
+        String imageFileName = "jpeg_" + timeStamp + "_";
+        Log.i(TAG, "imageFileName: " + imageFileName);
 
+        //This is the directory in which the file will be created. This is the default location of Camera photos
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for using again
+        cameraFilePath = "file://" + image.getAbsolutePath();
+        Log.i(TAG, "Photo file path: " + cameraFilePath);
+        return image;
+    }
+
+    /**
+     * initialize default values.
+     * @param savedInstanceState - Current state of the App
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,30 +147,6 @@ public class CameraActivity extends AppCompatActivity {
             // Launching the Intent
             startActivityForResult(intent, GALLERY_REQUEST_CODE);
         }
-    }
-
-    private String cameraFilePath;
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        Log.i(TAG, "Time Stamp: " + timeStamp);
-
-        String imageFileName = "jpeg_" + timeStamp + "_";
-        Log.i(TAG, "imageFileName: " + imageFileName);
-
-        //This is the directory in which the file will be created. This is the default location of Camera photos
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "Camera");
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        // Save a file: path for using again
-        cameraFilePath = "file://" + image.getAbsolutePath();
-        Log.i(TAG, "Photo file path: " + cameraFilePath);
-        return image;
     }
 
     /**

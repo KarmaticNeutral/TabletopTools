@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * An activity used in conjunction with the Authentication Activity for User distinction.
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonSignIn;

@@ -17,19 +17,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * An activity to allow us to track user information.
+ */
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener {
-
-
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewSignin;
-
     private ProgressDialog progressDialog;
-
-
     private FirebaseAuth mAuth;
 
+    /**
+     * Initialize deafault values.
+     * @param savedInstanceState - The current state of the App
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +117,4 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         }
 
     }
-
-
 }

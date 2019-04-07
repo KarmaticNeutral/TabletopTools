@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents the NewGameActivity window and sets the buttons and functions for this window
@@ -60,7 +61,12 @@ public class NewGameActivity extends AppCompatActivity {
      */
     public void subtractPlayer(View view) {
         if (players.size() > 1) {
-            this.getCurrentFocus().clearFocus();
+
+            View current = getCurrentFocus();
+            if (current != null) {
+                current.clearFocus();
+            }
+
             players.remove(players.size() - 1);
             customAdapter.notifyDataSetChanged();
         } else {

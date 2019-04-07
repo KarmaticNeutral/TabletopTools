@@ -60,6 +60,7 @@ public class NewGameActivity extends AppCompatActivity {
      */
     public void subtractPlayer(View view) {
         if (players.size() > 1) {
+            this.getCurrentFocus().clearFocus();
             players.remove(players.size() - 1);
             customAdapter.notifyDataSetChanged();
         } else {

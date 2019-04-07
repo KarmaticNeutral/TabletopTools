@@ -12,6 +12,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -434,6 +435,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         // Create variables for the different text fields on the dice rolling custom layout
         final TextView toBeRolled = view.findViewById(R.id.diceBeingRolled);
         final TextView total = view.findViewById(R.id.sumOfDice);
+        total.setMovementMethod(new ScrollingMovementMethod());
 
         // Create buttons for all the different buttons on the dice rolling custom layout
         Button zero = view.findViewById(R.id.zero);

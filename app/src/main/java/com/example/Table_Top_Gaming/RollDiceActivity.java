@@ -2,6 +2,10 @@ package com.example.Table_Top_Gaming;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Creates the Roll Dice Activity

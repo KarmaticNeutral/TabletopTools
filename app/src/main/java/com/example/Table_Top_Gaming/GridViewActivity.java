@@ -12,6 +12,7 @@ import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -235,6 +236,7 @@ public class GridViewActivity extends AppCompatActivity {
         // Create variables for the different text fields on the dice rolling custom layout
         final TextView toBeRolled = view.findViewById(R.id.diceBeingRolled);
         final TextView total = view.findViewById(R.id.sumOfDice);
+        total.setMovementMethod(new ScrollingMovementMethod());
 
         // Create buttons for all the different buttons on the dice rolling custom layout
         Button zero = view.findViewById(R.id.zero);

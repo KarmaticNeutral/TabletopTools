@@ -210,7 +210,7 @@ public class CardGameActivity extends AppCompatActivity {
     public void drawClicked(View view) {
         if (game.getDeck().getDeck().size() > 0) {
             game.getPlayers().get(currentPlayer).getHand().add(game.getDeck().drawCard());
-            recyclerViewAdapter.notifyDataSetChanged();
+            recyclerViewAdapter.notifyDataSetChangedWithExtras(hideHand, game.getPlayers().get(currentPlayer).getHand());
             updateImagesForCardLocations();
         } else {
             Toast.makeText(this, "The Draw Pile Is Empty.",
@@ -230,7 +230,7 @@ public class CardGameActivity extends AppCompatActivity {
         } else {
             game.getPlayers().get(currentPlayer).getHand().add(game.getDiscardPile().get(game.getDiscardPile().size() - 1));
             game.getDiscardPile().remove(game.getDiscardPile().size() - 1);
-            recyclerViewAdapter.notifyDataSetChanged();
+            recyclerViewAdapter.notifyDataSetChangedWithExtras(hideHand, game.getPlayers().get(currentPlayer).getHand());
 
             if (game.getDiscardPile().size() == 0) {
                 discardPileButton.setImageResource(R.drawable.gray_back);

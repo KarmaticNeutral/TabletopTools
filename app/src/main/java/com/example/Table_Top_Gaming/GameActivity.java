@@ -376,10 +376,10 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                         if (!resourceName.getText().toString().isEmpty()) {
                             for (int i = 0; i < game.getPlayers().size(); i++) {
                                 game.getPlayers().get(i).getResources().add(new Resource(newResourceName, defaultResourceValue));
-                                game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setName(resourceName.getText().toString());
+                                game.getPlayers().get(i).getResources().get(game.getPlayers().get(i).getResources().size() - 1).setName(resourceName.getText().toString());
 
                                 if (!resourceValue.getText().toString().isEmpty()) {
-                                    game.getPlayers().get(i).getResources().get(game.getPlayers().get(currentPlayer).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
+                                    game.getPlayers().get(i).getResources().get(game.getPlayers().get(i).getResources().size() - 1).setAmount(Integer.parseInt(resourceValue.getText().toString()));
                                 }
                             }
 

@@ -205,6 +205,12 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
         // Get the text field where the user will input a change in score
         final EditText input = view.findViewById(R.id.difference_in_score);
+        input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                input.getText().clear();
+            }
+        });
 
         // Get the text view that displays the players score on the new activity window
         final TextView difference = view.findViewById(R.id.player_score);

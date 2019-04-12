@@ -133,7 +133,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(name, message);
         editor.apply();
-        Toast.makeText(this, "Information Saved", Toast.LENGTH_LONG);
+        Toast.makeText(this, "Information Saved", Toast.LENGTH_LONG).show();
     }
 
     /**

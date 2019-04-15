@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
@@ -17,9 +18,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -168,6 +171,16 @@ public class GridViewActivity extends AppCompatActivity {
                         button.setHeight(50);
                         button.setText(MessageFormat.format("{0}", game.getPlayers().get(j).getResources().get(i).getAmount()));
                         row.addView(button);
+                        final int currentPlayer = j;
+                        final int resource = i;
+                        final int newButtonId = Button.generateViewId();
+                        button.setId(newButtonId);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                editPlayerScore((Button) GridViewActivity.this.findViewById(newButtonId), currentPlayer, resource);
+                            }
+                        });
                     }
                 }
                 if(j == game.getPlayers().size() - 1) {
@@ -1173,6 +1186,115 @@ public class GridViewActivity extends AppCompatActivity {
         });
 
         // Create and show the dialog to the screen
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void editPlayerScore(final Button callingButton, final int currentPlayer, final int resourceIndex) {
+
+        // Define a new AlertDialog box that will be called from this activity
+        AlertDialog.Builder builder = new AlertDialog.Builder(GridViewActivity.this);
+
+        // Using a custom Layout from the EditPlayerScoreDialogActivity so we have to get that view
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_edit_player_score_dialog, null);
+
+        // Get the text field where the user will input a change in score
+        final EditText input = view.findViewById(R.id.difference_in_score);
+        input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                input.getText().clear();
+            }
+        });
+
+        // Get the text view that displays the players score on the new activity window
+        final TextView difference = view.findViewById(R.id.player_score);
+
+        // Set the score display on the new window equal to Player 1's score
+        String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getName();
+        resourceInfo += ": " + Integer.toString(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+        difference.setText(resourceInfo);
+
+        // There is a plus and a minus button on this custom layout so we have to grab them
+        // and define them in this activity
+        Button plus = view.findViewById(R.id.plus_button);
+        Button minus = view.findViewById(R.id.minus_button);
+
+        // When the user clicks the plus button add the input to the player's score
+        plus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onClick(View v) {
+                if (input.getText().toString().equals("")) {
+                    return;
+                }
+
+                // Set this integer to the amount the user wants to change the score by
+                int diff = Integer.parseInt(input.getText().toString());
+
+                // Add this amount to the current player score
+                game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount() + diff);
+
+                // Change the display on the new window to the new amount
+                String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getName();
+                resourceInfo += ": " + Integer.toString(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                difference.setText(resourceInfo);
+
+                // Change the display on the GameActivity window score button to the new amount
+                callingButton.setText(String.format(" %d", game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount()));
+            }
+        });
+
+        // When the user clicks the minus button subtract the input from the player's score
+        minus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onClick(View v) {
+                if (input.getText().toString().equals("")) {
+                    return;
+                }
+
+                // Set this integer to the amount the user wants to change the score by
+                int diff = Integer.parseInt(input.getText().toString());
+
+                // Subtract this amount from the current player score
+                game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount() - diff);
+
+                // Change the display on the new window to the new amount
+                String resourceInfo = game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getName();
+                resourceInfo += ": " + Integer.toString(game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount());
+                difference.setText(resourceInfo);
+
+                // Change the display on the GameActivity window score button to the new amount
+                callingButton.setText(String.format(" %d", game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).getAmount()));
+            }
+        });
+
+        builder.setView(view)
+                .setPositiveButton(R.string.player_score_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The user hit "OK" do nothing they are done
+                    }
+                }).setNeutralButton(R.string.change_score_to, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (input.getText().toString().equals("")) {
+                            return;
+                        }
+
+                        // Change the score to the number the user input instead of adding or subtracting it
+                        game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(Integer.parseInt(input.getText().toString()));
+                        callingButton.setText(input.getText().toString());
+                    }
+                })
+                .setNegativeButton(R.string.player_score_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The user hit "CANCEL" do nothing they are done
+                    }
+                });
+
         AlertDialog dialog = builder.create();
         dialog.show();
     }

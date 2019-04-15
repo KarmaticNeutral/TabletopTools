@@ -230,6 +230,10 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
+                if (input.getText().toString().equals("")) {
+                    return;
+                }
+
                 // Set this integer to the amount the user wants to change the score by
                 int diff = Integer.parseInt(input.getText().toString());
 
@@ -251,6 +255,10 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
             @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
+                if (input.getText().toString().equals("")) {
+                    return;
+                }
+
                 // Set this integer to the amount the user wants to change the score by
                 int diff = Integer.parseInt(input.getText().toString());
 
@@ -277,6 +285,9 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        if (input.getText().toString().equals("")) {
+                            return;
+                        }
                         // Change the score to the number the user input instead of adding or subtracting it
                         game.getPlayers().get(currentPlayer).getResources().get(resourceIndex).setAmount(Integer.parseInt(input.getText().toString()));
                         setPlayerView();

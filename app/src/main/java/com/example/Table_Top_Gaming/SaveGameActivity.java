@@ -186,7 +186,6 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 diceClicked();
-                bottomNavigationView.setSelectedItemId(R.id.navigation_home);
             }
         });
 

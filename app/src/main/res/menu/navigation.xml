@@ -30,6 +30,4 @@
         android:icon="@drawable/save_icon"
         android:title="@string/save"
         android:enabled="true" />
-
-
 </menu>

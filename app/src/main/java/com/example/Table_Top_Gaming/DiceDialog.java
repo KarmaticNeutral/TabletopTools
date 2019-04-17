@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DiceDialog {
-    private static final String TAG = "GridViewActivity";
+    private static final String TAG = "DiceDialog";
 
     public DiceDialog(Context context) {
 

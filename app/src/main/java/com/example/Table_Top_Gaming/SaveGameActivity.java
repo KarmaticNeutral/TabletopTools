@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -271,17 +272,19 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         final TextView total = view.findViewById(R.id.sumOfDice);
         total.setMovementMethod(new ScrollingMovementMethod());
 
+        ArrayList<Button> buttons = new ArrayList<>();
+
         // Create buttons for all the different buttons on the dice rolling custom layout
-        Button zero = view.findViewById(R.id.zero);
-        Button one = view.findViewById(R.id.one);
-        Button two = view.findViewById(R.id.two);
-        Button three = view.findViewById(R.id.three);
-        Button four = view.findViewById(R.id.four);
-        Button five = view.findViewById(R.id.five);
-        Button six = view.findViewById(R.id.six);
-        Button seven = view.findViewById(R.id.seven);
-        Button eight = view.findViewById(R.id.eight);
-        Button nine = view.findViewById(R.id.nine);
+        buttons.add((Button)view.findViewById(R.id.zero));
+        buttons.add((Button)view.findViewById(R.id.one));
+        buttons.add((Button)view.findViewById(R.id.two));
+        buttons.add((Button)view.findViewById(R.id.three));
+        buttons.add((Button)view.findViewById(R.id.four));
+        buttons.add((Button)view.findViewById(R.id.five));
+        buttons.add((Button)view.findViewById(R.id.six));
+        buttons.add((Button)view.findViewById(R.id.seven));
+        buttons.add((Button)view.findViewById(R.id.eight));
+        buttons.add((Button)view.findViewById(R.id.nine));
         Button delete = view.findViewById(R.id.delete);
         Button plus = view.findViewById(R.id.roll_plus);
         Button roll = view.findViewById(R.id.roll);
@@ -291,353 +294,46 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         Button d10 = view.findViewById(R.id.d10);
         Button d20 = view.findViewById(R.id.d20);
 
-        // The zero button has been pressed check for foolish user input
-        zero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // If the to be rolled string is blank or the last character is a space you should not be able to use the zero button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    return;
-                }
-
-                // Check if the last entered string was that of a die, if it was you should not be able to use the zero button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+        for (final Button currentButton : buttons) {
+            currentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: number clicked");
+                    // If the to be rolled string is blank or the last character is a space you should not be able to use the number buttons
+                    if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                        if(currentButton.getText().equals("0")) {
+                            Log.d(TAG, "      onClick: return on first");
                             return;
                         }
                     }
 
-                    // Check if the last entered string was that of a die with 10 or 20 sides, if it is you should not be able to use the zero button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
+                    // Check if the last entered string was that of a die, if it was you should not be able to use the zero button
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                                || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                                || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                                Log.d(TAG, "      onClick: return on second");
+                                return;
+                            }
                         }
-                    }
-                }
 
-                // Having cleared all the checks add the 0 to the string
-                toBeRolled.setText(String.format("%s0", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The one button has been pressed check for foolish user input
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the one button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the one button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
+                        // Check if the last entered string was that of a die with 10 or 20 sides, if it is you should not be able to use the zero button
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                                && toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                Log.d(TAG, "      onClick: return on third");
+                                return;
+                            }
                         }
                     }
 
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the one button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
+                    // Having cleared all the checks add the 0 to the string
+                    toBeRolled.setText(String.format("%s%s", toBeRolled.getText().toString(), currentButton.getText().toString()));
+                    Log.d(TAG, "onClick: number after toberolled.settext");
                 }
-
-                // Having cleared all checks add the one button to the string
-                toBeRolled.setText(String.format("%s1", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The two button has been pressed check for foolish user input
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the two button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the two button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the two button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the two button to the string
-                toBeRolled.setText(String.format("%s2", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The three button has been pressed check for foolish user input
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the three button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the three button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the three button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the three button to the string
-                toBeRolled.setText(String.format("%s3", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The four button has been pressed check for foolish user input
-        four.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the four button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the four button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the four button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the four button to the string
-                toBeRolled.setText(String.format("%s4", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The five button has been pressed check for foolish user input
-        five.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the five button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the five button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the five button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the five button to the string
-                toBeRolled.setText(String.format("%s5", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The six button has been pressed check for foolish user input
-        six.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the six button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the six button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the six button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the six button to the string
-                toBeRolled.setText(String.format("%s6", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The seven button has been pressed check for foolish user input
-        seven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the seven button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the seven button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the seven button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the seven button to the string
-                toBeRolled.setText(String.format("%s7", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The eight button has been pressed check for foolish user input
-        eight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the eight button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the eight button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the eight button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the eight button to the string
-                toBeRolled.setText(String.format("%s8", toBeRolled.getText().toString()));
-            }
-        });
-
-        // The nine button has been pressed check for foolish user input
-        nine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // If the string is empty you should be able to use the nine button
-                if (toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
-                    toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
-                    return;
-                }
-
-                // If the last button pressed was a die button you should not be able to use the nine button
-                if (toBeRolled.getText().toString().length() > 1) {
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
-                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
-                            return;
-                        }
-                    }
-
-                    // If the last button pressed was a die with 10 or 20 sides you should not be able to use the nine button
-                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            return;
-                        }
-                    }
-                }
-
-                // Having cleared all checks add the nine button to the string
-                toBeRolled.setText(String.format("%s9", toBeRolled.getText().toString()));
-            }
-        });
+            });
+        }
 
         // The D4 button has been pressed check for foolish user input and a some D4 to the dieRoller
         d4.setOnClickListener(new View.OnClickListener() {

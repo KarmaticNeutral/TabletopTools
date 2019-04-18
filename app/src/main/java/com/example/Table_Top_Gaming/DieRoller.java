@@ -1,5 +1,7 @@
 package com.example.Table_Top_Gaming;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,10 @@ public class DieRoller {
     private int d6s;
     private int d8s;
     private int d10s;
+    private int d12s;
     private int d20s;
+    private int d100s;
+    private int dXs;
 
     /**
      * Creates a new and empty list of dice and sets all variables to 0 because the list is empty
@@ -28,7 +33,10 @@ public class DieRoller {
         d6s = 0;
         d8s = 0;
         d10s = 0;
+        d12s = 0;
         d20s = 0;
+        d100s = 0;
+        dXs = 0;
     }
 
     /**
@@ -67,14 +75,14 @@ public class DieRoller {
      * Adds a die to the end of the list of dice
      * @param die is a die object to be added to the list of die
      */
-    void addDie(Die die) {
+    public void addDie(Die die) {
         dice.add(die);
     }
 
     /**
      * Gets the size of the list of dice.
      */
-    int getNumDice() {
+    public int getNumDice() {
         return dice.size();
     }
 
@@ -89,18 +97,20 @@ public class DieRoller {
         }
     }
 
-
     /**
      * Rolls all the dice, adds up all the rolls total into "sum" and counts the total of each
      * individual kind of die
      */
-    void rollAllDice() {
+    public void rollAllDice() {
         sum = 0;
         d4s = 0;
         d6s = 0;
         d8s = 0;
         d10s = 0;
+        d12s = 0;
         d20s = 0;
+        d100s = 0;
+        dXs = 0;
 
         // Loop through the list of dice
         for (int i = 0; i < dice.size(); i++) {
@@ -127,8 +137,23 @@ public class DieRoller {
                 d10s++;
             }
 
+            if (dice.get(i).getName().equals("d12")) {
+                d12s++;
+            }
+
             if (dice.get(i).getName().equals("d20")) {
                 d20s++;
+            }
+
+            if (dice.get(i).getName().equals("d100")) {
+                d100s++;
+            }
+
+            if (!dice.get(i).getName().equals("d4") && !dice.get(i).getName().equals("d6")
+                    && !dice.get(i).getName().equals("d8") && !dice.get(i).getName().equals("d10")
+                    && !dice.get(i).getName().equals("d12") && !dice.get(i).getName().equals("d20")
+                    && !dice.get(i).getName().equals("d100")) {
+                dXs++;
             }
         }
     }
@@ -144,7 +169,7 @@ public class DieRoller {
         if (d4s > 0) {
             rolls += Integer.toString(d4s) + "d4";
 
-            if (d6s > 0 || d8s > 0 || d10s > 0 || d20s > 0) {
+            if (d6s > 0 || d8s > 0 || d10s > 0 || d20s > 0 || d100s > 0) {
                 rolls += " + ";
             }
         }
@@ -152,7 +177,7 @@ public class DieRoller {
         if (d6s > 0) {
             rolls += Integer.toString(d6s) + "d6";
 
-            if (d8s > 0 || d10s > 0 || d20s > 0) {
+            if (d8s > 0 || d10s > 0 || d12s > 0 || d20s > 0 || d100s > 0) {
                 rolls += " + ";
             }
         }
@@ -160,7 +185,7 @@ public class DieRoller {
         if (d8s > 0) {
             rolls += Integer.toString(d8s) + "d8";
 
-            if (d10s > 0 || d20s > 0) {
+            if (d10s > 0 || d12s > 0 || d20s > 0 || d100s > 0) {
                 rolls += " + ";
             }
         }
@@ -168,13 +193,29 @@ public class DieRoller {
         if (d10s > 0) {
             rolls += Integer.toString(d10s) + "d10";
 
-            if (d20s > 0) {
+            if (d12s > 0 || d20s > 0 || d100s > 0) {
+                rolls += " + ";
+            }
+        }
+
+        if (d12s > 0) {
+            rolls += Integer.toString(d12s) + "d12";
+
+            if (d20s > 0 || d100s > 0) {
                 rolls += " + ";
             }
         }
 
         if (d20s > 0) {
             rolls += Integer.toString(d20s) + "d20";
+
+            if (d100s > 0) {
+                rolls += " + ";
+            }
+        }
+
+        if (d100s > 0) {
+            rolls += Integer.toString(d100s) + "d100";
         }
 
         rolls += "\n";
@@ -244,10 +285,40 @@ public class DieRoller {
                 }
             }
 
+            if (dice.get(i).getName().equals("d12")) {
+                rolls += Integer.toString(dice.get(i).getNumRolled());
+                if ((i + 1) < dice.size()) {
+                    if (dice.get(i + 1).getName().equals("d12")) {
+                        rolls += " + ";
+                    }
+                    if (!dice.get(i + 1).getName().equals("d12")) {
+                        rolls += ") + (";
+                    }
+                }
+                if ((i + 1) == dice.size()) {
+                    rolls += ")";
+                }
+            }
+
             if (dice.get(i).getName().equals("d20")) {
                 rolls += Integer.toString(dice.get(i).getNumRolled());
                 if ((i + 1) < dice.size()) {
                     if (dice.get(i + 1).getName().equals("d20")) {
+                        rolls += " + ";
+                    }
+                    if (!dice.get(i + 1).getName().equals("d20")) {
+                        rolls += ") + (";
+                    }
+                }
+                if ((i + 1) == dice.size()) {
+                    rolls += ")";
+                }
+            }
+
+            if (dice.get(i).getName().equals("d100")) {
+                rolls += Integer.toString(dice.get(i).getNumRolled());
+                if ((i + 1) < dice.size()) {
+                    if (dice.get(i + 1).getName().equals("d100")) {
                         rolls += " + ";
                     }
                 }

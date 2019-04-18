@@ -10,13 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class DiceDialog {
     private static final String TAG = "DiceDialog";
 
-    public DiceDialog(Context context) {
+    public DiceDialog(final Context context) {
 
         // Create a new dieRoller that will keep track of all the dice
         final DieRoller dieRoller = new DieRoller();
@@ -52,7 +53,10 @@ public class DiceDialog {
         Button d6 = view.findViewById(R.id.d6);
         Button d8 = view.findViewById(R.id.d8);
         Button d10 = view.findViewById(R.id.d10);
+        Button d12 = view.findViewById(R.id.d12);
         Button d20 = view.findViewById(R.id.d20);
+        Button d100 = view.findViewById(R.id.d100);
+        Button dX = view.findViewById(R.id.dx);
 
         for (final Button currentButton : buttons) {
             currentButton.setOnClickListener(new View.OnClickListener() {
@@ -78,11 +82,19 @@ public class DiceDialog {
                             }
                         }
 
-                        // Check if the last entered string was that of a die with 10 or 20 sides, if it is you should not be able to use the zero button
+                        // Check if the last entered string was that of a die with 10, 12, or 20 sides, if it is you should not be able to use the zero button
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                                && toBeRolled.getText().toString().length() > 2) {
-                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                                Log.d(TAG, "      onClick: return on third");
+                                || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                            if (toBeRolled.getText().toString().length() > 2) {
+                                if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                    Log.d(TAG, "      onClick: return on third");
+                                    return;
+                                }
+                            }
+                        }
+
+                        if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                                 return;
                             }
                         }
@@ -123,8 +135,16 @@ public class DiceDialog {
 
                     // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                             return;
                         }
                     }
@@ -192,8 +212,16 @@ public class DiceDialog {
 
                     // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                             return;
                         }
                     }
@@ -261,8 +289,16 @@ public class DiceDialog {
 
                     // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                             return;
                         }
                     }
@@ -330,8 +366,16 @@ public class DiceDialog {
 
                     // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                             return;
                         }
                     }
@@ -371,6 +415,83 @@ public class DiceDialog {
             }
         });
 
+        // The D12 button has been pressed check for foolish user input and a some D12 to the dieRoller
+        d12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check for a number before a die can be added, if there is no number return
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
+                if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
+
+                    // Checks if the last button pressed was a die
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
+                            return;
+                        }
+                    }
+                }
+
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    // Grab the correct number of dice
+                    int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
+                    }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    // Add all the dice to the dieRoller, a list of dice.
+                    toBeRolled.setText(String.format("%sd12", toBeRolled.getText().toString()));
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new Die(12));
+                    }
+                }
+            }
+        });
+
         // The D20 button has been pressed check for foolish user input and a some D20 to the dieRoller
         d20.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -399,8 +520,16 @@ public class DiceDialog {
 
                     // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                             return;
                         }
                     }
@@ -435,6 +564,83 @@ public class DiceDialog {
                     toBeRolled.setText(String.format("%sd20", toBeRolled.getText().toString()));
                     for (int i = 0; i < numDice; i++) {
                         dieRoller.addDie(new Die(20));
+                    }
+                }
+            }
+        });
+
+        // The D100 button has been pressed check for foolish user input and a some D100 to the dieRoller
+        d100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check for a number before a die can be added, if there is no number return
+                if (toBeRolled.getText().toString().isEmpty()) {
+                    return;
+                }
+
+                // If the last button pressed was a another die or the plus button you should not be able to use this button yet
+                if (toBeRolled.getText().toString().length() > 1) {
+
+                    // Check if the last button pressed was the plus button
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == ' ') {
+                        return;
+                    }
+
+                    // Checks if the last button pressed was a die
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '4'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '6'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '8') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == 'd') {
+                            return;
+                        }
+                    }
+
+                    // Check if the last button pressed was a die with 10 or 20 sides you should not be able to use this button yet
+                    if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
+                            return;
+                        }
+                    }
+                }
+
+                // If the string is not empty and the last button pressed was not the plus button grab the last number entered
+                if (!toBeRolled.getText().toString().equals("") || toBeRolled.getText().toString().charAt((toBeRolled.getText().toString().length() - 1)) == ' ') {
+                    int startIndex = 0;
+
+                    // This loop grabs the last number entered if the plus button has been pressed
+                    for (int i = toBeRolled.getText().toString().length() - 1; i > -1; i--) {
+                        if (toBeRolled.getText().toString().charAt(i) == ' ') {
+                            startIndex = i + 1;
+                            break;
+                        }
+                    }
+
+                    // Grab the correct number of dice
+                    int numDice;
+
+                    // If there is multiple dice being rolled grab just the last number of dice added to the string
+                    if (toBeRolled.getText().toString().length() > 1) {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(startIndex));
+                    }
+
+                    // This would be the first amount of dice to be rolled, grab the amount of dice
+                    else {
+                        numDice = Integer.parseInt(toBeRolled.getText().toString().substring(toBeRolled.getText().toString().length() - 1));
+                    }
+
+                    // Add all the dice to the dieRoller, a list of dice.
+                    toBeRolled.setText(String.format("%sd100", toBeRolled.getText().toString()));
+                    for (int i = 0; i < numDice; i++) {
+                        dieRoller.addDie(new Die(100));
                     }
                 }
             }
@@ -511,46 +717,73 @@ public class DiceDialog {
 
                     // Check if the last entered item in the string was a d10 die
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
-                            && toBeRolled.getText().toString().length() > 2) {
-                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
-                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '1') {
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2') {
+                        if (toBeRolled.getText().toString().length() > 2) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                                if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '1') {
 
-                                // Delete "d10" from the string and remove all the d10 die objects from the list of die
-                                toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
-                                for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                                    if (dieRoller.getDice().get(i).getNumSides() == 10) {
-                                        dieRoller.getDice().remove(i);
-                                        i = 0;
-                                        if (dieRoller.getDice().size() > 0) {
-                                            if (dieRoller.getDice().get(0).getNumSides() == 10 && dieRoller.getDice().size() == 1) {
-                                                dieRoller.getDice().clear();
+                                    // Delete "d10" from the string and remove all the d10 die objects from the list of die
+                                    toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() - 3));
+                                    for (int i = 0; i < dieRoller.getDice().size(); i++) {
+                                        if (dieRoller.getDice().get(i).getNumSides() == 10 || dieRoller.getDice().get(i).getNumSides() == 12) {
+                                            dieRoller.getDice().remove(i);
+                                            i = 0;
+                                            if (dieRoller.getDice().size() > 0) {
+                                                if (dieRoller.getDice().get(0).getNumSides() == 10 || dieRoller.getDice().get(0).getNumSides() == 12
+                                                        && dieRoller.getDice().size() == 1) {
+                                                    dieRoller.getDice().clear();
+                                                }
                                             }
                                         }
                                     }
+                                    return;
                                 }
-                                return;
-                            }
 
-                            // Check if the last entered item in the string was a d20 die
-                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '2') {
+                                // Check if the last entered item in the string was a d20 die
+                                if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 2) == '2') {
 
-                                // Delete "d20" from the string and remove all the d20 die objects from the list of die
-                                toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
-                                for (int i = 0; i < dieRoller.getDice().size(); i ++) {
-                                    if (dieRoller.getDice().get(i).getNumSides() == 20) {
-                                        dieRoller.getDice().remove(i);
-                                        i = 0;
-                                        if (dieRoller.getDice().size() > 0) {
-                                            if (dieRoller.getDice().get(0).getNumSides() == 20 && dieRoller.getDice().size() == 1) {
-                                                dieRoller.getDice().clear();
+                                    // Delete "d20" from the string and remove all the d20 die objects from the list of die
+                                    toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() - 3));
+                                    for (int i = 0; i < dieRoller.getDice().size(); i++) {
+                                        if (dieRoller.getDice().get(i).getNumSides() == 20) {
+                                            dieRoller.getDice().remove(i);
+                                            i = 0;
+                                            if (dieRoller.getDice().size() > 0) {
+                                                if (dieRoller.getDice().get(0).getNumSides() == 20 && dieRoller.getDice().size() == 1) {
+                                                    dieRoller.getDice().clear();
+                                                }
                                             }
                                         }
                                     }
+                                    return;
                                 }
+
+                                toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() - 3));
                                 return;
                             }
-                            toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() -3));
-                            return;
+                        }
+
+                        // Check if the last entered item in the string was a d100 die
+                        if (toBeRolled.getText().toString().length() > 3) {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
+                                if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == '1') {
+
+                                    // Delete "d100" from the string and remove all the d20 die objects from the list of die
+                                    toBeRolled.setText(toBeRolled.getText().toString().substring(0, toBeRolled.getText().toString().length() - 4));
+                                    for (int i = 0; i < dieRoller.getDice().size(); i++) {
+                                        if (dieRoller.getDice().get(i).getNumSides() == 100) {
+                                            dieRoller.getDice().remove(i);
+                                            i = 0;
+                                            if (dieRoller.getDice().size() > 0) {
+                                                if (dieRoller.getDice().get(0).getNumSides() == 100 && dieRoller.getDice().size() == 1) {
+                                                    dieRoller.getDice().clear();
+                                                }
+                                            }
+                                        }
+                                    }
+                                    return;
+                                }
+                            }
                         }
                     }
 
@@ -591,8 +824,16 @@ public class DiceDialog {
 
                     // If the last button pressed was a d10 or d20 add " + " to the string
                     if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                            || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2'
                             && toBeRolled.getText().toString().length() > 2) {
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
+                            toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
+                            return;
+                        }
+                    }
+
+                    if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                        if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
                             toBeRolled.setText(String.format("%s + ", toBeRolled.getText().toString()));
                         }
                     }
@@ -631,11 +872,23 @@ public class DiceDialog {
 
                         // Check if the last button pressed was a d10 or 20 die if so roll the dice
                         if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0'
+                                || toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '2'
                                 && toBeRolled.getText().toString().length() > 2) {
                             if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 3) == 'd') {
                                 dieRoller.rollAllDice();
 
                                 // Display the total sum of the dice rolled and clear the to be rolled text
+                                total.setText(dieRoller.display());
+                                dieRoller.getDice().clear();
+                                toBeRolled.setText("");
+                                return;
+                            }
+                        }
+
+                        if (toBeRolled.getText().toString().length() > 3 && toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 1) == '0') {
+                            if (toBeRolled.getText().toString().charAt(toBeRolled.getText().toString().length() - 4) == 'd') {
+
+                                dieRoller.rollAllDice();
                                 total.setText(dieRoller.display());
                                 dieRoller.getDice().clear();
                                 toBeRolled.setText("");

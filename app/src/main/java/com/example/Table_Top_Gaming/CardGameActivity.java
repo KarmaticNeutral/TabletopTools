@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- *
+ * An activity to allow users to access playing cards with differing hands for each player.
  */
 public class CardGameActivity extends AppCompatActivity {
     private static final String TAG = "CardGameActivity";

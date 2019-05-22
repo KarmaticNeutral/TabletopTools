@@ -8,38 +8,44 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
         android:id="@+id/cloudSavesTextView"
-        android:textColor="@color/defaultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/cloud_saves"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cloudSavedGamesListView"/>
+        android:textAlignment="center"
+        android:textColor="@color/defaultText"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/cloudSavedGamesListView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
+        android:id="@+id/cloudSavedGamesListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/cloudSavedGamesListView"
         app:layout_constraintBottom_toTopOf="@id/localSavesTextView"
-        app:layout_constraintTop_toBottomOf="@id/cloudSavesTextView">
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@id/cloudSavesTextView"
+        android:background="@drawable/border" />
 
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:textColor="@color/defaultText"
         android:id="@+id/localSavesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/local_saves"
-        app:layout_constraintTop_toBottomOf="@id/cloudSavedGamesListView"
-        app:layout_constraintBottom_toTopOf="@id/localSavedGamesListView"/>
+        android:textAlignment="center"
+        android:textColor="@color/defaultText"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/localSavedGamesListView"
+        app:layout_constraintTop_toBottomOf="@id/cloudSavedGamesListView" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/localSavedGamesListView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/localSavesTextView">
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@id/localSavesTextView"
+        android:background="@drawable/border" />
 
 </android.support.constraint.ConstraintLayout>

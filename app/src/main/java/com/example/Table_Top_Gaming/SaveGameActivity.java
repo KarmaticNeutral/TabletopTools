@@ -262,4 +262,9 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     public void diceClicked() {
         DiceDialog diceDialog = new DiceDialog(SaveGameActivity.this);
     }
+
+    public void returnToMainMenu(View view) {
+        Intent intent = new Intent(SaveGameActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 }

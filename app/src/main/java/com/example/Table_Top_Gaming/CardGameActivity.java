@@ -173,7 +173,7 @@ public class CardGameActivity extends AppCompatActivity {
      * Update the screen to ensure that all of the correct images are shown
      */
     public void updateImagesForCardLocations() {
-        if (game.getDiscardPile().size() > 0) { 
+        if (game.getDiscardPile().size() > 0) {
             String cardToDiplay = game.getDiscardPile().get(game.getDiscardPile().size() - 1).getSuit().toString() +
                     game.getDiscardPile().get(game.getDiscardPile().size() - 1).getNumber();
             int id = this.getResources().getIdentifier(cardToDiplay, "drawable", this.getPackageName());

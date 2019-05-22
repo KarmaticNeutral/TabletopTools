@@ -70,6 +70,15 @@
         app:layout_constraintLeft_toRightOf="@id/saveGameButton"
         app:layout_constraintVertical_bias="0.751" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:onClick="returnToMainMenu"
+        android:text="@string/return_to_main_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLocalSave"
+        app:layout_constraintVertical_bias="0.0" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationMenu"
         android:layout_width="0dp"

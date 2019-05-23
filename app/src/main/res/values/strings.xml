@@ -94,4 +94,7 @@
     <string name="save_to_cloud">Save To Cloud</string>
     <string name="enter_player_name">Enter Player Name</string>
     <string name="picturePreviewImage">Preview of selected picture.</string>
+    <string name="d12">d12</string>
+    <string name="d100">d100</string>
+    <string name="return_to_main_menu">Return to Main Menu</string>
 </resources>

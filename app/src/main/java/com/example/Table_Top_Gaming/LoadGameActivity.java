@@ -36,6 +36,7 @@ public class LoadGameActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.load.MESSAGE";
 
     private ArrayList <String> CLOUD_GAME_NAMES;
+    private ArrayList <String> CLOUD_GAME_TIMESTAMPS;
     private ArrayList <String> LOCAL_GAME_NAMES;
 
     private FirebaseUser user; //user info
@@ -50,6 +51,7 @@ public class LoadGameActivity extends AppCompatActivity {
     public LoadGameActivity() {
         CLOUD_GAME_NAMES = new ArrayList<>();
         LOCAL_GAME_NAMES = new ArrayList<>();
+        CLOUD_GAME_TIMESTAMPS = new ArrayList<>();
     }
 
     @Override
@@ -76,8 +78,6 @@ public class LoadGameActivity extends AppCompatActivity {
      * Creates a cloud save list that will be displayed in a list view on the screen
      */
     public void createCloud() {
-
-
         FirebaseFirestore firebase = FirebaseFirestore.getInstance();
 
         //do this only if the user is logged in
@@ -97,6 +97,11 @@ public class LoadGameActivity extends AppCompatActivity {
                         if (currentDocumentSnapshot.contains("Name") && currentDocumentSnapshot.contains("savedGame")) {
                             Log.d("PIE", "Inside IF Name&Save; List Length: " + CLOUD_GAME_NAMES.size());
                             CLOUD_GAME_NAMES.add(Objects.requireNonNull(currentDocumentSnapshot.get("Name")).toString());
+                            if (currentDocumentSnapshot.contains("timeStamp") && currentDocumentSnapshot.get("timeStamp") != null) {
+                                CLOUD_GAME_TIMESTAMPS.add((String) currentDocumentSnapshot.get("timeStamp"));
+                            } else {
+                                CLOUD_GAME_TIMESTAMPS.add("No Timestamp Found");
+                            }
                         }
                     }
                     CustomFirebaseAdapter customAdapterCloud = new CustomFirebaseAdapter();
@@ -212,7 +217,8 @@ public class LoadGameActivity extends AppCompatActivity {
         public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.custom_load_layout, null);
 
-            TextView textView = convertView.findViewById(R.id.textViewName);
+            TextView gameNameTextView = convertView.findViewById(R.id.textViewName);
+            TextView gameTimeStampTextView = convertView.findViewById(R.id.textViewTimestamp);
             Button button = convertView.findViewById(R.id.selectionButton);
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +248,8 @@ public class LoadGameActivity extends AppCompatActivity {
             });
 
             if (CLOUD_GAME_NAMES.size() > 0) {
-                textView.setText(CLOUD_GAME_NAMES.get(position));
+                gameNameTextView.setText(CLOUD_GAME_NAMES.get(position));
+                gameTimeStampTextView.setText(CLOUD_GAME_TIMESTAMPS.get(position));
                 return convertView;
             }
             return null;

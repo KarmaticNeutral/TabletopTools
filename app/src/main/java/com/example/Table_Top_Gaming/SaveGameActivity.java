@@ -27,10 +27,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static com.example.Table_Top_Gaming.GridViewActivity.EXTRA_MESSAGE_GRID;
 
@@ -53,6 +56,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
 
     /**
      * Create the SaveGameActivity window and set the default values
+     *
      * @param savedInstanceState Just the beginning state
      */
     @Override
@@ -89,23 +93,22 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
         initBotNav();
     }
 
-
-
     /**
      * This function creates a save file and writes the game information to it
-    */
+     */
     public void createCloudSave() {
 
         //get the instance of firebase
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         //saveGame is going to store the information that we want to put inside the cloud
-        Map <String, Object> saveGame = new HashMap<>();
+        Map<String, Object> saveGame = new HashMap<>();
         TextView textView = findViewById(R.id.saveNameTextBox);
         String saveName = textView.getText().toString();
 
         saveGame.put("Name", saveName);
         saveGame.put("savedGame", message);
+        saveGame.put("timeStamp", getCurrentTimeStamp());
 
         //store info in the the users specific cloud
         db.collection(user.getUid())
@@ -124,7 +127,7 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
 
-        Toast.makeText(this,"Information Saved", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Information Saved", Toast.LENGTH_LONG).show();
 
         // After the information is saved pass back the game information and restart the
         // GameActivity
@@ -150,21 +153,19 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
 
     /**
      * In essence the button hub, holds all the buttons functionality
+     *
      * @param v the view
      */
     @Override
     public void onClick(View v) {
-        if(v == buttonLocalSave)
-        {
+        if (v == buttonLocalSave) {
             createLocalSave();
         }
-        if (v == buttonCloudSave)
-        {
-            if(user != null) {
+        if (v == buttonCloudSave) {
+            if (user != null) {
                 createCloudSave();
-            }
-            else {
-                Toast.makeText(this,"ERROR: Login First", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "ERROR: Login First", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -266,5 +267,19 @@ public class SaveGameActivity extends AppCompatActivity implements View.OnClickL
     public void returnToMainMenu(View view) {
         Intent intent = new Intent(SaveGameActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public static String getCurrentTimeStamp() {
+        try {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+            String currentDateTime = dateFormat.format(new Date()); // Find todays date
+
+            return currentDateTime;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return null;
+        }
     }
 }
